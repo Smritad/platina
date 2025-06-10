@@ -9,10 +9,11 @@ use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\UserDetailsController;
 use App\Http\Controllers\Backend\UserPermissionsController;
 use App\Http\Controllers\Backend\home\BannerDetailsController;
+use App\Http\Controllers\Backend\home\AboutusDetailsDetailsController;
+use App\Http\Controllers\Backend\home\BrandEthosDetailsDetailsController;
+use App\Http\Controllers\Backend\home\PremiumDetailsController;
+use App\Http\Controllers\Backend\home\TestimonialsDetailsController;
 
-use App\Http\Controllers\Backend\BulkUploadController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ProductUploadController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -33,10 +34,11 @@ Route::group(['middleware' => ['auth:web', \App\Http\Middleware\PreventBackHisto
         })->name('admin.dashboard');
 });
 Route::resource('banner-details', BannerDetailsController::class);
+Route::resource('aboutus-details-platina', AboutusDetailsDetailsController::class);
+Route::resource('brand-ethos-details', BrandEthosDetailsDetailsController::class);
+Route::resource('Premium-details', PremiumDetailsController::class);
+Route::resource('testimonials-details', TestimonialsDetailsController::class);
 
 
-// Route::get('product/import', [ProductController::class, 'showImportForm'])->name('product.import.form');
-// Route::post('product/import', [ProductController::class, 'import'])->name('product.import');
-// Route::get('product/export', [ProductController::class, 'export'])->name('product.export');
 
 

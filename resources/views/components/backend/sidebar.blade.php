@@ -44,7 +44,11 @@
                   </a>
                   <ul class="sidebar-submenu">
                     <li><a href="{{ route('banner-details.index') }}" class="{{ request()->routeIs('banner-details.index') ? 'active' : '' }}">Banner Details</a></li>
-                    
+                    <li><a href="{{ route('aboutus-details-platina.index') }}" class="{{ request()->routeIs('aboutus-details-platina.index') ? 'active' : '' }}">Aboutus Details Platina</a></li>
+                    <li><a href="{{ route('brand-ethos-details.index') }}" class="{{ request()->routeIs('brand-ethos-details.index') ? 'active' : '' }}">Brand Ethos Details</a></li>
+                    <li><a href="{{ route('Premium-details.index') }}" class="{{ request()->routeIs('Premium-details.index') ? 'active' : '' }}">Our Premium Collections</a></li>
+                    <li><a href="{{ route('testimonials-details.index') }}" class="{{ request()->routeIs('testimonials-details.index') ? 'active' : '' }}">Testimonials</a></li>
+
 
                   </ul>
                 </li>
