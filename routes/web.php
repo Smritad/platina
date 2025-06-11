@@ -13,6 +13,12 @@ use App\Http\Controllers\Backend\home\AboutusDetailsDetailsController;
 use App\Http\Controllers\Backend\home\BrandEthosDetailsDetailsController;
 use App\Http\Controllers\Backend\home\PremiumDetailsController;
 use App\Http\Controllers\Backend\home\TestimonialsDetailsController;
+use App\Http\Controllers\Backend\home\MaterialsDetailsController;
+use App\Http\Controllers\Backend\home\BlogsDetailsController;
+use App\Http\Controllers\Backend\home\FooterDetailsController;
+use App\Http\Controllers\Backend\home\ReturnPolicyDetailsController;
+use App\Http\Controllers\Backend\home\PrivacyPolicyDetailsController;
+use App\Http\Controllers\Backend\home\TermsConditionsDetailsController;
 
 
 Route::get('/', function () {
@@ -38,6 +44,12 @@ Route::resource('aboutus-details-platina', AboutusDetailsDetailsController::clas
 Route::resource('brand-ethos-details', BrandEthosDetailsDetailsController::class);
 Route::resource('Premium-details', PremiumDetailsController::class);
 Route::resource('testimonials-details', TestimonialsDetailsController::class);
+Route::resource('material-details', MaterialsDetailsController::class);
+Route::resource('blogs-details', BlogsDetailsController::class);
+Route::resource('footer-details', FooterDetailsController::class);
+Route::resource('return-policy', ReturnPolicyDetailsController::class);
+Route::resource('privacy-policy', PrivacyPolicyDetailsController::class);
+Route::resource('terms-conditions', TermsConditionsDetailsController::class);
 
 
 
