@@ -19,6 +19,10 @@ use App\Http\Controllers\Backend\home\FooterDetailsController;
 use App\Http\Controllers\Backend\home\ReturnPolicyDetailsController;
 use App\Http\Controllers\Backend\home\PrivacyPolicyDetailsController;
 use App\Http\Controllers\Backend\home\TermsConditionsDetailsController;
+use App\Http\Controllers\Backend\about\AboutHayagreevasDetailsController;
+use App\Http\Controllers\Backend\about\PlatinaBrandDetailsController;
+use App\Http\Controllers\Backend\about\TeamLeadershipDetailsController;
+use App\Http\Controllers\Backend\about\ManufacturingUnitDetailsController ;
 
 
 Route::get('/', function () {
@@ -50,6 +54,10 @@ Route::resource('footer-details', FooterDetailsController::class);
 Route::resource('return-policy', ReturnPolicyDetailsController::class);
 Route::resource('privacy-policy', PrivacyPolicyDetailsController::class);
 Route::resource('terms-conditions', TermsConditionsDetailsController::class);
+Route::resource('about-hayagreevas', AboutHayagreevasDetailsController::class);
+Route::resource('platina-brand', PlatinaBrandDetailsController::class);
+Route::resource('team-leadership', TeamLeadershipDetailsController::class);
+Route::resource('manufacturing-unit', ManufacturingUnitDetailsController ::class);
 
 
 

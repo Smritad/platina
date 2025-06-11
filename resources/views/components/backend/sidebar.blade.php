@@ -68,16 +68,31 @@
                     <span>Policies</span>
                   </a>
                   <ul class="sidebar-submenu">
-                <li><a href="{{ route('return-policy.index') }}" class="{{ request()->routeIs('return-policy.index') ? 'active' : '' }}">Return Policy</a></li>
-                <li><a href="{{ route('privacy-policy.index') }}" class="{{ request()->routeIs('privacy-policy.index') ? 'active' : '' }}">Privacy Policy</a></li>
-                <li><a href="{{ route('terms-conditions.index') }}" class="{{ request()->routeIs('terms-conditions.index') ? 'active' : '' }}">Terms Conditions</a></li>
-
-
-
+                    <li><a href="{{ route('return-policy.index') }}" class="{{ request()->routeIs('return-policy.index') ? 'active' : '' }}">Return Policy</a></li>
+                    <li><a href="{{ route('privacy-policy.index') }}" class="{{ request()->routeIs('privacy-policy.index') ? 'active' : '' }}">Privacy Policy</a></li>
+                    <li><a href="{{ route('terms-conditions.index') }}" class="{{ request()->routeIs('terms-conditions.index') ? 'active' : '' }}">Terms Conditions</a></li>
                   </ul>
                 </li>
 
-                       
+                         <li class="sidebar-list {{ request()->routeIs('return-policy.index') ? 'active' : '' }}">
+                  <i class="fa fa-thumb-tack"> </i>
+                  <a class="sidebar-link sidebar-title" href="#">
+                    <svg class="stroke-icon"> 
+                      <use href="{{ asset('admin/assets/svg/icon-sprite.svg#stroke-icons') }}"></use>
+                    </svg>
+                    <svg class="fill-icon">
+                      <use href="{{ asset('admin/assets/svg/icon-sprite.svg#stroke-icons') }}"></use>
+                    </svg>
+                    <span>About</span>
+                  </a>
+                  <ul class="sidebar-submenu">
+                    <li><a href="{{ route('about-hayagreevas.index') }}" class="{{ request()->routeIs('about-hayagreevas.index') ? 'active' : '' }}">About Hayagreevas</a></li>
+                     <li><a href="{{ route('platina-brand.index') }}" class="{{ request()->routeIs('platina-brand.index') ? 'active' : '' }}">Platina Brand</a></li>
+                     <li><a href="{{ route('team-leadership.index') }}" class="{{ request()->routeIs('team-leadership.index') ? 'active' : '' }}">Team Leadership</a></li>
+                     <li><a href="{{ route('manufacturing-unit.index') }}" class="{{ request()->routeIs('manufacturing-unit.index') ? 'active' : '' }}">Manufacturing</a></li>
+
+                  </ul>
+                </li>
                     </ul>
                 </li>
 
