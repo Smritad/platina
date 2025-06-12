@@ -25,6 +25,10 @@ use App\Http\Controllers\Backend\about\TeamLeadershipDetailsController;
 use App\Http\Controllers\Backend\about\ManufacturingUnitDetailsController ;
 
 
+
+use App\Http\Controllers\Frontend\HomeController;
+
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -61,4 +65,7 @@ Route::resource('manufacturing-unit', ManufacturingUnitDetailsController ::class
 
 
 
+
+// Frontend
+Route::get('/', [HomeController::class, 'home'])->name('frontend.index');
 

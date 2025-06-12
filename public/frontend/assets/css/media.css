@@ -1,0 +1,156 @@
+@media (max-width:2600px){
+  
+
+}
+
+@media (max-width:2000px){
+
+
+}
+
+
+@media (max-width:1700px){
+
+
+}
+
+
+@media (max-width:1400px){
+.rx-services .services-contact h5 {
+    height: 55px;
+}
+.rx-services .services-contact p{
+    height: 185px;
+}
+.main_menu .item-center {
+    flex: 0 0 70%;
+}
+.main_menu .item-right {
+    flex: 0 0 13%;
+}
+}
+
+
+@media (max-width:1350px){
+
+
+}
+
+
+@media (max-width:1200px){
+
+.section-testimonials:before {
+    top: -90px;
+}
+.section-services:after {
+    height: 180px;
+    width: 24%;
+    top: -50px;
+}
+.main_menu .item-center {
+        flex: 0 0 65%;
+    }
+        .main_menu .item-right {
+        flex: 0 0 15%;
+    }
+
+    .rx-about-contact .inner-contact .rx-about-inner-box .rx-about-box p {
+        font-size: 12px;
+    }
+    .rx-services .services-contact p {
+        height: 105px;
+    }
+}
+
+@media (max-width:1120px){
+
+
+}
+
+@media (max-width:991px){
+.section-testimonials:after {
+    height: 360px;
+    width: 24%;
+    top: 0;
+}
+.rx-services .services-contact p {
+        height: 130px;
+    }
+    .main_menu .item-right {
+        flex: 0 0 50%;
+    }
+    .main_menu .item-left {
+    flex: 0 0 50% !important;
+}
+.main_menu .container {
+        width: 94%;
+    }
+    .about-img {
+    margin-top: 60px;
+}
+.main_menu .menu>ul>li>a {
+        color: #111;
+    }
+    .main_menu .row {
+    width: 100%;
+}
+.border-right-one {
+    border-right: none;
+    width: 100%;
+}
+.main_menu .row .col-md-6{
+    width: 100%;
+}
+}
+
+@media (max-width:768px){
+.rx-services .services-contact p {
+        height: 180px;
+    }
+}
+
+@media (max-width:640px){
+    .rx-services .services-contact p {
+        height: 210px;
+    }
+.topbar-info ul li {
+    padding-left: 0;
+}
+.main_menu .logo img {
+    width: 120px;
+}
+.header-top-info li a img {
+    width: 18px;
+    height: 18px;
+}
+.main_menu .item-right a {
+    padding: 0px 8px;
+}
+.social-links span {
+    display: none;
+}
+}
+
+@media (max-width:480px){
+    .main_menu .item-right a {
+        padding: 0px 5px;
+    }
+        .rx-services .services-contact p {
+        height: auto;
+    }
+    .rx-services .services-contact h5 {
+        height: auto;
+    }
+    .rx-footer-inner-contact .rx-footer-left-side-contact p {
+    text-align: center;
+}
+}
+
+@media (max-width:420px){
+
+}
+
+@media (max-width:380px){
+
+
+}

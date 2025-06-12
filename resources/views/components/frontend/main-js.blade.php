@@ -1,23 +1,13 @@
- <script src="{{ asset('frontend/assets/vendors/jquery/jquery-3.7.0.min.js') }}"></script>
-    <script src="{{ asset('frontend/assets/vendors/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('frontend/assets/vendors/bootstrap-select/bootstrap-select.min.js') }}"></script>
-    <script src="{{ asset('frontend/assets/vendors/jarallax/jarallax.min.js') }}"></script>
-    <script src="{{ asset('frontend/assets/vendors/jquery-ui/jquery-ui.js') }}"></script>
-    <script src="{{ asset('frontend/assets/vendors/jquery-ajaxchimp/jquery.ajaxchimp.min.js') }}"></script>
-    <script src="{{ asset('frontend/assets/vendors/jquery-appear/jquery.appear.min.js') }}"></script>
-    <script src="{{ asset('frontend/assets/vendors/jquery-circle-progress/jquery.circle-progress.min.js') }}"></script>
-    <script src="{{ asset('frontend/assets/vendors/jquery-magnific-popup/jquery.magnific-popup.min.js') }}"></script>
-    <script src="{{ asset('frontend/assets/vendors/jquery-validate/jquery.validate.min.js') }}"></script>
-    <script src="{{ asset('frontend/assets/vendors/nouislider/nouislider.min.js') }}"></script>
-    <script src="{{ asset('frontend/assets/vendors/tiny-slider/tiny-slider.js') }}"></script>
-    <script src="{{ asset('frontend/assets/vendors/wnumb/wNumb.min.js') }}"></script>
-    <script src="{{ asset('frontend/assets/vendors/owl-carousel/js/owl.carousel.min.js') }}"></script>
-    <script src="{{ asset('frontend/assets/vendors/wow/wow.js') }}"></script>
-    <script src="{{ asset('frontend/assets/vendors/imagesloaded/imagesloaded.min.js') }}"></script>
-    <script src="{{ asset('frontend/assets/vendors/isotope/isotope.js') }}"></script>
-    <script src="{{ asset('frontend/assets/vendors/countdown/countdown.min.js') }}"></script>
-    <!-- <script src="assets/vendors/jquery-circleType/jquery.circleType.js"></script> -->
-    <script src="{{ asset('frontend/assets/vendors/jquery-lettering/jquery.lettering.min.js') }}"></script>
-            <script src="https://html.laralink.com/seapearl/assets/js/jquery.slick.min.js"></script>
-    <!-- template js -->
-    <script src="{{ asset('frontend/assets/js/wallpi.js') }}"></script>
+ <!-- Plugins -->
+    <script src="{{ asset('frontend/assets/js/vendor/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{ asset('frontend/assets/js/vendor/jquery-3.7.1.min.js')}}"></script>
+    <script src="{{ asset('frontend/assets/js/vendor/jquery-ui.min.js')}}"></script>
+    <script src="{{ asset('frontend/assets/js/vendor/aos.js')}}"></script>
+    <script src="{{ asset('frontend/assets/js/vendor/smoothscroll.min.js')}}"></script>
+    <script src="{{ asset('frontend/assets/js/vendor/jquery.fancybox.min.js')}}"></script>
+    <script src="{{ asset('frontend/assets/js/vendor/slick.min.js')}}"></script>
+    <script src="{{ asset('frontend/assets/js/vendor/owl.carousel.min.js')}}"></script>
+    <script src="{{ asset('frontend/assets/js/vendor/swiper-bundle.min.js')}}"></script>
+    <script src="{{ asset('frontend/assets/js/vendor/menu.js')}}"></script>
+    <!-- main-js -->
+    <script src="{{ asset('frontend/assets/js/main.js')}}"></script>

@@ -44,9 +44,9 @@ public function store(Request $request)
     $data = $request->only(['title', 'heading']);
     $data['created_by'] = auth()->id();
 
-    // Store counter text and descriptions
-    $data['counter_text'] = implode(',', $request->counter_text ?? []);
-    $data['counter_description'] = implode(',', $request->counter_description ?? []);
+    // Store counter text and descriptions using pipe
+    $data['counter_text'] = implode('|', $request->counter_text ?? []);
+    $data['counter_description'] = implode('|', $request->counter_description ?? []);
 
     // Store counter images
     $counterImages = [];
@@ -63,7 +63,7 @@ public function store(Request $request)
         }
     }
 
-    $data['counter_images'] = implode(',', $counterImages);
+    $data['counter_images'] = implode('|', $counterImages);
 
     BrandEthosDetail::create($data);
 
@@ -76,10 +76,10 @@ public function edit($id)
 {
     $brandEthosDetails = BrandEthosDetail::findOrFail($id);
 
-    // Convert comma-separated values to arrays
-    $texts = explode(',', $brandEthosDetails->counter_text);
-    $descriptions = explode(',', $brandEthosDetails->counter_description);
-    $images = explode(',', $brandEthosDetails->counter_images);
+    // Convert pipe-separated values to arrays
+    $texts = explode('|', $brandEthosDetails->counter_text);
+    $descriptions = explode('|', $brandEthosDetails->counter_description);
+    $images = explode('|', $brandEthosDetails->counter_images);
 
     $counterItems = [];
     foreach ($texts as $i => $text) {
@@ -92,6 +92,7 @@ public function edit($id)
 
     return view('backend.home-page.brandethos.edit', compact('brandEthosDetails', 'counterItems'));
 }
+
 public function update(Request $request, $id)
 {
     $brandEthos = BrandEthosDetail::findOrFail($id);
@@ -117,9 +118,9 @@ public function update(Request $request, $id)
     $brandEthos->update([
         'title' => $request->title,
         'heading' => $request->heading,
-        'counter_text' => implode(',', $texts),
-        'counter_description' => implode(',', $descriptions),
-        'counter_images' => implode(',', $finalImages),
+        'counter_text' => implode('|', $texts),
+        'counter_description' => implode('|', $descriptions),
+        'counter_images' => implode('|', $finalImages),
         'updated_by' => auth()->user()->id,
     ]);
 

@@ -57,8 +57,7 @@
         <tr>
             <th>#</th>
             <th>Title</th>
-            <th>Heading</th>
-            <th>Counters</th>
+            
             <th>Action</th>
         </tr>
     </thead>
@@ -67,25 +66,7 @@
             <tr>
                 <td>{{ $index + 1 }}</td>
                 <td>{{ $item->title }}</td>
-                <td>{{ $item->heading }}</td>
-                <td>
-                    @php
-                        $texts = explode(',', $item->counter_text);
-                        $descriptions = explode(',', $item->counter_description);
-                        $images = explode(',', $item->counter_images);
-                    @endphp
-
-                    @foreach($texts as $i => $text)
-                        <div class="mb-2">
-                            <strong>Text:</strong> {{ $text ?? '-' }}<br>
-                            <strong>Desc:</strong> {{ $descriptions[$i] ?? '-' }}<br>
-                            @if (!empty($images[$i]))
-                                <img src="{{ asset('/platina/home/brandethos/' . $images[$i]) }}" alt="Image" style="width: 60px; height: 60px;">
-                            @endif
-                        </div>
-                        <hr>
-                    @endforeach
-                </td>
+              
                 <td>
                     <a href="{{ route('brand-ethos-details.edit', $item->id) }}" class="btn btn-sm btn-primary">Edit</a>
 <br><br>
