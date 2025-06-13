@@ -72,7 +72,7 @@ Route::resource('manage-manufacturing-unit', ManufacturingUnitDetailsController 
 
 
 // Frontend
-Route::get('/', [HomeController::class, 'home'])->name('frontend.index');
+Route::get('/home', [HomeController::class, 'home'])->name('frontend.index');
 Route::get('/return-policy', [PoliciesController::class, 'index'])->name('frontend.return');
 Route::get('/privacy-policy', [PoliciesController::class, 'privacy'])->name('frontend.privacy');
 Route::get('/terms-conditions', [PoliciesController::class, 'termsconditions'])->name('frontend.termsconditions');
