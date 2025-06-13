@@ -19,7 +19,7 @@
                     </div>
                     <div class="col-6 text-end">
                         <ol class="breadcrumb justify-content-end">
-                            <li class="breadcrumb-item"><a href="{{ route('about-hayagreevas.index') }}">Home</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('manage-about-hayagreevas.index') }}">Home</a></li>
                             <li class="breadcrumb-item active">{{ isset($record) ? 'Edit' : 'Add' }} About Hayagreevas Details</li>
                         </ol>
                     </div>
@@ -27,7 +27,7 @@
             </div>
 
             <!-- Form Start -->
-            <form action="{{ isset($record) ? route('about-hayagreevas.update', $record->id) : route('about-hayagreevas.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ isset($record) ? route('manage-about-hayagreevas.update', $record->id) : route('manage-about-hayagreevas.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @if(isset($record)) @method('PUT') @endif
 
@@ -75,7 +75,7 @@
 
                 <!-- Submit Buttons -->
                 <div class="text-end mt-3">
-                    <a href="{{ route('about-hayagreevas.index') }}" class="btn btn-danger">Cancel</a>
+                    <a href="{{ route('manage-about-hayagreevas.index') }}" class="btn btn-danger">Cancel</a>
                     <button type="submit" class="btn btn-primary">{{ isset($record) ? 'Update' : 'Submit' }}</button>
                 </div>
             </form>

@@ -68,9 +68,9 @@
                     <span>Policies</span>
                   </a>
                   <ul class="sidebar-submenu">
-                    <li><a href="{{ route('return-policy.index') }}" class="{{ request()->routeIs('return-policy.index') ? 'active' : '' }}">Return Policy</a></li>
-                    <li><a href="{{ route('privacy-policy.index') }}" class="{{ request()->routeIs('privacy-policy.index') ? 'active' : '' }}">Privacy Policy</a></li>
-                    <li><a href="{{ route('terms-conditions.index') }}" class="{{ request()->routeIs('terms-conditions.index') ? 'active' : '' }}">Terms Conditions</a></li>
+                    <li><a href="{{ route('manage-return-policy.index') }}" class="{{ request()->routeIs('return-policy.index') ? 'active' : '' }}">Return Policy</a></li>
+                    <li><a href="{{ route('manage-privacy-policy.index') }}" class="{{ request()->routeIs('privacy-policy.index') ? 'active' : '' }}">Privacy Policy</a></li>
+                    <li><a href="{{ route('manage-terms-conditions.index') }}" class="{{ request()->routeIs('terms-conditions.index') ? 'active' : '' }}">Terms Conditions</a></li>
                   </ul>
                 </li>
 
@@ -86,10 +86,10 @@
                     <span>About</span>
                   </a>
                   <ul class="sidebar-submenu">
-                    <li><a href="{{ route('about-hayagreevas.index') }}" class="{{ request()->routeIs('about-hayagreevas.index') ? 'active' : '' }}">About Hayagreevas</a></li>
-                     <li><a href="{{ route('platina-brand.index') }}" class="{{ request()->routeIs('platina-brand.index') ? 'active' : '' }}">Platina Brand</a></li>
-                     <li><a href="{{ route('team-leadership.index') }}" class="{{ request()->routeIs('team-leadership.index') ? 'active' : '' }}">Team Leadership</a></li>
-                     <li><a href="{{ route('manufacturing-unit.index') }}" class="{{ request()->routeIs('manufacturing-unit.index') ? 'active' : '' }}">Manufacturing</a></li>
+                    <li><a href="{{ route('manage-about-hayagreevas.index') }}" class="{{ request()->routeIs('manage-about-hayagreevas.index') ? 'active' : '' }}">About Hayagreevas</a></li>
+                     <li><a href="{{ route('manage-platina-brand.index') }}" class="{{ request()->routeIs('manage-platina-brand.index') ? 'active' : '' }}">Platina Brand</a></li>
+                     <li><a href="{{ route('manage-team-leadership.index') }}" class="{{ request()->routeIs('manage-team-leadership.index') ? 'active' : '' }}">Team Leadership</a></li>
+                     <li><a href="{{ route('manage-manufacturing-unit.index') }}" class="{{ request()->routeIs('manage-manufacturing-unit.index') ? 'active' : '' }}">Manufacturing</a></li>
 
                   </ul>
                 </li>

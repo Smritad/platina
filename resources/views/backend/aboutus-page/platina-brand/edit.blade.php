@@ -40,7 +40,7 @@
                     </div>
                     <div class="col-6 text-end">
                         <ol class="breadcrumb justify-content-end">
-                            <li class="breadcrumb-item"><a href="{{ route('platina-brand.index') }}">Home</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('manage-platina-brand.index') }}">Home</a></li>
                             <li class="breadcrumb-item active">{{ isset($record) ? 'Edit' : 'Add' }} Platina Brand Details</li>
                         </ol>
                     </div>
@@ -48,7 +48,7 @@
             </div>
 
             <!-- Form Start -->
-            <form action="{{ isset($record) ? route('platina-brand.update', $record->id) : route('platina-brand.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ isset($record) ? route('manage-platina-brand.update', $record->id) : route('manage-platina-brand.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @if(isset($record)) @method('PUT') @endif
 
@@ -95,7 +95,7 @@
 <br>
 
                         @php
-                            $descriptions = old('content_heading_descriptions', isset($record) ? explode(',', $record->content_heading_descriptions) : []);
+                            $descriptions = old('content_heading_descriptions', isset($record) ? explode('|', $record->content_heading_descriptions) : []);
                         @endphp
                         @foreach($descriptions as $index => $desc)
                             <div class="col-md-12 mb-2 d-flex">
@@ -112,7 +112,7 @@
                         <input type="file" name="extra_images[]" class="form-control" accept="image/*" multiple id="extra_image">
                         <div class="row mt-2" id="preview_extra_container">
                             @if(!empty($record->extra_image))
-                                @foreach(explode(',', $record->extra_image) as $index => $img)
+                                @foreach(explode('|', $record->extra_image) as $index => $img)
                                     <div class="col-md-3 mb-2 image-preview-wrapper existing-image" data-index="{{ $index }}">
                                         <img src="{{ asset('uploads/platina_brand/' . $img) }}" class="img-thumbnail w-100" style="height:100px;">
                                         <input type="hidden" name="existing_extra_images[]" value="{{ $img }}">
@@ -137,13 +137,13 @@
                     <!-- Content Description -->
                     <div class="col-md-12">
                         <label>Content Description <span class="text-danger">*</span></label>
-                        <textarea name="content_description" class="form-control" rows="3" placeholder="Enter content description *">{{ old('content_description', $record->content_description ?? '') }}</textarea>
+                        <textarea name="content_description" id="summernote" class="form-control" rows="3" placeholder="Enter content description *">{{ old('content_description', $record->content_description ?? '') }}</textarea>
                     </div>
                 </div>
 
                 <!-- Submit Buttons -->
                 <div class="text-end mt-3">
-                    <a href="{{ route('platina-brand.index') }}" class="btn btn-danger">Cancel</a>
+                    <a href="{{ route('manage-platina-brand.index') }}" class="btn btn-danger">Cancel</a>
                     <button type="submit" class="btn btn-primary">{{ isset($record) ? 'Update' : 'Submit' }}</button>
                 </div>
             </form>

@@ -39,7 +39,7 @@ class TermsConditionsDetailsController extends Controller
             'description' => $request->description,
         ]);
 
-        return redirect()->route('terms-conditions.index')->with('message', 'Terms Conditions added successfully!');
+        return redirect()->route('manage-terms-conditions.index')->with('message', 'Terms Conditions added successfully!');
     }
 
     public function edit($id)
@@ -71,13 +71,13 @@ class TermsConditionsDetailsController extends Controller
             'description' => $request->description,
         ]);
 
-        return redirect()->route('terms-conditions.index')->with('message', 'Terms Conditions updated successfully!');
+        return redirect()->route('manage-terms-conditions.index')->with('message', 'Terms Conditions updated successfully!');
     }
 
     public function destroy($id)
     {
         $record = TermsConditions::findOrFail($id);
         $record->delete();
-        return redirect()->route('terms-conditions.index')->with('message', 'Terms Conditions deleted successfully!');
+        return redirect()->route('manage-terms-conditions.index')->with('message', 'Terms Conditions deleted successfully!');
     }
 }

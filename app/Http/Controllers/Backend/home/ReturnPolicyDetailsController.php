@@ -39,7 +39,7 @@ class ReturnPolicyDetailsController extends Controller
             'description' => $request->description,
         ]);
 
-        return redirect()->route('return-policy.index')->with('message', 'Return Policy added successfully!');
+        return redirect()->route('manage-return-policy.index')->with('message', 'Return Policy added successfully!');
     }
 
     public function edit($id)
@@ -71,13 +71,13 @@ class ReturnPolicyDetailsController extends Controller
             'description' => $request->description,
         ]);
 
-        return redirect()->route('return-policy.index')->with('message', 'Return Policy updated successfully!');
+        return redirect()->route('manage-return-policy.index')->with('message', 'Return Policy updated successfully!');
     }
 
     public function destroy($id)
     {
         $record = ReturnPolicyDetail::findOrFail($id);
         $record->delete();
-        return redirect()->route('return-policy.index')->with('message', 'Return Policy deleted successfully!');
+        return redirect()->route('manage-return-policy.index')->with('message', 'Return Policy deleted successfully!');
     }
 }

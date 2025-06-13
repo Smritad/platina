@@ -35,8 +35,8 @@ class BlogsDetailsController extends Controller
             'created_by' => auth()->id(),
         ];
 
-        $data['text'] = implode(',', $request->text ?? []);
-        $data['description'] = implode(',', $request->description ?? []);
+        $data['text'] = implode('|', $request->text ?? []);
+        $data['description'] = implode('|', $request->description ?? []);
 
         $images = [];
         if ($request->hasFile('image')) {
@@ -49,90 +49,89 @@ class BlogsDetailsController extends Controller
             }
         }
 
-        $data['images'] = implode(',', $images);
+        $data['images'] = implode('|', $images);
 
         BlogsDetail::create($data);
 
         return redirect()->route('blogs-details.index')->with('message', 'Blogs Details added successfully!');
     }
 
+    public function edit($id)
+    {
+        $brandEthosDetails = BlogsDetail::findOrFail($id);
 
-   public function edit($id)
-{
-    $brandEthosDetails = BlogsDetail::findOrFail($id);
+        // Convert pipe-separated values to arrays
+        $texts = explode('|', $brandEthosDetails->text ?? '');
+        $descriptions = explode('|', $brandEthosDetails->description ?? '');
+        $images = explode('|', $brandEthosDetails->images ?? '');
 
-    // Convert comma-separated values to arrays
-    $texts = explode(',', $brandEthosDetails->text ?? '');
-    $descriptions = explode(',', $brandEthosDetails->description ?? '');
-    $images = explode(',', $brandEthosDetails->images ?? '');
+        $counterItems = [];
+        $count = max(count($texts), count($descriptions), count($images));
 
-    $counterItems = [];
-    $count = max(count($texts), count($descriptions), count($images));
-
-    for ($i = 0; $i < $count; $i++) {
-        $counterItems[] = [
-            'text' => $texts[$i] ?? '',
-            'description' => $descriptions[$i] ?? '',
-            'image' => $images[$i] ?? '',
-        ];
-    }
-
-    return view('backend.home-page.blogs-details.edit', compact('brandEthosDetails', 'counterItems'));
-}
-
-public function update(Request $request, $id)
-{
-    $request->validate([
-        'title' => 'required|string|max:255',
-        'heading' => 'required|string|max:255',
-        'counter_text.*' => 'nullable|string',
-        'counter_description.*' => 'nullable|string',
-        'image.*' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
-    ]);
-
-    $material = BlogsDetail::findOrFail($id);
-
-    $texts = $request->counter_text ?? [];
-    $descriptions = $request->counter_description ?? [];
-    $existingImages = $request->existing_images ?? [];
-    $newImages = $request->file('image') ?? [];
-
-    $finalImages = [];
-
-    foreach ($texts as $index => $text) {
-        if (isset($newImages[$index]) && $newImages[$index]->isValid()) {
-            $file = $newImages[$index];
-            $filename = time() . '_' . Str::random(10) . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('/platina/home/blogs'), $filename);
-            $finalImages[] = $filename;
-        } else {
-            $finalImages[] = $existingImages[$index] ?? '';
+        for ($i = 0; $i < $count; $i++) {
+            $counterItems[] = [
+                'text' => $texts[$i] ?? '',
+                'description' => $descriptions[$i] ?? '',
+                'image' => $images[$i] ?? '',
+            ];
         }
+
+        return view('backend.home-page.blogs-details.edit', compact('brandEthosDetails', 'counterItems'));
     }
 
-    $material->update([
-        'title' => $request->title,
-        'heading' => $request->heading,
-        'text' => implode(',', $texts),
-        'description' => implode(',', $descriptions),
-        'images' => implode(',', $finalImages),
-        'updated_by' => auth()->id(),
-    ]);
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'heading' => 'required|string|max:255',
+            'counter_text.*' => 'nullable|string',
+            'counter_description.*' => 'nullable|string',
+            'image.*' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+        ]);
 
-    return redirect()->route('blogs-details.index')->with('message', 'Blogs Details updated successfully!');
-}
+        $material = BlogsDetail::findOrFail($id);
 
-public function destroy($id)
-{
-    $record = BlogsDetail::findOrFail($id);
+        $texts = $request->counter_text ?? [];
+        $descriptions = $request->counter_description ?? [];
+        $existingImages = $request->existing_images ?? [];
+        $newImages = $request->file('image') ?? [];
 
-    $record->update([
-        'deleted_by' => auth()->id(),
-    ]);
+        $finalImages = [];
 
-    $record->delete(); // Must call this for soft delete
+        foreach ($texts as $index => $text) {
+            if (isset($newImages[$index]) && $newImages[$index]->isValid()) {
+                $file = $newImages[$index];
+                $filename = time() . '_' . Str::random(10) . '.' . $file->getClientOriginalExtension();
+                $file->move(public_path('/platina/home/blogs'), $filename);
+                $finalImages[] = $filename;
+            } else {
+                $finalImages[] = $existingImages[$index] ?? '';
+            }
+        }
 
-    return redirect()->route('blogs-details.index')
-        ->with('message', 'Blogs Details deleted successfully!');
-}
+        $material->update([
+            'title' => $request->title,
+            'heading' => $request->heading,
+            'text' => implode('|', $texts),
+            'description' => implode('|', $descriptions),
+            'images' => implode('|', $finalImages),
+            'updated_by' => auth()->id(),
+        ]);
+
+        return redirect()->route('blogs-details.index')->with('message', 'Blogs Details updated successfully!');
+    }
+
+    public function destroy($id)
+    {
+        $record = BlogsDetail::findOrFail($id);
+
+        $record->update([
+            'deleted_by' => auth()->id(),
+        ]);
+
+        $record->delete(); // Must call this for soft delete
+
+        return redirect()->route('blogs-details.index')
+            ->with('message', 'Blogs Details deleted successfully!');
+    }
 }

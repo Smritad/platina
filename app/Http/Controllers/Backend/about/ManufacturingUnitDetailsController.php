@@ -45,7 +45,7 @@ class ManufacturingUnitDetailsController extends Controller
         'created_by' => auth()->id(),
     ]);
 
-    return redirect()->route('manufacturing-unit.index')->with('message', 'Manufacturing detail added successfully!');
+    return redirect()->route('manage-manufacturing-unit.index')->with('message', 'Manufacturing detail added successfully!');
 }
 
 
@@ -89,7 +89,7 @@ class ManufacturingUnitDetailsController extends Controller
         'updated_by' => auth()->id(),
     ]);
 
-    return redirect()->route('manufacturing-unit.index')->with('message', 'Manufacturing detail updated successfully!');
+    return redirect()->route('manage-manufacturing-unit.index')->with('message', 'Manufacturing detail updated successfully!');
 }
 
 
@@ -100,7 +100,7 @@ class ManufacturingUnitDetailsController extends Controller
     $record->save();
     $record->delete();
 
-    return redirect()->route('manufacturing-unit.index')->with('message', 'Deleted successfully!');
+    return redirect()->route('manage-manufacturing-unit.index')->with('message', 'Deleted successfully!');
 }
 
 }

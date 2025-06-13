@@ -19,7 +19,7 @@
                 </div>
                 <div class="col-6 text-end">
                     <ol class="breadcrumb justify-content-end">
-                        <li class="breadcrumb-item"><a href="{{ route('team-leadership.index') }}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('manage-team-leadership.index') }}">Home</a></li>
                         <li class="breadcrumb-item active">Add Team Leadership Details</li>
                     </ol>
                 </div>
@@ -27,7 +27,7 @@
         </div>
 
         <!-- Form Start -->
-        <form action="{{ route('team-leadership.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('manage-team-leadership.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
             <div class="card">
@@ -74,7 +74,7 @@
 
             <!-- Submit Buttons -->
             <div class="text-end mt-3">
-                <a href="{{ route('team-leadership.index') }}" class="btn btn-danger">Cancel</a>
+                <a href="{{ route('manage-team-leadership.index') }}" class="btn btn-danger">Cancel</a>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>
         </form>

@@ -9,7 +9,7 @@ class ManufacturingUnitDetail extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'banner_image', 'title', 
+        'banner_image', 'title', 'content_image',
         'content_heading', 'description_content'
     ];
 }

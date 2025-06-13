@@ -41,13 +41,13 @@
 								<nav aria-label="breadcrumb" role="navigation">
 									<ol class="breadcrumb mb-0">
 										<li class="breadcrumb-item">
-											<a href="{{ route('team-leadership.index') }}">Home</a>
+											<a href="{{ route('manage-team-leadership.index') }}">Home</a>
 										</li>
 										<li class="breadcrumb-item active" aria-current="page">Team Leadership Details</li>
 									</ol>
 								</nav>
 
-								<a href="{{ route('team-leadership.create') }}" class="btn btn-primary px-5 radius-30">+ Add Team Leadership Details</a>
+								<a href="{{ route('manage-team-leadership.create') }}" class="btn btn-primary px-5 radius-30">+ Add Team Leadership Details</a>
 							</div>
                     <div class="table-responsive custom-scrollbar">
            <table class="table table-bordered display" id="basic-1">
@@ -74,8 +74,8 @@
                             <td>{!! Str::limit(strip_tags($item->description), 100) !!}</td>
                             <td>{{ $item->updated_at->format('d-m-Y') }}</td>
                             <td>
-                                <a href="{{ route('team-leadership.edit', $item->id) }}" class="btn btn-primary">Edit</a>
-                                   <br> <br><form action="{{ route('team-leadership.destroy', $item->id) }}" method="POST" class="d-inline-block" onsubmit="return confirm('Are you sure?');">
+                                <a href="{{ route('manage-team-leadership.edit', $item->id) }}" class="btn btn-primary">Edit</a>
+                                   <br> <br><form action="{{ route('manage-team-leadership.destroy', $item->id) }}" method="POST" class="d-inline-block" onsubmit="return confirm('Are you sure?');">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-sm btn-danger">Delete</button>

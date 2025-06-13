@@ -48,7 +48,7 @@ class AboutHayagreevasDetailsController extends Controller
             'description_content' => $request->description_content,
         ]);
 
-        return redirect()->route('about-hayagreevas.index')->with('message', 'About Us detail added successfully!');
+        return redirect()->route('manage-about-hayagreevas.index')->with('message', 'About Us detail added successfully!');
     }
 
     public function edit($id)
@@ -94,13 +94,13 @@ class AboutHayagreevasDetailsController extends Controller
             'description_content' => $request->description_content,
         ]);
 
-        return redirect()->route('about-hayagreevas.index')->with('message', 'About Us detail updated successfully!');
+        return redirect()->route('manage-about-hayagreevas.index')->with('message', 'About Us detail updated successfully!');
     }
 
     public function destroy($id)
     {
         $record = AboutHayagreevasDetail::findOrFail($id);
         $record->delete();
-        return redirect()->route('about-hayagreevas.index')->with('message', 'Deleted successfully!');
+        return redirect()->route('manage-about-hayagreevas.index')->with('message', 'Deleted successfully!');
     }
 }

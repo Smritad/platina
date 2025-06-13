@@ -19,7 +19,7 @@
                 </div>
                 <div class="col-6 text-end">
                     <ol class="breadcrumb justify-content-end">
-                        <li class="breadcrumb-item"><a href="{{ route('team-leadership.index') }}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('manage-team-leadership.index') }}">Home</a></li>
                         <li class="breadcrumb-item active">Edit Team Leadership Details</li>
                     </ol>
                 </div>
@@ -27,7 +27,7 @@
         </div>
 
         <!-- Form Start -->
-        <form action="{{ route('team-leadership.update', $record->id) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('manage-team-leadership.update', $record->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
 
@@ -69,11 +69,11 @@
                 </div>
                 <div class="card-body" id="members-wrapper">
                     @php
-                        $names = explode(',', $record->person_name);
-                        $designations = explode(',', $record->person_designation);
-                        $descriptions = explode(',', $record->person_description);
-                        $images = explode(',', $record->person_image);
-                        $icons = explode(',', $record->social_icons);
+                        $names = explode('|', $record->person_name);
+                        $designations = explode('|', $record->person_designation);
+                        $descriptions = explode('|', $record->person_description);
+                        $images = explode('|', $record->person_image);
+                        $icons = explode('|', $record->social_icons);
                     @endphp
 
                     @foreach($names as $index => $name)
@@ -113,7 +113,7 @@
 
             <!-- Submit -->
             <div class="text-end mt-3">
-                <a href="{{ route('team-leadership.index') }}" class="btn btn-danger">Cancel</a>
+                <a href="{{ route('manage-team-leadership.index') }}" class="btn btn-danger">Cancel</a>
                 <button type="submit" class="btn btn-primary">Update</button>
             </div>
 

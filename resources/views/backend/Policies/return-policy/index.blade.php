@@ -41,13 +41,13 @@
 								<nav aria-label="breadcrumb" role="navigation">
 									<ol class="breadcrumb mb-0">
 										<li class="breadcrumb-item">
-											<a href="{{ route('return-policy.index') }}">Home</a>
+											<a href="{{ route('manage-return-policy.index') }}">Home</a>
 										</li>
 										<li class="breadcrumb-item active" aria-current="page">Return Policy Details</li>
 									</ol>
 								</nav>
 
-								<a href="{{ route('return-policy.create') }}" class="btn btn-primary px-5 radius-30">+ Add Return Policy Details</a>
+								<a href="{{ route('manage-return-policy.create') }}" class="btn btn-primary px-5 radius-30">+ Add Return Policy Details</a>
 							</div>
                     <div class="table-responsive custom-scrollbar">
               <table class="table table-bordered display" id="basic-1">
@@ -72,9 +72,9 @@
                                 @endif
                             </td>
                             <td>
-                                <a href="{{ route('return-policy.edit', $record->id) }}" class="btn btn-primary">Edit</a>
+                                <a href="{{ route('manage-return-policy.edit', $record->id) }}" class="btn btn-primary">Edit</a>
 
-                                <form action="{{ route('return-policy.destroy', $record->id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Are you sure you want to delete this?');">
+                                <form action="{{ route('manage-return-policy.destroy', $record->id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Are you sure you want to delete this?');">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-sm btn-danger">Delete</button>

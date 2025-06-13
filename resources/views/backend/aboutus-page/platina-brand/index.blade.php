@@ -41,13 +41,13 @@
 								<nav aria-label="breadcrumb" role="navigation">
 									<ol class="breadcrumb mb-0">
 										<li class="breadcrumb-item">
-											<a href="{{ route('platina-brand.index') }}">Home</a>
+											<a href="{{ route('manage-platina-brand.index') }}">Home</a>
 										</li>
 										<li class="breadcrumb-item active" aria-current="page">Platina Brand Details</li>
 									</ol>
 								</nav>
 
-								<a href="{{ route('platina-brand.create') }}" class="btn btn-primary px-5 radius-30">+ Add Platina Brand Details</a>
+								<a href="{{ route('manage-platina-brand.create') }}" class="btn btn-primary px-5 radius-30">+ Add Platina Brand Details</a>
 							</div>
                     <div class="table-responsive custom-scrollbar">
            <table class="table table-bordered display" id="basic-1">
@@ -66,8 +66,8 @@
                 <td>{{ $item->title }}</td>
                 <td>{{ \Illuminate\Support\Str::limit(strip_tags($item->description), 50) }}</td>
                 <td>
-                    <a href="{{ route('platina-brand.edit', $item->id) }}" class="btn btn-primary">Edit</a>
-                    <form action="{{ route('platina-brand.destroy', $item->id) }}" method="POST" style="display:inline-block;">
+                    <a href="{{ route('manage-platina-brand.edit', $item->id) }}" class="btn btn-primary">Edit</a>
+                    <form action="{{ route('manage-platina-brand.destroy', $item->id) }}" method="POST" style="display:inline-block;">
                         @csrf @method('DELETE')
                         <button class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
                     </form>

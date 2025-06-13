@@ -45,10 +45,10 @@
                     <a href="#">About Us <i class="fa fa-angle-down"></i></a>
                     <div class="sub-menu single-column-menu">
                       <ul>
-                        <li><a href="#">About Hayagreevas</a></li>
-                        <li><a href="#">The PLATINA India Brand </a></li>
-                        <li><a href="#">Our Leadership</a></li>
-                        <li><a href="#">Manufacturing Excellence</a></li>
+                        <li><a href="{{ route('frontend.abouthayagreevas') }}">About Hayagreevas</a></li>
+                        <li><a href="{{ route('frontend.platina-brand') }}">The PLATINA India Brand </a></li>
+                        <li><a href="{{ route('frontend.team') }}">Our Leadership</a></li>
+                        <li><a href="{{ route('frontend.manufacturing-unit') }}">Manufacturing Excellence</a></li>
                       </ul>
                     </div>
                   </li>

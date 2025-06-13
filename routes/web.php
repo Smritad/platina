@@ -27,6 +27,11 @@ use App\Http\Controllers\Backend\about\ManufacturingUnitDetailsController ;
 
 
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\PoliciesController;
+use App\Http\Controllers\Frontend\AbouthayagreevasController;
+use App\Http\Controllers\Frontend\PlatinaBrndController;
+use App\Http\Controllers\Frontend\TeamController;
+use App\Http\Controllers\Frontend\ManufacturingController;
 
 
 Route::get('/', function () {
@@ -55,17 +60,24 @@ Route::resource('testimonials-details', TestimonialsDetailsController::class);
 Route::resource('material-details', MaterialsDetailsController::class);
 Route::resource('blogs-details', BlogsDetailsController::class);
 Route::resource('footer-details', FooterDetailsController::class);
-Route::resource('return-policy', ReturnPolicyDetailsController::class);
-Route::resource('privacy-policy', PrivacyPolicyDetailsController::class);
-Route::resource('terms-conditions', TermsConditionsDetailsController::class);
-Route::resource('about-hayagreevas', AboutHayagreevasDetailsController::class);
-Route::resource('platina-brand', PlatinaBrandDetailsController::class);
-Route::resource('team-leadership', TeamLeadershipDetailsController::class);
-Route::resource('manufacturing-unit', ManufacturingUnitDetailsController ::class);
+Route::resource('manage-return-policy', ReturnPolicyDetailsController::class);
+Route::resource('manage-privacy-policy', PrivacyPolicyDetailsController::class);
+Route::resource('manage-terms-conditions', TermsConditionsDetailsController::class);
+Route::resource('manage-about-hayagreevas', AboutHayagreevasDetailsController::class);
+Route::resource('manage-platina-brand', PlatinaBrandDetailsController::class);
+Route::resource('manage-team-leadership', TeamLeadershipDetailsController::class);
+Route::resource('manage-manufacturing-unit', ManufacturingUnitDetailsController ::class);
 
 
 
 
 // Frontend
 Route::get('/', [HomeController::class, 'home'])->name('frontend.index');
+Route::get('/return-policy', [PoliciesController::class, 'index'])->name('frontend.return');
+Route::get('/privacy-policy', [PoliciesController::class, 'privacy'])->name('frontend.privacy');
+Route::get('/terms-conditions', [PoliciesController::class, 'termsconditions'])->name('frontend.termsconditions');
+Route::get('/about-hayagreevas', [AbouthayagreevasController::class, 'index'])->name('frontend.abouthayagreevas');
+Route::get('/platina-brand', [PlatinaBrndController::class, 'index'])->name('frontend.platina-brand');
+Route::get('/team', [TeamController::class, 'index'])->name('frontend.team');
+Route::get('/manufacturing-unit', [ManufacturingController::class, 'index'])->name('frontend.manufacturing-unit');
 

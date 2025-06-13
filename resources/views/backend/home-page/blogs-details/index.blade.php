@@ -58,7 +58,6 @@
             <th>#</th>
             <th>Title</th>
             <th>Heading</th>
-            <th>Details</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -68,25 +67,7 @@
                 <td>{{ $index + 1 }}</td>
                 <td>{{ $record->title }}</td>
                 <td>{{ $record->heading }}</td>
-                <td>
-                    @php
-                        $texts = explode(',', $record->text);
-                        $descriptions = explode(',', $record->description);
-                        $images = explode(',', $record->image);
-                    @endphp
-
-                    <ul class="list-unstyled">
-                        @for($i = 0; $i < count($texts); $i++)
-                            <li class="mb-2">
-                                <strong>{{ $texts[$i] ?? '-' }}</strong><br>
-                                <span>{{ $descriptions[$i] ?? '-' }}</span><br>
-                                @if(!empty($images[$i]))
-                                    <img src="{{ asset('platina/home/blogs/' . $images[$i]) }}" alt="Image" width="60" class="rounded mt-1" />
-                                @endif
-                            </li>
-                        @endfor
-                    </ul>
-                </td>
+               
                 <td>
                     <a href="{{ route('blogs-details.edit', $record->id) }}" class="btn btn-sm btn-primary">Edit</a>
                     

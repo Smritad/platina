@@ -19,7 +19,7 @@
                     </div>
                     <div class="col-6 text-end">
                         <ol class="breadcrumb justify-content-end">
-                            <li class="breadcrumb-item"><a href="{{ route('about-hayagreevas.index') }}">Home</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('manage-about-hayagreevas.index') }}">Home</a></li>
                             <li class="breadcrumb-item active">Add About Hayagreevas Details</li>
                         </ol>
                     </div>
@@ -27,7 +27,7 @@
             </div>
 
             <!-- Form Start -->
-            <form action="{{ route('about-hayagreevas.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('manage-about-hayagreevas.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 <div class="card">
@@ -74,7 +74,7 @@
 
                 <!-- Submit Buttons -->
                 <div class="text-end mt-3">
-                    <a href="{{ route('about-hayagreevas.index') }}" class="btn btn-danger">Cancel</a>
+                    <a href="{{ route('manage-about-hayagreevas.index') }}" class="btn btn-danger">Cancel</a>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
             </form>

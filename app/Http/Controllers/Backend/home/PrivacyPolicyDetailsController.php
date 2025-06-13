@@ -39,7 +39,7 @@ class PrivacyPolicyDetailsController extends Controller
             'description' => $request->description,
         ]);
 
-        return redirect()->route('privacy-policy.index')->with('message', 'Return Policy added successfully!');
+        return redirect()->route('manage-privacy-policy.index')->with('message', 'Return Policy added successfully!');
     }
 
     public function edit($id)
@@ -71,13 +71,13 @@ class PrivacyPolicyDetailsController extends Controller
             'description' => $request->description,
         ]);
 
-        return redirect()->route('privacy-policy.index')->with('message', 'Return Policy updated successfully!');
+        return redirect()->route('manage-privacy-policy.index')->with('message', 'Return Policy updated successfully!');
     }
 
     public function destroy($id)
     {
         $record = PrivacyPolicyDetail::findOrFail($id);
         $record->delete();
-        return redirect()->route('privacy-policy.index')->with('message', 'Return Policy deleted successfully!');
+        return redirect()->route('manage-privacy-policy.index')->with('message', 'Return Policy deleted successfully!');
     }
 }

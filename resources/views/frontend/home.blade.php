@@ -222,349 +222,195 @@
         </div>
       </div>
       @endforeach
-
     </div>
   </div>
 </section>
 
     <!-- Amenities -->
-    <section class="section-amenities padding-tb-50">
-      <div class="container">
-        <div class="row">
-          <div class="col-12" data-aos="fade-up" data-aos-duration="1000">
-            <div class="rx-banner text-center rx-banner-effects">
-              <p><img src="{{ asset('/frontend/assets/img/banner/left-shape.svg')}}" alt="banner-left-shape"
-                class="svg-img left-side">Luxury<img src="{{ asset('/frontend/assets/img/banner/right-shape.svg')}}"
-                alt="banner-right-shape" class="svg-img right-side"></p>
-              <h4>Our <span> Premium Collection</span></h4>
-            </div>
-          </div>
-          <div class="col-12" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
-            <div class="owl-carousel rx-amenities-slider">
-              <div class="row mb-minus-24">
-                <div class="col-lg-8 col-12 mb-24">
-                  <div class="rx-amenities-img">
-                    <img src="assets/img/amenities/webp/1.webp" alt="amenities-1">
-                  </div>
-                </div>
-                <div class="col-lg-4 col-12 mb-24">
-                  <div class="rx-amenities-contact amenities-animation">
-                    <div class="inner-banner">
-                      <h4>Bed Sheets</h4>
-                    </div>
-                    <p>Welcome to The Gourmet Haven, where culinary excellence
-                      meets a serene and inviting ambiance. Nestled in the heart
-                      of the city, our restaurant offers a delightful escape from the
-                      hustle and bustle, providing a perfect setting for any
-                      occasion.
-                    </p>
-                    <div class="amenities-btn">
-                      <a href="#" class="rx-btn-two">Shop Now</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row mb-minus-24">
-                <div class="col-lg-8 col-12 mb-24">
-                  <div class="rx-amenities-img">
-                    <img src="assets/img/amenities/webp/2.webp" alt="amenities-2">
-                  </div>
-                </div>
-                <div class="col-lg-4 col-12 mb-24">
-                  <div class="rx-amenities-contact amenities-animation">
-                    <div class="inner-banner">
-                      <h4>Comforters</h4>
-                    </div>
-                    <p>Welcome to The Gourmet Haven, where culinary excellence
-                      meets a serene and inviting ambiance. Nestled in the heart
-                      of the city, our restaurant offers a delightful escape from the
-                      hustle and bustle, providing a perfect setting for any
-                      occasion.
-                    </p>
-                    <div class="amenities-btn">
-                      <a href="#" class="rx-btn-two">Shop Now</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row mb-minus-24">
-                <div class="col-lg-8 col-12 mb-24">
-                  <div class="rx-amenities-img">
-                    <img src="assets/img/amenities/webp/3.webp" alt="amenities-3">
-                  </div>
-                </div>
-                <div class="col-lg-4 col-12 mb-24">
-                  <div class="rx-amenities-contact amenities-animation">
-                    <div class="inner-banner">
-                      <h4>Quilts</h4>
-                    </div>
-                    <p>Welcome to The Gourmet Haven, where culinary excellence
-                      meets a serene and inviting ambiance. Nestled in the heart
-                      of the city, our restaurant offers a delightful escape from the
-                      hustle and bustle, providing a perfect setting for any
-                      occasion.
-                    </p>
-                    <div class="amenities-btn">
-                      <a href="#" class="rx-btn-two">Shop Now</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row mb-minus-24">
-                <div class="col-lg-8 col-12 mb-24">
-                  <div class="rx-amenities-img">
-                    <img src="assets/img/amenities/webp/4.webp" alt="amenities-4">
-                  </div>
-                </div>
-                <div class="col-lg-4 col-12 mb-24">
-                  <div class="rx-amenities-contact amenities-animation">
-                    <div class="inner-banner">
-                      <h4>Duvet Covers</h4>
-                    </div>
-                    <p>Welcome to The Gourmet Haven, where culinary excellence
-                      meets a serene and inviting ambiance. Nestled in the heart
-                      of the city, our restaurant offers a delightful escape from the
-                      hustle and bustle, providing a perfect setting for any
-                      occasion.
-                    </p>
-                    <div class="amenities-btn">
-                      <a href="#" class="rx-btn-two">Shop Now</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- Testimonials -->
-    <section class="section-testimonials padding-tb-50">
-      <div class="container">
-        <div class="row">
-          <div class="col-12" data-aos="fade-up" data-aos-duration="1000">
-            <div class="rx-banner text-center rx-banner-effects">
-              <p><img src="assets/img/banner/left-shape.svg" alt="banner-left-shape"
-                class="svg-img left-side">Testimonials<img src="assets/img/banner/right-shape.svg"
-                alt="banner-right-shape" class="svg-img right-side"></p>
-              <h4>Echoes of <span>Brilliance</span></h4>
-            </div>
-          </div>
-          <div class="col-12" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
-            <div class="owl-carousel rx-testimonials-slider">
-              <div class="row mb-minus-24">
-                <div class="col-md-4 col-12 mb-24">
-                  <div class="rx-testimonials-img">
-                    <img src="assets/img/testimonials/webp/1.webp" alt="testimonials-1">
-                  </div>
-                </div>
-                <div class="col-md-8 col-12 mb-24">
-                  <div class="rx-testimonials-contact">
-                    <div class="rx-inner-banner">
-                      <h4>Isabella Bianchi</h4>
-                      <span>(Manager)</span>
-                    </div>
-                    <div class="inner-contact">
-                      <p>"Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto
-                        at sint eligendi possimus perspiciatis asperiores reiciendis hic
-                        amet alias aut."
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row mb-minus-24">
-                <div class="col-md-4 col-12 mb-24">
-                  <div class="rx-testimonials-img">
-                    <img src="assets/img/testimonials/webp/2.webp" alt="testimonials-2">
-                  </div>
-                </div>
-                <div class="col-md-8 col-12 mb-24">
-                  <div class="rx-testimonials-contact">
-                    <div class="rx-inner-banner">
-                      <h4>Saddika Alard</h4>
-                      <span>(Team Leader)</span>
-                    </div>
-                    <div class="inner-contact">
-                      <p>"Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto
-                        at sint eligendi possimus perspiciatis asperiores reiciendis hic
-                        amet alias aut."
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row mb-minus-24">
-                <div class="col-md-4 col-12 mb-24">
-                  <div class="rx-testimonials-img">
-                    <img src="assets/img/testimonials/webp/3.webp" alt="testimonials-3">
-                  </div>
-                </div>
-                <div class="col-md-8 col-12 mb-24">
-                  <div class="rx-testimonials-contact">
-                    <div class="rx-inner-banner">
-                      <h4>Stephen Smith</h4>
-                      <span>(Co Founder)</span>
-                    </div>
-                    <div class="inner-contact">
-                      <p>"Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto
-                        at sint eligendi possimus perspiciatis asperiores reiciendis hic
-                        amet alias aut."
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- Blog -->
-    <section class="section-blog padding-t-50 padding-b-100">
-      <div class="container">
-        <div class="row">
-          <div class="col-12" data-aos="fade-up" data-aos-duration="1000">
-            <div class="rx-banner text-center rx-banner-effects">
-              <p><img src="assets/img/banner/left-shape.svg" alt="banner-left-shape"
-                class="svg-img left-side">New Blogs<img src="assets/img/banner/right-shape.svg"
-                alt="banner-right-shape" class="svg-img right-side"></p>
-              <h4>Latest <span>News</span></h4>
-            </div>
-          </div>
-          <div class="col-12" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
-            <div class="owl-carousel rx-blog-slider" id="rxblogslider">
-              <div class="rx-blog-card">
-                <div class="rx-blog-img">
-                  <img src="assets/img/blog/webp/1.webp" alt="blog-1" id="myImage">
-                </div>
-                <div class="rx-blog-contact">
-                  <span>June 28,2024 </span>
-                  <h4><a href="#">Luxurious Egyptian Cotton Sheets for Ultimate Comfort</a>
-                  </h4>
-                </div>
-              </div>
-              <div class="rx-blog-card">
-                <div class="rx-blog-img">
-                  <img src="assets/img/blog/webp/2.webp" alt="blog-2">
-                </div>
-                <div class="rx-blog-contact">
-                  <span>June 30,2021 </span>
-                  <h4><a href="#">The Best Duvet Covers for a Cozy Night</a></h4>
-                </div>
-              </div>
-              <div class="rx-blog-card">
-                <div class="rx-blog-img">
-                  <img src="assets/img/blog/webp/3.webp" alt="blog-3">
-                </div>
-                <div class="rx-blog-contact">
-                  <span>June 16,2021 </span>
-                  <h4><a href="#">Top Pillow Options for Better Sleep Support</a></h4>
-                </div>
-              </div>
-              <div class="rx-blog-card">
-                <div class="rx-blog-img">
-                  <img src="assets/img/blog/webp/4.webp" alt="blog-4">
-                </div>
-                <div class="rx-blog-contact">
-                  <span>June 10,2025 </span>
-                  <h4><a href="#">How to Choose the Perfect Mattress Protector</a></h4>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- Footer -->
-    <footer>
-      <div class="rx-main-footer padding-tb-100">
-        <div class="container">
-          <div class="row mb-minus-24">
-            <div class="col-lg-3 col-sm-6 col-12 mb-24 footer-order-1">
-              <div class="rx-social-media">
-                <div class="rx-logo">
-                  <img src="assets/img/logo/logo.webp" alt="logo">
-                </div>
-                <div class="inner-contact">
-                  <p>Lorem Ipsum is simply dummy a of the printing and type setting industry Loreaim Ipsum has been the industry's standard dummy. Lorem Ipsum is simply dummy a of the printing and type setting industry Loreaim Ipsum has been the industry's standard dummy.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-2 col-sm-4 col-6 col-420-full mb-24 footer-order-2">
-              <div class="rx-footer-items">
-                <div class="rx-items-heading">
-                  <h4>Explore</h4>
-                </div>
-                <div class="rx-items-contact">
-                  <ul>
-                    <li><a href="#" class="line-hover">FAQ’s</a></li>
-                    <li><a href="#" class="line-hover">Privacy Policy</a></li>
-                    <li><a href="#" class="line-hover">Terms & Condition</a></li>
-                    <li><a href="#" class="line-hover">Return & Refund Policy</a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-2 col-sm-4 col-6 col-420-full mb-24 footer-order-3">
-              <div class="rx-footer-items">
-                <div class="rx-items-heading">
-                  <h4>Materials</h4>
-                </div>
-                <div class="rx-items-contact">
-                  <ul>
-                    <li><a href="#">Giza 45 Cotton</a></li>
-                    <li><a href="#">100 % Cotton</a></li>
-                    <li><a href="#">Percale</a></li>
-                    <li><a href="#">Sateen</a></li>
-                    <li><a href="#">Jacquard</a></li>
-                    <li><a href="#">Linen</a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-2 col-sm-4 col-6 col-420-full mb-24 footer-order-4">
-              <div class="rx-footer-items">
-                <div class="rx-items-heading">
-                  <h4>Best Seller</h4>
-                </div>
-                <div class="rx-items-contact">
-                  <ul>
-                    <li><a href="#">Bed Sheets</a></li>
-                    <li><a href="#">Comforters</a></li>
-                    <li><a href="#">Quilts</a></li>
-                    <li><a href="#">Duvet Covers</a></li>
-                    <li><a href="#">Pillow Covers</a></li>
-                    <li><a href="#">Cushion Covers</a></li>
-                    <li><a href="#">Quilt Sets</a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3 col-sm-6 col-6 col-420-full mb-24 footer-order-5">
-              <div class="rx-footer-other-info">
-                <div class="inner-info">
-                  <h5>Address</h5>
-                  <p>1247/Plot No. 39, 15th Phase, <br>United States of America
-                  </p>
-                </div>
-                <div class="inner-info">
-                  <h5>Mail</h5>
-                  <a href="mailto:mail@platinaindia.com">mail@platinaindia.com</a>
-                </div>
-                <div class="inner-info">
-                  <h5>Phone No</h5>
-                  <a href="phone:+91 98765 43210">+91 98765 43210</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-              @include('components.frontend.footer')
+<section class="section-amenities padding-tb-50">
+  <div class="container">
+    <div class="row">
+      <div class="col-12" data-aos="fade-up" data-aos-duration="1000">
+        <div class="rx-banner text-center rx-banner-effects">
+          <p>
+            <img src="{{ asset('/frontend/assets/img/banner/left-shape.svg')}}" alt="banner-left-shape" class="svg-img left-side">
+            {{ $premium->title ?? '' }}
+            <img src="{{ asset('/frontend/assets/img/banner/right-shape.svg')}}" alt="banner-right-shape" class="svg-img right-side">
+          </p>
+            @php
+                $heading = $premium->heading ?? '';
+                $words = explode(' ', $heading);
+                $count = count($words);
 
-    
+                if ($count >= 2) {
+                    $before = implode(' ', array_slice($words, 0, $count - 2));
+                    $lastTwo = implode(' ', array_slice($words, -2));
+                } else {
+                    $before = '';
+                    $lastTwo = $heading;
+                }
+            @endphp
+
+            <h4>
+                {{ $before }} <span>{{ $lastTwo }}</span>
+            </h4>
+        </div>
+      </div>
+
+      <div class="col-12" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+        <div class="owl-carousel rx-amenities-slider">
+          @php
+            $counterTexts = explode('|', $premium->counter_text ?? '');
+            $counterDescs = explode('|', $premium->counter_description ?? '');
+            $images = explode('|', $premium->counter_image ?? '');
+          @endphp
+
+          @foreach($counterTexts as $index => $counterText)
+            <div class="row mb-minus-24">
+              <div class="col-lg-8 col-12 mb-24">
+                <div class="rx-amenities-img">
+                  <img src="{{ asset('platina/home/premium/' . trim($images[$index] ?? 'default.webp')) }}" alt="amenities-{{ $index + 1 }}">
+                </div>
+              </div>
+              <div class="col-lg-4 col-12 mb-24">
+                <div class="rx-amenities-contact amenities-animation">
+                  <div class="inner-banner">
+                    <h4>{{ $counterText }}</h4>
+                  </div>
+                  <p>{{ $counterDescs[$index] ?? '' }}</p>
+                  <div class="amenities-btn">
+                    <a href="#" class="rx-btn-two">Shop Now</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          @endforeach
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+    @php
+    $texts = explode(',', $testimonials->text ?? '');
+    $designations = explode(',', $testimonials->designations ?? '');
+    $descriptions = explode(',', $testimonials->description ?? '');
+    $images = explode(',', $testimonials->image ?? '');
+@endphp
+
+<section class="section-testimonials padding-tb-50">
+  <div class="container">
+    <div class="row">
+      <div class="col-12" data-aos="fade-up" data-aos-duration="1000">
+        <div class="rx-banner text-center rx-banner-effects">
+          <p>
+            <img src="{{ asset('/frontend/assets/img/banner/left-shape.svg')}}" alt="banner-left-shape" class="svg-img left-side">
+            {{ $testimonials->title ?? '' }}
+            <img src="{{ asset('/frontend/assets/img/banner/right-shape.svg')}}" alt="banner-right-shape" class="svg-img right-side">
+          </p>
+         <h4>
+    @php
+        $heading = $testimonials->heading ?? '';
+        $words = explode(' ', $heading);
+        $count = count($words);
+        if ($count >= 1) {
+            $before = implode(' ', array_slice($words, 0, $count - 1));
+            $last = $words[$count - 1];
+        } else {
+            $before = '';
+            $last = $heading;
+        }
+    @endphp
+    {{ $before }} <span>{{ $last }}</span>
+</h4>
+
+        </div>
+      </div>
+
+      <div class="col-12" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+        <div class="owl-carousel rx-testimonials-slider">
+          @foreach ($texts as $index => $text)
+            <div class="row mb-minus-24">
+              <div class="col-md-4 col-12 mb-24">
+                <div class="rx-testimonials-img">
+                  <img src="{{ asset('/platina/home/Testimonials/' . ($images[$index] ?? 'default.webp')) }}" alt="testimonial-{{ $index + 1 }}">
+                </div>
+              </div>
+              <div class="col-md-8 col-12 mb-24">
+                <div class="rx-testimonials-contact">
+                  <div class="rx-inner-banner">
+                    <h4>{{ $text ?? '' }}</h4>
+                    <span>({{ $designations[$index] ?? '' }})</span>
+                  </div>
+                  <div class="inner-contact">
+                    <p>"{{ $descriptions[$index] ?? '' }}"</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          @endforeach
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <!-- Blog -->
+   <section class="section-blog padding-t-50 padding-b-100">
+  <div class="container">
+    <div class="row">
+      <div class="col-12" data-aos="fade-up" data-aos-duration="1000">
+        <div class="rx-banner text-center rx-banner-effects">
+          <p>
+            <img src="{{ asset('/frontend/assets/img/banner/left-shape.svg')}}" alt="banner-left-shape" class="svg-img left-side">
+            {{ $blogsdetails->title ?? '' }}
+            <img src="{{ asset('/frontend/assets/img/banner/right-shape.svg')}}" alt="banner-right-shape" class="svg-img right-side">
+          </p>
+          <h4>
+            @php
+                $heading = $blogsdetails->heading ?? '';
+                $words = explode(' ', $heading);
+                $before = implode(' ', array_slice($words, 0, count($words) - 1));
+                $lastWord = $words[count($words) - 1] ?? '';
+            @endphp
+            {{ $before }} <span>{{ $lastWord }}</span>
+          </h4>
+        </div>
+      </div>
+
+      <div class="col-12" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+        <div class="owl-carousel rx-blog-slider" id="rxblogslider">
+          @php
+              $texts = explode('|', $blogsdetails->text ?? '');
+              $descriptions = explode('|', $blogsdetails->description ?? '');
+              $images = explode('|', $blogsdetails->images ?? '');
+              $count = max(count($texts), count($descriptions), count($images));
+          @endphp
+
+          @for ($i = 0; $i < $count; $i++)
+            <div class="rx-blog-card">
+              <div class="rx-blog-img">
+                @if (!empty($images[$i]))
+                  <img src="{{ asset('platina/home/blogs/' . $images[$i]) }}" alt="blog-{{ $i + 1 }}">
+                @else
+                  <img src="{{ asset('frontend/assets/img/default-blog.jpg') }}" alt="default-blog">
+                @endif
+              </div>
+              <div class="rx-blog-contact">
+                <span>{{ $texts[$i] ?? '' }}</span>
+                <h4><a href="#">{{ $descriptions[$i] ?? '' }}</a></h4>
+              </div>
+            </div>
+          @endfor
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+    <!-- Footer -->
+    @include('components.frontend.footer')    
     <!-- Back to top  -->
     <a href="#Top" class="back-to-top result-placeholder">
       <i class="fa fa-angle-up"></i>
@@ -674,3 +520,4 @@
     @include('components.frontend.main-js')
 
   </body>
+  </html>

@@ -41,13 +41,13 @@
 								<nav aria-label="breadcrumb" role="navigation">
 									<ol class="breadcrumb mb-0">
 										<li class="breadcrumb-item">
-											<a href="{{ route('about-hayagreevas.index') }}">Home</a>
+											<a href="{{ route('manage-about-hayagreevas.index') }}">Home</a>
 										</li>
 										<li class="breadcrumb-item active" aria-current="page">About Hayagreevas Details</li>
 									</ol>
 								</nav>
 
-								<a href="{{ route('about-hayagreevas.create') }}" class="btn btn-primary px-5 radius-30">+ Add About Hayagreevas Details</a>
+								<a href="{{ route('manage-about-hayagreevas.create') }}" class="btn btn-primary px-5 radius-30">+ Add About Hayagreevas Details</a>
 							</div>
                     <div class="table-responsive custom-scrollbar">
            <table class="table table-bordered display" id="basic-1">
@@ -77,9 +77,9 @@
             <td>{{ $record->content_heading }}</td>
 
             <td>
-                <a href="{{ route('about-hayagreevas.edit', $record->id) }}" class="btn btn-sm btn-primary">Edit</a>
+                <a href="{{ route('manage-about-hayagreevas.edit', $record->id) }}" class="btn btn-sm btn-primary">Edit</a>
 
-                <form action="{{ route('about-hayagreevas.destroy', $record->id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Are you sure you want to delete this?');">
+                <form action="{{ route('manage-about-hayagreevas.destroy', $record->id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Are you sure you want to delete this?');">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-sm btn-danger">Delete</button>

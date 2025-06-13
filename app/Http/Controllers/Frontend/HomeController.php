@@ -9,6 +9,9 @@ use App\Models\BannerDetails;
 use App\Models\AboutusDetail;
 use App\Models\BrandEthosDetail;
 use App\Models\MaterialsDetail;
+use App\Models\PremiumDetail;
+use App\Models\TestimonialsDetail;
+use App\Models\BlogsDetail;
 
 
 class HomeController extends Controller
@@ -20,8 +23,11 @@ class HomeController extends Controller
     $about = AboutusDetail::latest()->first(); 
     $brandEthos = BrandEthosDetail::first(); 
     $materials = MaterialsDetail::first();
-    return view('frontend.home', compact('banners', 'about', 'brandEthos', 'materials')); // ✅ Make sure it's passed
+    $premium = PremiumDetail::first(); 
+    $testimonials = TestimonialsDetail::first(); 
+    $blogsdetails = BlogsDetail::first(); 
 
+    return view('frontend.home', compact('banners', 'about', 'brandEthos', 'materials', 'premium', 'testimonials', 'blogsdetails'));
 }
 
 

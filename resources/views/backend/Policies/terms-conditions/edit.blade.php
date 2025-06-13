@@ -17,7 +17,7 @@
                     </div>
                     <div class="col-6 text-end">
                         <ol class="breadcrumb justify-content-end">
-                            <li class="breadcrumb-item"><a href="{{ route('terms-conditions.index') }}">Home</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('manage-terms-conditions.index') }}">Home</a></li>
                             <li class="breadcrumb-item active">Edit Terms Conditions  Details</li>
                         </ol>
                     </div>
@@ -25,7 +25,7 @@
             </div>
 
              <!-- Form -->
-            <form action="{{ route('terms-conditions.update', $record->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('manage-terms-conditions.update', $record->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
@@ -54,7 +54,7 @@
                 </div>
 
                 <div class="text-end mt-3">
-                    <a href="{{ route('terms-conditions.index') }}" class="btn btn-danger">Cancel</a>
+                    <a href="{{ route('manage-terms-conditions.index') }}" class="btn btn-danger">Cancel</a>
                     <button type="submit" class="btn btn-primary">Update</button>
                 </div>
             </form>

@@ -19,7 +19,7 @@
                     </div>
                     <div class="col-6 text-end">
                         <ol class="breadcrumb justify-content-end">
-                            <li class="breadcrumb-item"><a href="{{ route('return-policy.index') }}">Home</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('manage-return-policy.index') }}">Home</a></li>
                             <li class="breadcrumb-item active">Add Return Policy Details</li>
                         </ol>
                     </div>
@@ -28,7 +28,7 @@
 
         
 
-    <form action="{{ isset($record) ? route('return-policy.update', $record->id) : route('return-policy.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ isset($record) ? route('manage-return-policy.update', $record->id) : route('manage-return-policy.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         @if(isset($record)) @method('PUT') @endif
 
@@ -55,7 +55,7 @@
         </div>
 
         <div class="text-end mt-3">
-            <a href="{{ route('return-policy.index') }}" class="btn btn-danger">Cancel</a>
+            <a href="{{ route('manage-return-policy.index') }}" class="btn btn-danger">Cancel</a>
             <button type="submit" class="btn btn-primary">{{ isset($record) ? 'Update' : 'Submit' }}</button>
         </div>
     </form>

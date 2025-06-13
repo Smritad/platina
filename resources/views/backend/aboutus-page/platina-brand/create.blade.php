@@ -19,7 +19,7 @@
                     </div>
                     <div class="col-6 text-end">
                         <ol class="breadcrumb justify-content-end">
-                            <li class="breadcrumb-item"><a href="{{ route('platina-brand.index') }}">Home</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('manage-platina-brand.index') }}">Home</a></li>
                             <li class="breadcrumb-item active">Add Platina Brand Details</li>
                         </ol>
                     </div>
@@ -27,7 +27,7 @@
             </div>
 
             <!-- Form Start -->
-            <form action="{{ route('platina-brand.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('manage-platina-brand.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="row g-3">
 
@@ -89,13 +89,13 @@
                     <!-- Content Description -->
                     <div class="col-md-12">
                         <label>Content Description <span class="text-danger">*</span></label>
-                        <textarea name="content_description" class="form-control" placeholder="Enter content description *" rows="3">{{ old('content_description') }}</textarea>
+                        <textarea name="content_description" id="summernote" class="form-control" placeholder="Enter content description *" rows="3">{{ old('content_description') }}</textarea>
                     </div>
                 </div>
 
                 <!-- Submit Buttons -->
                 <div class="text-end mt-3">
-                    <a href="{{ route('platina-brand.index') }}" class="btn btn-danger">Cancel</a>
+                    <a href="{{ route('manage-platina-brand.index') }}" class="btn btn-danger">Cancel</a>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
             </form>
