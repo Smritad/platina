@@ -7,7 +7,7 @@
   <div class="rx-main-footer padding-tb-100">
     <div class="container">
       <div class="row mb-minus-24">
-        <div class="col-lg-5 col-sm-6 col-12 mb-24 footer-order-1">
+        <div class="col-lg-4 col-sm-6 col-12 mb-24 footer-order-1">
           <div class="rx-social-media">
             <div class="rx-logo">
               <img src="{{ asset('uploads/footer/' . ($footer->logo ?? 'default-logo.png')) }}" alt="logo">
@@ -18,7 +18,7 @@
           </div>
         </div>
 
-        <div class="col-lg-2 col-sm-4 col-6 col-420-full mb-24 footer-order-2">
+        <div class="col-lg-3 col-sm-4 col-6 col-420-full mb-24 footer-order-2">
           <div class="rx-footer-items">
             <div class="rx-items-heading">
               <h4>Explore</h4>
@@ -76,11 +76,16 @@
           <div class="rx-footer-other-info">
             <div class="inner-info">
               <h5>Address</h5>
-              <p>
-                <a href="https://maps.app.goo.gl/EYjTyAFkgsgzK22P6" target="_blank">
-                  {{ $footer->address ?? '' }}
-                </a>
-              </p>
+             <p>
+  <a href="https://maps.app.goo.gl/EYjTyAFkgsgzK22P6" target="_blank">
+    {!! preg_replace('/(Ltd\.)/', '$1</a><br><a href="https://maps.app.goo.gl/EYjTyAFkgsgzK22P6" target="_blank">', e($footer->address ?? '')) !!}
+  </a>
+</p>
+
+
+
+
+
 
             </div>
             <div class="inner-info">
