@@ -14,9 +14,9 @@ class ProductContentController extends Controller
 {
     public function index()
 {
-    $product_category = ProductContent::leftJoin('users', 'Product_content.created_by', '=', 'users.id')
-                                ->whereNull('Product_content.deleted_by')
-                                ->select('Product_content.*', 'users.name as creator_name')
+    $product_category = ProductContent::leftJoin('users', 'product_content.created_by', '=', 'users.id')
+                                ->whereNull('product_content.deleted_by')
+                                ->select('product_content.*', 'users.name as creator_name')
                                 ->get();
 
     return view('backend.products.product-content.index', compact('product_category'));
