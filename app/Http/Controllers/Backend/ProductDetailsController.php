@@ -143,8 +143,8 @@ public function update(Request $request, $id)
         'size_id' => 'required',
         'product_content_id' => 'required',
         'mrp' => 'nullable|numeric',
-        'thumbnail_image.*' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
-        'media_files.*' => 'nullable|mimes:webp,png,jpeg,jpg,mp4,mp3|max:20480',
+        'thumbnail_image.*' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:20480000',
+        'media_files.*' => 'nullable|mimes:webp,png,jpeg,jpg,mp4,mp3|max:20480000',
     ]);
 
     try {
