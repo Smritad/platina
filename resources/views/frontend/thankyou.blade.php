@@ -64,7 +64,7 @@
             <div class="rx-banner text-center rx-banner-effects">
               <h4>Thank <span> You!</span></h4>
               <p>Your request has been received. Please check your email for further instructions.</p>
-              <a href="#" class="login-btn-two">Back to Home</a>
+              <a href="{{route('frontend.index') }}" class="login-btn-two">Back to Home</a>
             </div>
           </div>
         </div>

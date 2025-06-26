@@ -88,7 +88,8 @@
                 <div class="sidebar-wrap">
 
                         <!-- Category -->
-                        <div class="single-sidebar-item">
+                         
+                        <!-- <div class="single-sidebar-item">
                             <div class="single-sidebar-title">
                                 <h4>Category</h4>
                             </div>
@@ -97,7 +98,44 @@
                                     <li><a href="#">{{ $category }}</a></li>
                                 @endforeach
                             </ul>
-                        </div>
+                        </div> -->
+
+
+<div class="single-sidebar-item">
+                    <div class="single-sidebar-title">
+                      <h4>Category</h4>
+                    </div>
+<div class="dropdown product-sub-cate-dropdown-sec">
+  <button class="btn custom-dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Bedding
+  </button>
+  <ul class="dropdown-menu custom-dropdown-menu">
+    <li><a class="dropdown-item" href="#">Bedding 1</a></li>
+    <li><a class="dropdown-item" href="#">Bedding 2</a></li>
+    <li><a class="dropdown-item" href="#">Bedding 3</a></li>
+  </ul>
+</div>
+<div class="dropdown product-sub-cate-dropdown-sec">
+  <button class="btn custom-dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Bedding
+  </button>
+  <ul class="dropdown-menu custom-dropdown-menu">
+    <li><a class="dropdown-item" href="#">Bedding 4</a></li>
+    <li><a class="dropdown-item" href="#">Bedding 5</a></li>
+    <li><a class="dropdown-item" href="#">Bedding 6</a></li>
+  </ul>
+</div>
+ <div class="dropdown product-sub-cate-dropdown-sec">
+  <button class="btn custom-dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Bedding
+  </button>
+  <ul class="dropdown-menu custom-dropdown-menu">
+    <li><a class="dropdown-item" href="#">Bedding 7</a></li>
+    <li><a class="dropdown-item" href="#">Bedding 8</a></li>
+    <li><a class="dropdown-item" href="#">Bedding 9</a></li>
+  </ul>
+</div>
+</div>
 
                         <!-- TC -->
                         <div class="single-sidebar-item">
@@ -217,7 +255,7 @@
             <div class="sidebar-wrap">
 
                <!-- Category -->
-                        <div class="single-sidebar-item">
+                        <!-- <div class="single-sidebar-item">
                             <div class="single-sidebar-title">
                                 <h4>Category</h4>
                             </div>
@@ -226,7 +264,43 @@
                                     <li><a href="#">{{ $category }}</a></li>
                                 @endforeach
                             </ul>
-                        </div>
+                        </div> -->
+
+<div class="single-sidebar-item">
+                    <div class="single-sidebar-title">
+                      <h4>Category</h4>
+                    </div>
+<div class="dropdown product-sub-cate-dropdown-sec">
+  <button class="btn custom-dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Bedding
+  </button>
+  <ul class="dropdown-menu custom-dropdown-menu">
+    <li><a class="dropdown-item" href="#">Bedding 1</a></li>
+    <li><a class="dropdown-item" href="#">Bedding 2</a></li>
+    <li><a class="dropdown-item" href="#">Bedding 3</a></li>
+  </ul>
+</div>
+<div class="dropdown product-sub-cate-dropdown-sec">
+  <button class="btn custom-dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Bedding
+  </button>
+  <ul class="dropdown-menu custom-dropdown-menu">
+    <li><a class="dropdown-item" href="#">Bedding 4</a></li>
+    <li><a class="dropdown-item" href="#">Bedding 5</a></li>
+    <li><a class="dropdown-item" href="#">Bedding 6</a></li>
+  </ul>
+</div>
+ <div class="dropdown product-sub-cate-dropdown-sec">
+  <button class="btn custom-dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Bedding
+  </button>
+  <ul class="dropdown-menu custom-dropdown-menu">
+    <li><a class="dropdown-item" href="#">Bedding 7</a></li>
+    <li><a class="dropdown-item" href="#">Bedding 8</a></li>
+    <li><a class="dropdown-item" href="#">Bedding 9</a></li>
+  </ul>
+</div>
+</div>
 
                         <!-- TC -->
                         <div class="single-sidebar-item">

@@ -60,7 +60,7 @@
 
 
 <li class="menu-item-has-children">
-    <a href="{{ route('product.all') }}">
+    <a href="{{ route('coming.soon') }}">
         Products <i class="fa fa-angle-down"></i>
     </a>
     <div class="sub-menu mega-menu row mega-menu-column-4 scrollbar" id="style-3">
