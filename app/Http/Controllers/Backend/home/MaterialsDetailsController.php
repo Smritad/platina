@@ -113,9 +113,9 @@ public function update(Request $request, $id)
     $material->update([
         'title' => $request->title,
         'heading' => $request->heading,
-        'text' => implode(',', $texts),
-        'description' => implode(',', $descriptions),
-        'images' => implode(',', $finalImages),
+        'text' => implode('|', $texts),
+        'description' => implode('|', $descriptions),
+        'images' => implode('|', $finalImages),
         'updated_by' => auth()->id(),
     ]);
 
