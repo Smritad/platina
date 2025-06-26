@@ -5,20 +5,17 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\FooterDetails;
-
 use Illuminate\Support\Facades\Mail;
-
+use App\Mail\ContactMail;
+use App\Mail\ThankYouMail; // New mail for user
 
 class ContactController extends Controller
 {
-  
     public function index()
-{
-    
-    $records = FooterDetails::latest()->get();
-    return view('frontend.contactus', compact('records'));
-}
-
+    {
+        $records = FooterDetails::latest()->get();
+        return view('frontend.contactus', compact('records'));
+    }
 
     public function send(Request $request)
     {
@@ -38,12 +35,15 @@ class ContactController extends Controller
             'message' => $request->message,
         ];
 
-        Mail::to('smrita@matrixbricks.com')->send(new \App\Mail\ContactMail($details));
+        // 1️⃣ Send mail to admin with CC using view
+        Mail::to('smrita@matrixbricks.com')
+            ->cc(['shweta@matrixbricks.com', 'onkar@matrixbricks.com'])
+            ->send(new ContactMail($details));
 
-        return back()->with('message', 'Your message has been sent successfully!');
+        // 2️⃣ Send thank-you mail to user using view
+        Mail::to($details['email'])->send(new ThankYouMail($details));
+
+        // 3️⃣ Redirect to thank you page
+        return view('frontend.thankyou');
     }
-
-
-    
-    
 }

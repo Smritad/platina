@@ -76,11 +76,31 @@
           <div class="rx-footer-other-info">
             <div class="inner-info">
               <h5>Address</h5>
-             <p>
-  <a href="https://maps.app.goo.gl/EYjTyAFkgsgzK22P6" target="_blank">
-    {!! preg_replace('/(Ltd\.)/', '$1</a><br><a href="https://maps.app.goo.gl/EYjTyAFkgsgzK22P6" target="_blank">', e($footer->address ?? '')) !!}
-  </a>
+            @php
+  $address = $footer->address ?? '';
+  $addressLines = explode("\n", $address); // Break into lines
+@endphp
+
+<!-- <p>
+  @foreach ($addressLines as $line)
+    <a href="https://maps.app.goo.gl/EYjTyAFkgsgzK22P6" target="_blank" style="display: block; margin-bottom: 4px;">
+      {{ e(trim($line)) }}
+    </a>
+  @endforeach
+</p> -->
+
+
+<p>
+    <a href="https://maps.app.goo.gl/EYjTyAFkgsgzK22P6" target="_blank" style="display: block; margin-bottom: 4px;">
+     Hayagreevas Fabrics Pvt. Ltd.<br>
+312, Kuntal Building, <br>
+Mody Estate, LBS Marg, <br>
+Ghatkopar West, Mumbai, 400086.<br>
+    </a>
+
 </p>
+
+
 
 
 

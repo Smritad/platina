@@ -21,4 +21,6 @@ class ContactMail extends Mailable
         return $this->subject($this->details['subject'])
                     ->view('emails.contact');
     }
+
+    
 }
