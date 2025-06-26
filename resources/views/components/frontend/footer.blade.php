@@ -76,7 +76,12 @@
           <div class="rx-footer-other-info">
             <div class="inner-info">
               <h5>Address</h5>
-              <p>{{ $footer->address ?? '' }}</p>
+              <p>
+                <a href="https://maps.app.goo.gl/EYjTyAFkgsgzK22P6" target="_blank">
+                  {{ $footer->address ?? '' }}
+                </a>
+              </p>
+
             </div>
             <div class="inner-info">
               <h5>Mail</h5>
