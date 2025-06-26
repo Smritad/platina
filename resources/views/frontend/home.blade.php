@@ -57,13 +57,13 @@
         <div class="rx-about-img">
           <img src="{{ asset('public/platina/home/banner/' . $about->image) }}" alt="about" class="rx-white-img">
           <div class="rx-rounded-circle">
-            <a href="http://127.0.0.1:8000/about-hayagreevas">
+            <a href="{{ route('frontend.abouthayagreevas') }}">
               <svg viewBox="0 0 100 100" width="100" height="100">
                 <defs>
                   <path id="circle" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0"></path>
                 </defs>
                 <text>
-                  <textPath xlink:href="{{ route('frontend.abouthayagreevas') }}">
+                  <textPath xlink:href="#circle">
                     About Us - About Us - About Us -
                   </textPath>
                 </text>
