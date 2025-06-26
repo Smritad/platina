@@ -68,9 +68,24 @@
  <section class="section-room padding-tb-50">
     <div class="container">
         <div class="row">
-            <div class="col-12 col-sm-3">
-                <div class="product-listing-side-bar-sec">
-                    <div class="sidebar-wrap">
+            <div class="col-md-12 col-lg-3 col-sm-12 col-xs-12">
+               <!-- Filter Button: visible on mobile/tablet only -->
+           <div class="filter-btn-sec">
+             <button id="filterBtn" class="rx-btn-two fitler-btn-two d-block d-lg-none">Filter</button>
+           </div>
+
+          <!-- Overlay -->
+          <div id="sidebarOverlay" class="sidebar-overlay"></div>
+
+          <!-- Sidebar: mobile view -->
+          <div id="mobileSidebar" class="sidebar d-block d-lg-none">
+            <div class="sidebar-header">
+              <h4>Filter</h4>
+              <button id="closeSidebar" class="close-btn">&times;</button>
+            </div>
+            <div class="sidebar-content">
+              <div class="product-listing-side-bar-sec">
+                <div class="sidebar-wrap">
 
                         <!-- Category -->
                         <div class="single-sidebar-item">
@@ -164,7 +179,7 @@
                         </div>
 
                         <!-- Price Range -->
-                      <div class="single-sidebar-item">
+              <div class="single-sidebar-item">
                 <div class="single-sidebar-title">
                   <h4>Price</h4>
                 </div>
@@ -192,6 +207,135 @@
                     </div>
                 </div>
             </div>
+          </div>
+
+
+          
+          <!-- -- Sidebar on desktop: visible only on desktop --> 
+
+          <div class="product-listing-side-bar-sec d-none d-lg-block">
+            <div class="sidebar-wrap">
+
+               <!-- Category -->
+                        <div class="single-sidebar-item">
+                            <div class="single-sidebar-title">
+                                <h4>Category</h4>
+                            </div>
+                            <ul class="products-list">
+                                @foreach($categories as $id => $category)
+                                    <li><a href="#">{{ $category }}</a></li>
+                                @endforeach
+                            </ul>
+                        </div>
+
+                        <!-- TC -->
+                        <div class="single-sidebar-item">
+                            <div class="single-sidebar-title">
+                                <h4>TC</h4>
+                            </div>
+                            <select class="rx-from-control form-select">
+                                <option selected>Select</option>
+                                @foreach($tcs as $tc)
+                                    <option value="{{ $tc }}">{{ $tc }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <!-- Age Group -->
+                        <div class="single-sidebar-item">
+                            <div class="single-sidebar-title">
+                                <h4>Age Group</h4>
+                            </div>
+                            <select class="rx-from-control form-select">
+                                <option selected>Select</option>
+                                @foreach($ageGroups as $id => $ageGroup)
+                                    <option value="{{ $ageGroup }}">{{ $ageGroup }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <!-- Collection -->
+                        <div class="single-sidebar-item">
+                            <div class="single-sidebar-title">
+                                <h4>Collection Name</h4>
+                            </div>
+                            <select class="rx-from-control form-select">
+                                <option selected>Select</option>
+                                @foreach($collections as $collection)
+                                    <option value="{{ $collection }}">{{ $collection }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <!-- Fabric Type -->
+                        <div class="single-sidebar-item">
+                            <div class="single-sidebar-title">
+                                <h4>Fabric Type</h4>
+                            </div>
+                            @foreach($fabricTypes as $id => $fabric)
+                                <div class="form-check">
+                                    <input class="fabric-type-check form-check-input" type="checkbox" value="{{ $id }}" id="check{{ $id }}">
+                                    <label class="form-check-label" for="check{{ $id }}">
+                                        {{ $fabric }}
+                                    </label>
+                                </div>
+                            @endforeach
+                        </div>
+
+                        <!-- Color -->
+                        <div class="single-sidebar-item">
+                            <div class="single-sidebar-title">
+                                <h4>Select Color</h4>
+                            </div>
+                            <input type="text" class="product-select-color-search-box" placeholder="Search color...">
+                            <ul class="products-list">
+                                @foreach($uniqueColors as $color)
+                                    <li>{{ $color }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+
+                        <!-- Size -->
+                        <div class="single-sidebar-item">
+                            <div class="single-sidebar-title">
+                                <h4>Size</h4>
+                            </div>
+                            <ul class="list-inline">
+                                @foreach($sizes as $id => $size)
+                                    <li class="list-inline-item"><a href="#" class="size-btn">{{ $size }}</a></li>
+                                @endforeach
+                            </ul>
+                        </div>
+
+                        <!-- Price Range -->
+              <div class="single-sidebar-item">
+                <div class="single-sidebar-title">
+                  <h4>Price</h4>
+                </div>
+                <div class="price-range-box">
+                  <div class="price-input">
+                    <div class="field">
+                      <label for="minPrice">Min</label>
+                      <input type="number" id="minPrice" value="1000">
+                    </div>
+                    <div class="field">
+                      <label for="maxPrice">Max</label>
+                      <input type="number" id="maxPrice" value="5000">
+                    </div>
+                  </div>
+                  <div class="slider">
+                    <div class="progress" style="left: 0%; right: 70%;"></div>
+                  </div>
+                  <div class="range-input">
+                    <input type="range" id="rangeMin" min="0" max="100000" value="0" step="100">
+                    <input type="range" id="rangeMax" min="0" max="100000" value="30000" step="100">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+</div>  
 
           
 <div class="col-12 col-sm-9">
@@ -354,7 +498,29 @@
     </div>
   </div>
       @include('components.frontend.main-js')
+ <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const filterBtn = document.getElementById('filterBtn');
+      const sidebar = document.getElementById('mobileSidebar');
+      const overlay = document.getElementById('sidebarOverlay');
+      const closeBtn = document.getElementById('closeSidebar');
 
+      filterBtn.addEventListener('click', () => {
+        sidebar.classList.add('open');
+        overlay.classList.add('show');
+      });
+
+      overlay.addEventListener('click', () => {
+        sidebar.classList.remove('open');
+        overlay.classList.remove('show');
+      });
+
+      closeBtn.addEventListener('click', () => {
+        sidebar.classList.remove('open');
+        overlay.classList.remove('show');
+      });
+    });
+  </script>
 </body>
 
 </html>
