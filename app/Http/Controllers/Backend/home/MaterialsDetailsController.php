@@ -62,9 +62,9 @@ class MaterialsDetailsController extends Controller
     $brandEthosDetails = MaterialsDetail::findOrFail($id);
 
     // Convert comma-separated values to arrays
-    $texts = explode(',', $brandEthosDetails->text ?? '');
-    $descriptions = explode(',', $brandEthosDetails->description ?? '');
-    $images = explode(',', $brandEthosDetails->images ?? '');
+    $texts = explode('|', $brandEthosDetails->text ?? '');
+    $descriptions = explode('|', $brandEthosDetails->description ?? '');
+    $images = explode('|', $brandEthosDetails->images ?? '');
 
     $counterItems = [];
     $count = max(count($texts), count($descriptions), count($images));
