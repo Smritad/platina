@@ -60,59 +60,50 @@
 
 
 <li class="menu-item-has-children">
-    <a href="{{ route('coming.soon') }}">
-        Products <i class="fa fa-angle-down"></i>
-    </a>
-    <div class="sub-menu mega-menu row mega-menu-column-4 scrollbar" id="style-3">
-        <div class="row">
-            @foreach($categoriesWithSub as $masterCategoryId => $subCategories)
-                @php
-                    $masterName = $subCategories->first()->master_name;
-                    $masterSlug = \Illuminate\Support\Str::slug($masterName);
+                  <a href="#">Products <i class="fa fa-angle-down"></i></a>
+                  <div class="sub-menu mega-menu row mega-menu-column-4 scrollbar" id="style-3">
+                    <div class="row">
+                      <div class="col-md-3 list-item border-right-one">
+                        <h3>Bedding</h3>
+                        <ul>
+                          <li><a href="{{ route('coming.soon') }}">Bed Sheet</a></li>
+                          <li><a href="{{ route('coming.soon') }}">Pillow Covers</a></li>
+                          <li><a href="{{ route('coming.soon') }}">Quilt Set</a></li>
+                          <li><a href="{{ route('coming.soon') }}">Comforter Set</a></li>
+                          <li><a href="{{ route('coming.soon') }}">Bed Covers</a></li>
+                          <li><a href="{{ route('coming.soon') }}">Cover Let</a></li>
+                          <li><a href="{{ route('coming.soon') }}">Duvet Cover Set</a></li>
+                        </ul>
+                      </div>
 
-                    // Check if product details exist for this master category
-                    $masterHasProducts = \Illuminate\Support\Facades\DB::table('product_details')
-                        ->where('product_category_id', $masterCategoryId)
-                        ->whereNull('deleted_at')
-                        ->exists();
-                @endphp
-                <div class="col-md-3 list-item border-right-one">
-                    <h3>
-                        <a href="{{ $masterHasProducts ? route('product.category', $masterSlug) : route('coming.soon') }}" class="master-category-link">
-                            {{ $masterName }}
-                        </a>
-                    </h3>
+                      <div class="col-md-3 list-item border-right-one">
+                        <h3>Living</h3>
+                        <ul>
+                          <li><a href="{{ route('coming.soon') }}">Cushion Cover</a></li>
+                          <li><a href="{{ route('coming.soon') }}">Bolster Cover</a></li>
+                        </ul>
+                      </div>
 
-                    <ul>
-                        @foreach($subCategories as $sub)
-                     
-                            @php
-                              
-                                // Check if product details exist for this sub category
-                                $subHasProducts = \Illuminate\Support\Facades\DB::table('product_details')
-                                    ->where('product_sab_category_id', $sub->id)
-                                    ->whereNull('deleted_at')
-                                    ->exists();
+                      <div class="col-md-3 list-item border-right-one">
+                        <h3>Table Linen</h3>
+                        <ul>
+                          <li><a href="{{ route('coming.soon') }}">Table Cover</a></li>
+                          <li><a href="{{ route('coming.soon') }}">Table Napkins</a></li>
+                          <li><a href="{{ route('coming.soon') }}">Cocktail Napkins</a></li>
+                          <li><a href="{{ route('coming.soon') }}">Table Runner</a></li>
+                          <li><a href="{{ route('coming.soon') }}">Table Set</a></li>
+                          <li><a href="{{ route('coming.soon') }}">Place Mats</a></li>
+                        </ul>
+                      </div>
+                      <div class="col-md-3 list-item border-right-one">
+                        <div class="menu-img">
+                          <img src="{{ asset('frontend/assets/img/home/bedding-menu.jpg') }}" class="img-responsive">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
 
-                            @endphp
-                            <li>
-                                <a href="{{ $subHasProducts ? route('product.details', $sub->sub_slug) : route('coming.soon') }}">
-                                    {{ $sub->sab_category_name }}
-                                </a>
-                            </li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endforeach
-
-            <div class="col-md-3 list-item border-right-one">
-                <div class="menu-img">
-                    <img src="{{ asset('frontend/assets/img/home/bedding-menu.jpg') }}" class="img-responsive" alt="Menu Image">
-                </div>
-            </div>
-        </div>
-    </div>
-</li>
 
                   <!-- <li><a href="#">Bedding Care</a></li> -->
                                     <li><a href="{{ route('contact.us') }}">Contact Us</a></li>
