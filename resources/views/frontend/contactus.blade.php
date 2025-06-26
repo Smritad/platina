@@ -155,7 +155,7 @@
         </div>
         <div class="col-12 mb-24">
             <div class="rx-input-box">
-                <textarea name="message" class="rx-form-control" placeholder="Message*" required></textarea>
+                <textarea name="message" class="rx-form-control" placeholder="Message"></textarea>
             </div>
         </div>
         <div class="col-12">

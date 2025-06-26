@@ -6,8 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\FooterDetails;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\ContactMail;
-use App\Mail\ThankYouMail; // New mail for user
+use Illuminate\Support\Facades\Log;
 
 class ContactController extends Controller
 {
@@ -35,15 +34,28 @@ class ContactController extends Controller
             'message' => $request->message,
         ];
 
-        // 1️⃣ Send mail to admin with CC using view
-        Mail::to('smrita@matrixbricks.com')
-            ->cc(['shweta@matrixbricks.com', 'onkar@matrixbricks.com'])
-            ->send(new ContactMail($details));
+        // 1️⃣ Send mail to admin with CC
+        try {
+            Mail::send('emails.contact_admin', ['details' => $details], function ($message) use ($details) {
+                $message->to('riddhi@matrixbricks.com')
+                        ->cc(['shweta@matrixbricks.com', 'onkar@matrixbricks.com'])
+                        ->subject('Contact Us Enquirey');
+            });
+        } catch (\Exception $e) {
+            Log::error('Failed to send contact mail to admin: ' . $e->getMessage());
+        }
 
-        // 2️⃣ Send thank-you mail to user using view
-        Mail::to($details['email'])->send(new ThankYouMail($details));
+        // 2️⃣ Send thank-you mail to user
+        try {
+            Mail::send('emails.contact_user', ['details' => $details], function ($message) use ($details) {
+                $message->to($details['email'])
+                        ->subject('Thank You for Your Enquiry');
+            });
+        } catch (\Exception $e) {
+            Log::error('Failed to send thank-you mail to user: ' . $e->getMessage());
+        }
 
-        // 3️⃣ Redirect to thank you page
+        // 3️⃣ Redirect to thank-you page
         return view('frontend.thankyou');
     }
 }
