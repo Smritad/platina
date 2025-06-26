@@ -30,7 +30,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="inner-contact slider-animation">
-                                <h2>{!! $banner->banner_heading !!}</h2>
+                                <h2>{{ $banner->banner_heading }}</h2>
                             </div>
                         </div>
                     </div>
@@ -364,9 +364,9 @@
                     <h4>{{ $counterText }}</h4>
                   </div>
                   <p>{{ $counterDescs[$index] ?? '' }}</p>
-                  <div class="amenities-btn">
+                  <!-- <div class="amenities-btn">
                     <a href="#" class="rx-btn-two">Shop Now</a>
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </div>

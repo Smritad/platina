@@ -54,7 +54,7 @@
                                     <!-- Banner Heading-->
                                     <div class="col-xxl-4 col-sm-6">
                                         <label class="form-label" for="banner_heading">Banner Heading <span class="txt-danger">*</span></label>
-                                        <input class="form-control" id="banner_heading" type="text" name="banner_heading" value="{{ old('banner_heading', $banner_details->banner_heading) }}" placeholder="Enter Banner Heading" required>
+                                        <input class="form-control" id="banner_heading" id="summernotes" type="text" name="banner_heading" value="{{ old('banner_heading', $banner_details->banner_heading) }}" placeholder="Enter Banner Heading" required>
                                         <div class="invalid-feedback">Please enter a Banner Heading.</div>
                                     </div>
 
