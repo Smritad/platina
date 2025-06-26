@@ -25,17 +25,27 @@
                  alt="hero-box" 
                  class="banner-arrow-img">
 
-            <div class="rx-hero-contact">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="inner-contact slider-animation">
-                                <h2>{{ $banner->banner_heading }}</h2>
-                            </div>
-                        </div>
-                    </div>
+        @php
+    $highlightWords = ['Luxurious', 'Luxury', 'Ultimate'];
+    $heading = $banner->banner_heading ?? '';
+
+    foreach ($highlightWords as $word) {
+        $heading = preg_replace("/\b($word)\b/i", '<span>$1</span>', $heading);
+    }
+@endphp
+
+<div class="rx-hero-contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="inner-contact slider-animation">
+                    <h2>{!! $heading !!}</h2>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
 
         </div>
     @endforeach
