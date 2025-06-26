@@ -137,9 +137,9 @@ Route::get('/return-policy', [PoliciesController::class, 'index'])->name('fronte
 Route::get('/privacy-policy', [PoliciesController::class, 'privacy'])->name('frontend.privacy');
 Route::get('/terms-conditions', [PoliciesController::class, 'termsconditions'])->name('frontend.termsconditions');
 Route::get('/about-hayagreevas', [AbouthayagreevasController::class, 'index'])->name('frontend.abouthayagreevas');
-Route::get('/platina-brand', [PlatinaBrndController::class, 'index'])->name('frontend.platina-brand');
-Route::get('/team', [TeamController::class, 'index'])->name('frontend.team');
-Route::get('/manufacturing-unit', [ManufacturingController::class, 'index'])->name('frontend.manufacturing-unit');
+Route::get('/platina-india', [PlatinaBrndController::class, 'index'])->name('frontend.platina-brand');
+Route::get('/our-leadership', [TeamController::class, 'index'])->name('frontend.team');
+Route::get('/manufacturing-excellence', [ManufacturingController::class, 'index'])->name('frontend.manufacturing-unit');
 Route::get('/products', [AllProductsController::class, 'index'])->name('product.all');
 Route::get('/category/{slug}', [CategoryProductsListingDetailsController::class, 'index'])->name('product.category');
 
