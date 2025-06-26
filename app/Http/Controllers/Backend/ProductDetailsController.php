@@ -42,7 +42,7 @@ class ProductDetailsController extends Controller
     $age_groups = DB::table('age_group')->get();
     $fabric_types = DB::table('fabric_type')->get();
     $sizes = DB::table('size_details')->get();
-    $contents = DB::table('product_content')->get();
+    $contents = DB::table('Product_content')->get();
 
     return view('backend.products.product-details.create', compact('categories', 'subcategories', 'age_groups', 'fabric_types', 'sizes', 'contents'));
 }
