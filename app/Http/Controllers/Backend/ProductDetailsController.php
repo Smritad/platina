@@ -59,8 +59,8 @@ public function store(Request $request)
         'colors' => 'required|array',
         'mrp' => 'nullable|numeric',
         'thumbnail_image' => 'required|array',
-        'thumbnail_image.*' => 'image|mimes:jpeg,png,jpg,webp|max:2048',
-        'media_files.*' => 'nullable|mimes:webp,png,jpeg,jpg,mp4,mp3|max:20480'
+        'thumbnail_image.*' => 'image|mimes:jpeg,png,jpg,webp|max:20480000',
+        'media_files.*' => 'nullable|mimes:webp,png,jpeg,jpg,mp4,mp3|max:20480000'
     ]);
 
     try {
