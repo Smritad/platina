@@ -122,7 +122,8 @@
                             <div class="col-lg-6 col-12 mb-24">
                                 <div class="rx-contact-touch-ifrem">
 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3770.47600107083!2d72.9018054!3d19.0867629!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c7003c24ea01%3A0xd49e0c3aaa72741d!2sMODI%20ESTATE!5e0!3m2!1sen!2sin!4v1750928892290!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>                            </div>
-                            <div class="col-lg-6 col-12 mb-24">
+</div>                          
+  <div class="col-lg-6 col-12 mb-24">
                                 <div class="rx-inner-form">
                                    <form action="{{ route('contact.send') }}" method="POST">
     @csrf
