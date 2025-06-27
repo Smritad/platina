@@ -134,7 +134,7 @@ Ghatkopar West, Mumbai, 400086.<br>
             </div>
             <div class="rx-footer-last-logo">
               @php
-                $icons = ['fa-facebook', 'fa-instagram', 'fa-linkedin', 'fa-twitter'];
+                $icons = ['fa-instagram', 'fa-facebook', 'fa-linkedin', 'fa-twitter'];
               @endphp
               
               @foreach ($socialLinks as $key => $link)

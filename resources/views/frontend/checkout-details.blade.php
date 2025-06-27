@@ -99,12 +99,7 @@
 </div>
 @endif
  
-                            @php
-                                use App\Models\OrderDetail;
-
-                                $user = Auth::user();
-                                $order = OrderDetail::where('user_id', $user->id ?? null)->latest()->first();
-                            @endphp                              
+                                                      
             <div class="rx-checkout-wrap checkout-information-sec" data-aos="fade-up" data-aos-duration="1000">
               <div class="inner-title">
                 <h4>Information</h4>

@@ -113,7 +113,7 @@
             </div>
           </div>
 
-          <!-- <div class="product-details-price-sec">
+          <div class="product-details-price-sec">
             <div class="product-details-price-title">
               <h4>₹ {{ number_format($product->mrp, 2) }}
                 @if($product->mrp)
@@ -121,9 +121,9 @@
                 @endif
               </h4>
             </div>
-          </div> -->
+          </div>
 
-          <!-- <div class="product-details-color-sec">
+          <div class="product-details-color-sec">
             <div class="product-details-color-variant">
               <p class="product-details-title">Color :</p>
               @php
@@ -138,7 +138,7 @@
               </ul>
               <input type="hidden" name="selected_color" id="selected_color" value="{{ trim($colors[0]) }}">
             </div>
-          </div> -->
+          </div>
 
           <input type="hidden" name="product_id" value="{{ $product->id }}">
           <input type="hidden" name="fabric" value="{{ optional($product->fabricType)->category_name ?? 'N/A' }}">
@@ -218,11 +218,11 @@
 
           <div class="product-details-btn-sec">
             <div class="row">
-              <!-- <div class="col-md-5">
+              <div class="col-md-5">
                 <div class="pro-det-add-to-cart-btn">
                <button type="button" class="prod-det-btn-two" id="buyNowButton">Buy Now</button>
                 </div>
-              </div> -->
+              </div>
 
               <!-- Connect Us Button -->
  <div class="col-md-5">
@@ -231,23 +231,23 @@
 Enquire Now  </button>
 </div>
 </div>
-              <!-- <div class="col-md-5">
+              <div class="col-md-5">
                 <div class="pro-det-add-to-cart-btn">
                   <button type="submit" class="prod-det-btn-two">Add to cart</button>
                 </div>
-              </div> -->
-              <!-- <div class="col-md-2">
+              </div>
+              <div class="col-md-2">
                 <div class="pro-det-wishlist-btn">
                   <a href="{{ route('wishlist.add', $product->id) }}" class="box-icon hover-tooltip text-capton-2 wishlist btn-icon-action btn btn-wishlist">
                    <span class="fa fa-heart-o"></span>
                     <span class="tooltip text-caption-2">Wishlist</span></a>
                 </div>
               </div>
-            </div> -->
+            </div>
             <br>
           </div>
 
-          <!-- <div class="product-details-guranteed-sec">
+          <div class="product-details-guranteed-sec">
             <div class="product-details-guranteed-title">Guaranteed Safe Checkout :</div>
             <div class="product-details-guranteed-payment">
               <img src="{{ asset('frontend/assets/img/logo/visa-img.png') }}" alt="Visa">
@@ -257,7 +257,7 @@ Enquire Now  </button>
               <img src="{{ asset('frontend/assets/img/logo/od-img.png') }}" alt="OD">
               <img src="{{ asset('frontend/assets/img/logo/disocver-img.png') }}" alt="Discover">
             </div>
-          </div> -->
+          </div>
 
         </div>
       </div>

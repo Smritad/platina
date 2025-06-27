@@ -236,7 +236,7 @@
 
                 </div>
                 <div class="last-contact">
-                  <!-- <a href="#" class="inner-button">Know More</a> -->
+                  <a href="#" class="inner-button">Know More</a>
                 </div>
               </div>
             </div>
@@ -374,9 +374,9 @@
                     <h4>{{ $counterText }}</h4>
                   </div>
                   <p>{{ $counterDescs[$index] ?? '' }}</p>
-                  <!-- <div class="amenities-btn">
+                  <div class="amenities-btn">
                     <a href="#" class="rx-btn-two">Shop Now</a>
-                  </div> -->
+                  </div>
                 </div>
               </div>
             </div>
@@ -394,7 +394,7 @@
     $images = explode(',', $testimonials->image ?? '');
 @endphp
 
-<!-- <section class="section-testimonials padding-tb-50">
+<section class="section-testimonials padding-tb-50">
   <div class="container">
     <div class="row">
       <div class="col-12" data-aos="fade-up" data-aos-duration="1000">
@@ -449,10 +449,10 @@
       </div>
     </div>
   </div>
-</section> -->
+</section>
 
     <!-- Blog -->
-<!-- <section class="section-blog padding-t-50 padding-b-100">
+<section class="section-blog padding-t-50 padding-b-100">
   <div class="container">
     <div class="row">
       <div class="col-12" data-aos="fade-up" data-aos-duration="1000">
@@ -503,7 +503,7 @@
 
     </div>
   </div>
-</section> -->
+</section>
 
     <!-- Footer -->
     @include('components.frontend.footer')    
