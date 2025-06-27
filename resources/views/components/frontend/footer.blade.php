@@ -132,7 +132,7 @@ Ghatkopar West, Mumbai, 400086.<br>
                 <a href="http://www.matrixbricks.com" target="_blank">Matrix Bricks</a>
               </p>
             </div>
-            <!-- <div class="rx-footer-last-logo">
+            <div class="rx-footer-last-logo">
               @php
                 $icons = ['fa-facebook', 'fa-instagram', 'fa-linkedin', 'fa-twitter'];
               @endphp
@@ -147,7 +147,7 @@ Ghatkopar West, Mumbai, 400086.<br>
                 @endif
               @endforeach
 
-            </div> -->
+            </div>
           </div>
         </div>
       </div>

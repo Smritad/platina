@@ -289,7 +289,7 @@
                 </div>
                 <div class="spa-contact">
                   <h4>Sateen</h4>
-                  <p>A cotton-based weave with a subtle sheen and silky finish. Sateen combines softness with durability, making it ideal for premium bedding and apparel.</p>
+                  <p>A weave with a subtle sheen and silky finish. Sateen combines softness with durability, making it ideal for premium bedding and apparel.</p>
                 </div>
               </div>
             </div>
