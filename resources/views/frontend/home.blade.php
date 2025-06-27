@@ -132,7 +132,7 @@
 
 <section class="section-services padding-tb-50">
   <div class="container">
-    <div class="row mb-minus-24">
+    <div class="row mb-minus-24 justify-content-center">
       {{-- Banner Section --}}
       <div class="col-12" data-aos="fade-up" data-aos-duration="1000">
         <div class="rx-banner text-center rx-banner-effects">
