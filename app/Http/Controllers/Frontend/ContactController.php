@@ -37,8 +37,8 @@ class ContactController extends Controller
         // 1️⃣ Send mail to admin with CC
         try {
             Mail::send('emails.contact_admin', ['details' => $details], function ($message) use ($details) {
-                $message->to('riddhi@matrixbricks.com')
-                        ->cc(['shweta@matrixbricks.com', 'onkar@matrixbricks.com'])
+                $message->to('contact@platinaindia.com')
+                        ->cc(['shweta@matrixbricks.com', 'onkar@matrixbricks.com', 'smrita@matrixbricks.com'])
                         ->subject('Contact Us Enquiry');
             });
         } catch (\Exception $e) {

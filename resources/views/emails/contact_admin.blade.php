@@ -12,5 +12,5 @@
 
 <!-- Footer -->
 <div style="margin-top: 40px; text-align: center; border-top: 1px solid #ccc; padding-top: 20px; font-size: 14px; color: #777;">
-    &copy; {{ date('Y') }} Platina India. All rights reserved.<br>
+    &copy; {{ date('Y') }} PLATINA INDIA™. All rights reserved.<br>
 </div>

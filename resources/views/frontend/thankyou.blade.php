@@ -63,7 +63,7 @@
             <div class="thank-you-box">
             <div class="rx-banner text-center rx-banner-effects">
               <h4>Thank <span> You!</span></h4>
-              <p>Your request has been received. Please check your email for further instructions.</p>
+              <p>Thank you for submitting. Our concerned team will get in touch with you soon.</p>
               <a href="{{route('frontend.index') }}" class="login-btn-two">Back to Home</a>
             </div>
           </div>
