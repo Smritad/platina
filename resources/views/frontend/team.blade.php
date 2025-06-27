@@ -9,7 +9,31 @@
       <span class="loader"></span>
     </div>
     @include('components.frontend.header')
-
+ <style>
+        .rx-team-contact {
+            background-color: #f5f5f5;
+            padding: 30px 15px;
+            border: 1px solid #eee;
+            border-radius: 20px;
+            transition: all 0.3s ease-in-out;
+        }
+        
+        .rx-team-contact:hover {
+            border: 1px solid #131618;
+        }
+        
+        .team-group-row .rx-team-contact p {
+            line-height: 1.5;
+            min-height: 160px;
+            border-top: 1px solid #9d7e54;
+            padding-top: 10px;
+        }
+        
+        .rx-team-card .rx-team-contact h5 {
+            font-size: 22px;
+            color: #9d7e54;
+        }
+    </style>
 
 <!-- Breadcrumb -->
 <section class="section-breadcrumb">
@@ -69,7 +93,7 @@
       @foreach($names as $index => $name)
         <div class="col-xl-3 col-lg-6 col-sm-6 col-12" data-aos="flip-left" data-aos-duration="1000">
           <div class="rx-team-card">
-            <div class="rx-team-img">
+            <!-- <div class="rx-team-contact">
               <img src="{{ asset('uploads/platina_brand/' . ($images[$index] ?? 'default.png')) }}" alt="team-{{ $index + 1 }}">
               <div class="rx-team-social-media">
                 @php
@@ -88,7 +112,7 @@
                   <div class="social-media-item"><a href="{{ $socialLinks[3] ?? 'javascript:void(0)' }}"><i class="fa fa-twitter"></i></a></div>
                 @endif
               </div>
-            </div>
+            </div> -->
             <div class="rx-team-contact">
               <h5>{{ $name }}</h5>
               <h6>{{ $designations[$index] ?? '' }}</h6>
