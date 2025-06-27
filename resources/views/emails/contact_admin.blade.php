@@ -8,8 +8,7 @@
 <p><strong>Email:</strong> {{ $details['email'] }}</p>
 <p><strong>Phone:</strong> {{ $details['phone'] }}</p>
 <p><strong>Subject:</strong> {{ $details['subject'] }}</p>
-<p><strong>Message:</strong></p>
-<p>{{ $details['message'] }}</p>
+<p><strong>Message:</strong>{{ $details['message'] }}</p>
 
 
 

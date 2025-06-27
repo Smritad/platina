@@ -381,6 +381,68 @@ $(document).ready(function() {
     });
 });
 </script>
+<!--Product Color select 2 opt-->  
+<script>
+    $(document).ready(function() {
+   
+    $('#summernotes').summernote({
+        height: 200
+    });
+});
+   $(document).ready(function () {
+    const colorDropdown = $('#color_dropdown');
+
+    // Map color names to their respective hex values
+    const colorMap = {
+        "Black": "#000000",
+         "Ice Melt": "#D3E4F1",
+      "Spell Bound": "#4E646F",
+        "White": "#FFFFFF",
+        "Red": "#FF0000",
+        "Green": "#00FF00",
+        "Blue": "#0000FF",
+        "Yellow": "#FFFF00",
+        "Orange": "#FFA500",
+        "Purple": "#800080",
+        "Pink": "#FFC0CB",
+        "Brown": "#A52A2A",
+        "Gray": "#808080",
+        "Cyan": "#00FFFF",
+        "Dark Green": "#008000",
+        "Maroon": "#800000",
+        "Teal": "#006666"
+    };
+
+    // Initialize Select2 with color swatches
+    colorDropdown.select2({
+        placeholder: "Select Colors",
+        allowClear: true,
+        templateResult: formatColorOption,
+        templateSelection: formatColorOption
+    });
+
+    // Format options to display color swatches
+    function formatColorOption(option) {
+        if (!option.id) return option.text; // Handle placeholder
+        const colorHex = colorMap[option.id] || "#ccc"; // Fallback for unknown colors
+        return $(
+            `<span style="display: inline-flex; align-items: center;">
+                <span style="display: inline-block; width: 20px; height: 20px; background-color: ${colorHex}; margin-right: 8px; border-radius: 3px; border: 1px solid #ccc;"></span>
+                ${option.text}
+            </span>`
+        );
+    }
+    });
+$(document).ready(function() {
+    $('#shipping_summernote').summernote({
+        height: 200
+    });
+    $('#return_summernote').summernote({
+        height: 200
+    });
+});
+
+</script>
 
 
 </body>
