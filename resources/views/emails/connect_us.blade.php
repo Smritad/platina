@@ -11,6 +11,7 @@
                 <img src="{{ asset('frontend/assets/img/logo/logo.webp') }}" alt="Logo" style="max-width:150px;">
             </td>
         </tr>
+        
         <tr>
             <td style="padding:20px;">
                 <h2 style="color:#444; text-align:center;">Platina India | New Product Enquiry</h2>

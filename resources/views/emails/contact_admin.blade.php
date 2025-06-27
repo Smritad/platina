@@ -12,3 +12,6 @@
 <p>{{ $details['message'] }}</p>
 
 
+
+
+
