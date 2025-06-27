@@ -133,6 +133,7 @@ Route::get('/contact-us', [ContactController::class, 'index'])->name('contact.us
 Route::post('/contact/send', [ContactController::class, 'send'])->name('contact.send');
 
 
+
 Route::get('/return-policy', [PoliciesController::class, 'index'])->name('frontend.return');
 Route::get('/privacy-policy', [PoliciesController::class, 'privacy'])->name('frontend.privacy');
 Route::get('/terms-conditions', [PoliciesController::class, 'termsconditions'])->name('frontend.termsconditions');

@@ -33,15 +33,15 @@
               </div>
             </div>
           </div>
-          <div class="rx-banner-breadcrumb">
+          <!-- <div class="rx-banner-breadcrumb"> -->
             <div class="container">
               <div class="row">
                 <div class="col-12">
-                  <div class="breadcrumb-contact">
+                  <!-- <div class="breadcrumb-contact"> -->
                     <!-- <div class="main-heading">
                       <h4>Our Leadership </h4>
                     </div> -->
-                    <div class="last-contact">
+                    <!-- <div class="last-contact">
                       <ul>
                         <li>
                           <a href="{{route('frontend.index') }}">Home</a>
@@ -49,7 +49,7 @@
                         <li>Coming Soon</li>
                       </ul>
                     </div>
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </div>
