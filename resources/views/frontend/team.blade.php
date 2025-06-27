@@ -16,6 +16,7 @@
             border: 1px solid #eee;
             border-radius: 20px;
             transition: all 0.3s ease-in-out;
+                margin-top: 13px;
         }
         
         .rx-team-contact:hover {
