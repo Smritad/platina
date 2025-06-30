@@ -350,6 +350,7 @@
       </div>
     </div>
              @include('components.frontend.main-js')
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
   </body>
 
