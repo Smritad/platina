@@ -158,6 +158,10 @@
                 <textarea name="message" class="rx-form-control" placeholder="Message"></textarea>
             </div>
         </div>
+         <!-- reCAPTCHA -->
+        <div class="col-12 mb-24 text-center">
+            <div class="g-recaptcha" data-sitekey="6Ldlr3ErAAAAALsnWwc8C2MxfjMBTHiT5vutaMRI"></div>
+        </div>
         <div class="col-12">
             <div class="rx-inner-button justify-content-center">
                 <button type="submit" class="rx-btn-two">Send Message</button>
