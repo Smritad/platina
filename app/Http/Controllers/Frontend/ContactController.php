@@ -42,6 +42,7 @@ class ContactController extends Controller
         if (!($responseBody['success'] ?? false)) {
             return back()->withErrors(['captcha' => 'reCAPTCHA verification failed. Please try again.'])->withInput();
         }
+        
 
         // ✅ Collect Form Data
         $details = [

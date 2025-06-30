@@ -121,7 +121,7 @@
                                         <label class="form-label" for="product_colors">Product Colors</label>
                                         <div class="col-sm-9">
                                             <select class="form-control" id="color_dropdown" name="colors[]" multiple>
-                                                <option value="Black">Black</option>
+                                            <option value="Black">Black</option>
                                               <option value="Ice Melt">Ice Melt</option>
                                               <option value="Spell Bound">Spell Bound	</option>
                                                 <option value="White">White</option>
@@ -138,6 +138,50 @@
                                                 <option value="Dark Green">Dark Green</option>
                                                 <option value="Maroon">Maroon</option>
                                                 <option value="Teal">Teal</option>
+                                                <option value="Dove">Dove</option>
+                                                <option value="Sea Jet">Sea Jet</option>
+                                                <option value="Peach Beige">Peach Beige</option>
+                                                <option value="Nomad">Nomad</option>
+                                                <option value="Baby Lavender">Baby Lavender</option>
+                                                <option value="Balistic Sea">Balistic Sea</option>
+                                                <option value="Jet Black">Jet Black</option>
+                                                <option value="Steel Blue">Steel Blue</option>
+                                                <option value="Dark Blue">Dark Blue</option>
+                                                <option value="Country Blue">Country Blue</option>
+                                                <option value="Skin Tan">Skin Tan</option>
+                                                <option value="Cream">Cream</option>
+                                                <option value="Peach Pink">Peach Pink</option>
+                                                <option value="Sea Blue">Sea Blue</option>
+                                                <option value="Silver">Silver</option>
+                                                <option value="Stone">Stone</option>
+                                                <option value="Sand">Sand</option>
+                                                <option value="Beige">Beige</option>
+                                                <option value="Pearled Ivory">Pearled Ivory</option>
+                                                <option value="Lavender">Lavender</option>
+                                                <option value="Ivory">Ivory</option>
+                                                <option value="Beetroot Red">Beetroot Red</option>
+                                                <option value="Dark Beige">Dark Beige</option>
+                                                <option value="Dark Grey">Dark Grey</option>
+                                                <option value="Light Green">Light Green</option>
+                                                <option value="Azure Blue">Azure Blue</option>
+<option value="Stone Blue">Stone Blue</option>
+<option value="Sky Rocket">Sky Rocket</option>
+<option value="Pale Dew">Pale Dew</option>
+<option value="Frozen Dew">Frozen Dew</option>
+<option value="Amber Ash">Amber Ash</option>
+<option value="Pista">Pista</option>
+<option value="Dusty Blue">Dusty Blue</option>
+<option value="Sky Blue">Sky Blue</option>
+<option value="Ice">Ice</option>
+<option value="Wood Ash">Wood Ash</option>
+<option value="Northern Droplet">Northern Droplet</option>
+<option value="Travertine">Travertine</option>
+<option value="Ash">Ash</option>
+<option value="Peach">Peach</option>
+<option value="Cuban Sand">Cuban Sand</option>
+<option value="Blue Breeze">Blue Breeze</option>
+<option value="Sky">Sky</option>
+
                                             </select>
                                         </div>
                                     </div>
@@ -389,25 +433,73 @@ $(document).ready(function () {
     const colorDropdown = $('#color_dropdown');
 
     // Map color names to their respective hex values
-    const colorMap = {
-        "Black": "#000000",
-         "Ice Melt": "#D3E4F1",
-      "Spell Bound": "#4E646F",
-        "White": "#FFFFFF",
-        "Red": "#FF0000",
-        "Green": "#00FF00",
-        "Blue": "#0000FF",
-        "Yellow": "#FFFF00",
-        "Orange": "#FFA500",
-        "Purple": "#800080",
-        "Pink": "#FFC0CB",
-        "Brown": "#A52A2A",
-        "Gray": "#808080",
-        "Cyan": "#00FFFF",
-        "Dark Green": "#008000",
-        "Maroon": "#800000",
-        "Teal": "#006666"
-    };
+   const colorMap = {
+    "Black": "#000000",
+    "Ice Melt": "#D3E4F1",
+    "Spell Bound": "#4E646F",
+    "White": "#FFFFFF",
+    "Red": "#FF0000",
+    "Green": "#00FF00",
+    "Blue": "#0000FF",
+    "Yellow": "#FFFF00",
+    "Orange": "#FFA500",
+    "Purple": "#800080",
+    "Pink": "#FFC0CB",
+    "Brown": "#A52A2A",
+    "Gray": "#808080",
+    "Cyan": "#00FFFF",
+    "Dark Green": "#008000",
+    "Maroon": "#800000",
+    "Teal": "#006666",
+
+    // Newly added colors
+    "Dove": "#D6D3D1",
+    "Sea Jet": "#AAC9CE",
+    "Peach Beige": "#FAD9C1",
+    "Nomad": "#BBB3A2",
+    "Baby Lavender": "#E3D1F5",
+    "Balistic Sea": "#5D8AA8",
+    "Jet Black": "#343434",
+    "Steel Blue": "#4682B4",
+    "Dark Blue": "#00008B",
+    "Country Blue": "#9DB4C0",
+    "Skin Tan": "#FFDAB9",
+    "Cream": "#FFFDD0",
+    "Peach Pink": "#FFD1DC",
+    "Sea Blue": "#006994",
+    "Silver": "#C0C0C0",
+    "Stone": "#D8CAB8",
+    "Sand": "#F4E1C1",
+    "Beige": "#F5F5DC",
+    "Pearled Ivory": "#F8F4E3",
+    "Lavender": "#E6E6FA",
+    "Ivory": "#FFFFF0",
+    "Beetroot Red": "#7A263A",
+    "Dark Beige": "#A89F91",
+    "Dark Grey": "#A9A9A9",
+    "Light Green": "#90EE90",
+    "Azure Blue": "#007FFF",
+// New additions from this batch
+    "Stone Blue": "#7D98A1",
+    "Sky Rocket": "#AED7E0", // approximate
+    "Pale Dew": "#D8E3D7",
+    "Frozen Dew": "#E8F0F2",
+    "Amber Ash": "#D4BFAA",
+    "Pista": "#93C572",
+    "Dusty Blue": "#5A86AD",
+    "Sky Blue": "#87CEEB",
+    "Ice": "#E0F7FA",
+    "Wood Ash": "#C4BEB5",
+    "Northern Droplet": "#D6D7D9",
+    "Travertine": "#E6D8C3",
+    "Ash": "#B2BEB5",
+    "Peach": "#FFE5B4",
+    "Cuban Sand": "#DDD0A8",
+    "Blue Breeze": "#B2D8E1",
+    "Sky": "#87CEFA"
+    
+};
+
 
     // Initialize Select2 with color swatches
     colorDropdown.select2({

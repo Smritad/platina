@@ -315,144 +315,6 @@ Enquire Now  </button>
   </div>
 </div>
 
-
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  document.querySelector('[data-bs-target="#connectUsModal"]').addEventListener('click', function () {
-    let size = document.getElementById('sizeSelect').value || 'N/A';
-    let qty = document.getElementById('qtyInput').value;
-
-    document.getElementById('modal_product_name').value = document.getElementById('connect_product_name').value;
-    document.getElementById('modal_product_size').value = size;
-    document.getElementById('modal_product_qty').value = qty;
-
-    document.getElementById('connect_product_size').value = size;
-    document.getElementById('connect_product_qty').value = qty;
-  });
-});
-</script>
-
-<script>
-document.getElementById('buyNowButton').addEventListener('click', function (e) {
-    e.preventDefault();
-
-    const selectedColor = document.getElementById('selected_color').value;
-    const sizeSelect = document.getElementById('sizeSelect').value;
-    const qty = document.getElementById('qtyInput').value;
-
-    if (!selectedColor) {
-        alert('Please select a color.');
-        return;
-    }
-
-    if (!sizeSelect || sizeSelect === 'Select') {
-        alert('Please select a size.');
-        return;
-    }
-
-    if (!qty || isNaN(qty) || qty < 1) {
-        alert('Please enter a valid quantity.');
-        return;
-    }
-
-    const data = {
-        _token: '{{ csrf_token() }}',
-        product_id: '{{ $product->id }}',
-        product_name: '{{ $product->product_name }}',
-        price: '{{ $product->mrp }}',
-        image: '{{ !empty($mediaFiles) ? $mediaFiles[0] : '' }}',
-        fabric: '{{ optional($product->fabricType)->category_name ?? 'N/A' }}',
-        selected_color: selectedColor,
-        size: sizeSelect,
-        qty: qty
-    };
-
-    fetch('{{ route('buy.now') }}', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': data._token
-        },
-        body: JSON.stringify(data)
-    })
-    .then(res => res.json())
-    .then(response => {
-        if (response.status === 'success') {
-            window.location.href = response.redirect_url;
-        } else {
-            alert(response.message || 'Something went wrong');
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('Something went wrong.');
-    });
-});
-</script>
-
-<script>
-  document.getElementById('addToCartForm').addEventListener('submit', function(e) {
-    let selectedColor = document.getElementById('selected_color').value;
-    let sizeSelect = document.getElementById('sizeSelect').value;
-    let qty = document.getElementById('qtyInput').value;
-
-    if (!selectedColor) {
-      alert('Please select a color.');
-      e.preventDefault();
-      return false;
-    }
-
-    if (!sizeSelect || sizeSelect === 'Select') {
-      alert('Please select a size.');
-      e.preventDefault();
-      return false;
-    }
-
-    if (!qty || isNaN(qty) || qty < 1) {
-      alert('Please enter a valid quantity.');
-      e.preventDefault();
-      return false;
-    }
-  });
-
-  // Color selection handler
-  document.querySelectorAll('#color-options li').forEach(function(el) {
-    el.addEventListener('click', function() {
-      document.querySelectorAll('#color-options li').forEach(function(li) {
-        li.classList.remove('active');
-      });
-      this.classList.add('active');
-      document.getElementById('selected_color').value = this.dataset.color;
-    });
-  });
-
-  
-
-</script>
-<script>
-  document.querySelector('.qty-btn-plus').addEventListener('click', function(e) {
-    e.preventDefault();
-    let qtyInput = document.getElementById('qtyInput');
-    let current = parseInt(qtyInput.value) || 1;
-    qtyInput.value = current + 1;
-  });
-
-  document.querySelector('.qty-btn-minus').addEventListener('click', function(e) {
-    e.preventDefault();
-    let qtyInput = document.getElementById('qtyInput');
-    let current = parseInt(qtyInput.value) || 1;
-    if (current > 1) {
-      qtyInput.value = current - 1;
-    }
-  });
-</script>
-
-
-
-
-
-
-
 <section class="description-sec">
     <div class="container">
       <div class="row justify-content-center">
@@ -584,11 +446,11 @@ document.getElementById('buyNowButton').addEventListener('click', function (e) {
           <h3>Modes</h3>
           <div class="rx-tools-rtl">
             <div class="mode-primary rx-tools-item mode active-mode ltr" data-rx-mode-tool="ltr">
-              <img src="assets/img/tools/ltr.png" alt="ltr">
+              <img src="{{ asset('/frontend/assets/img/tools/ltr.png')}}" alt="ltr">
               <p>LTR</p>
             </div>
             <div class="mode-primary rx-tools-item mode rtl" data-rx-mode-tool="rtl">
-              <img src="assets/img/tools/rtl.png" alt="rtl">
+              <img src="{{ asset('/frontend/assets/img/tools/rtl.png')}}" alt="rtl">
               <p>RTL</p>
             </div>
           </div>
@@ -597,11 +459,11 @@ document.getElementById('buyNowButton').addEventListener('click', function (e) {
           <h3>Dark Modes</h3>
           <div class="rx-tools-dark">
             <div class="mode-primary rx-tools-item mode active-dark-mode light" data-rx-mode-tool="light">
-              <img src="assets/img/tools/light.png" alt="light">
+              <img src="{{ asset('/frontend/assets/img/tools/light.png')}}" alt="light">
               <p>Light</p>
             </div>
             <div class="rx-tools-item mode dark" data-rx-mode-tool="dark">
-              <img src="assets/img/tools/dark.png" alt="dark">
+              <img src="{{ asset('/frontend/assets/img/tools/dark.png')}}" alt="dark">
               <p>Dark</p>
             </div>
           </div>
@@ -610,11 +472,11 @@ document.getElementById('buyNowButton').addEventListener('click', function (e) {
           <h3>Box Design</h3>
           <div class="rx-tools-box">
             <div class="rx-tools-item default active-box" data-bry-mode-tool="default">
-              <img src="assets/img/tools/box-0.png" alt="box-0">
+              <img src="{{ asset('/frontend/assets/img/tools/box-0.png')}}" alt="box-0">
               <p>Default</p>
             </div>
             <div class="rx-tools-item box-1" data-bry-mode-tool="box-1">
-              <img src="assets/img/tools/box-1.png" alt="box-1">
+              <img src="{{ asset('/frontend/assets/img/tools/box-1.png')}}" alt="box-1">
               <p>Box-1</p>
             </div>
           </div>
@@ -623,27 +485,27 @@ document.getElementById('buyNowButton').addEventListener('click', function (e) {
           <h3>Backgrounds</h3>
           <div class="rx-tools-bg">
             <div class="rx-tools-item bg-0 active-bg">
-              <img src="assets/img/tools/bg-0.png" alt="bg-0">
+              <img src="{{ asset('/frontend/assets/img/tools/bg-0.png')}}" alt="bg-0">
               <p>Default</p>
             </div>
             <div class="rx-tools-item bg-1">
-              <img src="assets/img/tools/bg-1.png" alt="bg-1">
+              <img src="{{ asset('/frontend/assets/img/tools/bg-1.png')}}" alt="bg-1">
               <p>Bg-1</p>
             </div>
             <div class="rx-tools-item bg-2">
-              <img src="assets/img/tools/bg-2.png" alt="bg-2">
+              <img src="{{ asset('/frontend/assets/img/tools/bg-2.png')}}" alt="bg-2">
               <p>Bg-2</p>
             </div>
             <div class="rx-tools-item bg-3">
-              <img src="assets/img/tools/bg-3.png" alt="bg-3">
+              <img src="{{ asset('/frontend/assets/img/tools/bg-3.png')}}" alt="bg-3">
               <p>Bg-3</p>
             </div>
             <div class="rx-tools-item bg-4">
-              <img src="assets/img/tools/bg-4.png" alt="bg-4">
+              <img src="{{ asset('/frontend/assets/img/tools/bg-4.png')}}" alt="bg-4">
               <p>Bg-4</p>
             </div>
             <div class="rx-tools-item bg-5">
-              <img src="assets/img/tools/bg-5.png" alt="bg-5">
+              <img src="{{ asset('/frontend/assets/img/tools/bg-5.png')}}" alt="bg-5">
               <p>Bg-5</p>
             </div>
           </div>
@@ -769,6 +631,137 @@ document.getElementById('buyNowButton').addEventListener('click', function (e) {
     thumbs: {
       swiper: thumbSwiper,
     },
+  });
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelector('[data-bs-target="#connectUsModal"]').addEventListener('click', function () {
+    let size = document.getElementById('sizeSelect').value || 'N/A';
+    let qty = document.getElementById('qtyInput').value;
+
+    document.getElementById('modal_product_name').value = document.getElementById('connect_product_name').value;
+    document.getElementById('modal_product_size').value = size;
+    document.getElementById('modal_product_qty').value = qty;
+
+    document.getElementById('connect_product_size').value = size;
+    document.getElementById('connect_product_qty').value = qty;
+  });
+});
+</script>
+
+<script>
+document.getElementById('buyNowButton').addEventListener('click', function (e) {
+    e.preventDefault();
+
+    const selectedColor = document.getElementById('selected_color').value;
+    const sizeSelect = document.getElementById('sizeSelect').value;
+    const qty = document.getElementById('qtyInput').value;
+
+    if (!selectedColor) {
+        alert('Please select a color.');
+        return;
+    }
+
+    if (!sizeSelect || sizeSelect === 'Select') {
+        alert('Please select a size.');
+        return;
+    }
+
+    if (!qty || isNaN(qty) || qty < 1) {
+        alert('Please enter a valid quantity.');
+        return;
+    }
+
+    const data = {
+        _token: '{{ csrf_token() }}',
+        product_id: '{{ $product->id }}',
+        product_name: '{{ $product->product_name }}',
+        price: '{{ $product->mrp }}',
+        image: '{{ !empty($mediaFiles) ? $mediaFiles[0] : '' }}',
+        fabric: '{{ optional($product->fabricType)->category_name ?? 'N/A' }}',
+        selected_color: selectedColor,
+        size: sizeSelect,
+        qty: qty
+    };
+
+    fetch('{{ route('buy.now') }}', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': data._token
+        },
+        body: JSON.stringify(data)
+    })
+    .then(res => res.json())
+    .then(response => {
+        if (response.status === 'success') {
+            window.location.href = response.redirect_url;
+        } else {
+            alert(response.message || 'Something went wrong');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Something went wrong.');
+    });
+});
+</script>
+
+<script>
+  document.getElementById('addToCartForm').addEventListener('submit', function(e) {
+    let selectedColor = document.getElementById('selected_color').value;
+    let sizeSelect = document.getElementById('sizeSelect').value;
+    let qty = document.getElementById('qtyInput').value;
+
+    if (!selectedColor) {
+      alert('Please select a color.');
+      e.preventDefault();
+      return false;
+    }
+
+    if (!sizeSelect || sizeSelect === 'Select') {
+      alert('Please select a size.');
+      e.preventDefault();
+      return false;
+    }
+
+    if (!qty || isNaN(qty) || qty < 1) {
+      alert('Please enter a valid quantity.');
+      e.preventDefault();
+      return false;
+    }
+  });
+
+  // Color selection handler
+  document.querySelectorAll('#color-options li').forEach(function(el) {
+    el.addEventListener('click', function() {
+      document.querySelectorAll('#color-options li').forEach(function(li) {
+        li.classList.remove('active');
+      });
+      this.classList.add('active');
+      document.getElementById('selected_color').value = this.dataset.color;
+    });
+  });
+
+  
+
+</script>
+<script>
+  document.querySelector('.qty-btn-plus').addEventListener('click', function(e) {
+    e.preventDefault();
+    let qtyInput = document.getElementById('qtyInput');
+    let current = parseInt(qtyInput.value) || 1;
+    qtyInput.value = current + 1;
+  });
+
+  document.querySelector('.qty-btn-minus').addEventListener('click', function(e) {
+    e.preventDefault();
+    let qtyInput = document.getElementById('qtyInput');
+    let current = parseInt(qtyInput.value) || 1;
+    if (current > 1) {
+      qtyInput.value = current - 1;
+    }
   });
 </script>
 

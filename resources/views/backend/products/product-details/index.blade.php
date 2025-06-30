@@ -47,7 +47,7 @@
 									</ol>
 								</nav>
 
-								<a href="{{ route('product-details.create') }}" class="btn btn-primary px-5 radius-30">+ Add Product Size Details</a>
+								<a href="{{ route('product-details.create') }}" class="btn btn-primary px-5 radius-30">+ Add Product Details</a>
 							</div>
 
 

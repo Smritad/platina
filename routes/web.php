@@ -144,6 +144,7 @@ Route::get('/manufacturing-excellence', [ManufacturingController::class, 'index'
 Route::get('/products', [AllProductsController::class, 'index'])->name('product.all');
 Route::get('/category/{slug}', [CategoryProductsListingDetailsController::class, 'index'])->name('product.category');
 
+
 Route::get('/products/{slug}', [ProductsListingDetailsController::class, 'index'])->name('product.details');
 Route::get('/products-details/{catSlug}/{productSlug}', [CategoryProductsDetailsController::class, 'index'])->name('product.categoryproduct');
 

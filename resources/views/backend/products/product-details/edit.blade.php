@@ -112,7 +112,15 @@
                                 <label class="form-label">Product Colors</label>
                                 <select class="form-control" name="colors[]" id="color_dropdown" multiple>
                                     @php $selectedColors = explode(',', $product->colors); @endphp
-                                    @foreach(['Black','White','Red','Green','Blue','Yellow','Orange','Purple','Pink','Brown','Gray','Cyan','Dark Green','Maroon','Teal'] as $color)
+@foreach([
+    'Black','White','Red','Green','Blue','Yellow','Orange','Purple','Pink','Brown','Gray','Cyan','Dark Green','Maroon','Teal',
+    'Ice Melt','Spell Bound','Dove','Sea Jet','Peach Beige','Nomad','Baby Lavender','Balistic Sea','Jet Black','Steel Blue',
+    'Dark Blue','Country Blue','Skin Tan','Cream','Peach Pink','Sea Blue','Silver','Stone','Sand','Beige','Pearled Ivory',
+    'Lavender','Ivory','Beetroot Red','Dark Beige','Dark Grey','Light Green','Azure Blue','Stone Blue','Sky Rocket','Pale Dew',
+    'Frozen Dew','Amber Ash','Pista','Dusty Blue','Sky Blue','Ice','Wood Ash','Northern Droplet','Travertine','Ash','Peach',
+    'Cuban Sand','Blue Breeze','Sky'
+] as $color)
+   
                                     <option value="{{ $color }}" {{ in_array($color, $selectedColors) ? 'selected' : '' }}>
                                         {{ $color }}
                                     </option>
@@ -393,25 +401,72 @@ $(document).ready(function() {
     const colorDropdown = $('#color_dropdown');
 
     // Map color names to their respective hex values
-    const colorMap = {
-        "Black": "#000000",
-         "Ice Melt": "#D3E4F1",
-      "Spell Bound": "#4E646F",
-        "White": "#FFFFFF",
-        "Red": "#FF0000",
-        "Green": "#00FF00",
-        "Blue": "#0000FF",
-        "Yellow": "#FFFF00",
-        "Orange": "#FFA500",
-        "Purple": "#800080",
-        "Pink": "#FFC0CB",
-        "Brown": "#A52A2A",
-        "Gray": "#808080",
-        "Cyan": "#00FFFF",
-        "Dark Green": "#008000",
-        "Maroon": "#800000",
-        "Teal": "#006666"
-    };
+  const colorMap = {
+    "Black": "#000000",
+    "Ice Melt": "#D3E4F1",
+    "Spell Bound": "#4E646F",
+    "White": "#FFFFFF",
+    "Red": "#FF0000",
+    "Green": "#00FF00",
+    "Blue": "#0000FF",
+    "Yellow": "#FFFF00",
+    "Orange": "#FFA500",
+    "Purple": "#800080",
+    "Pink": "#FFC0CB",
+    "Brown": "#A52A2A",
+    "Gray": "#808080",
+    "Cyan": "#00FFFF",
+    "Dark Green": "#008000",
+    "Maroon": "#800000",
+    "Teal": "#006666",
+
+    // Newly added colors
+    "Dove": "#D6D3D1",
+    "Sea Jet": "#AAC9CE",
+    "Peach Beige": "#FAD9C1",
+    "Nomad": "#BBB3A2",
+    "Baby Lavender": "#E3D1F5",
+    "Balistic Sea": "#5D8AA8",
+    "Jet Black": "#343434",
+    "Steel Blue": "#4682B4",
+    "Dark Blue": "#00008B",
+    "Country Blue": "#9DB4C0",
+    "Skin Tan": "#FFDAB9",
+    "Cream": "#FFFDD0",
+    "Peach Pink": "#FFD1DC",
+    "Sea Blue": "#006994",
+    "Silver": "#C0C0C0",
+    "Stone": "#D8CAB8",
+    "Sand": "#F4E1C1",
+    "Beige": "#F5F5DC",
+    "Pearled Ivory": "#F8F4E3",
+    "Lavender": "#E6E6FA",
+    "Ivory": "#FFFFF0",
+    "Beetroot Red": "#7A263A",
+    "Dark Beige": "#A89F91",
+    "Dark Grey": "#A9A9A9",
+    "Light Green": "#90EE90",
+    "Azure Blue": "#007FFF",
+// New additions from this batch
+    "Stone Blue": "#7D98A1",
+    "Sky Rocket": "#AED7E0", // approximate
+    "Pale Dew": "#D8E3D7",
+    "Frozen Dew": "#E8F0F2",
+    "Amber Ash": "#D4BFAA",
+    "Pista": "#93C572",
+    "Dusty Blue": "#5A86AD",
+    "Sky Blue": "#87CEEB",
+    "Ice": "#E0F7FA",
+    "Wood Ash": "#C4BEB5",
+    "Northern Droplet": "#D6D7D9",
+    "Travertine": "#E6D8C3",
+    "Ash": "#B2BEB5",
+    "Peach": "#FFE5B4",
+    "Cuban Sand": "#DDD0A8",
+    "Blue Breeze": "#B2D8E1",
+    "Sky": "#87CEFA"
+    
+};
 
     // Initialize Select2 with color swatches
     colorDropdown.select2({
