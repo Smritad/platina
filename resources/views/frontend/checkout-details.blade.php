@@ -4,8 +4,9 @@
 
 <head>
        @include('components.frontend.head')
-<meta name="csrf-token" content="{{ csrf_token() }}">
- <!-- CSS for the spinner -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+    <meta name="csrf-token" content="{{ csrf_token() }}"> <!-- CSS for the spinner -->
     <style>
        .spinner {
             width: 50px;
@@ -301,7 +302,7 @@
 
                         <div class="shopping-cart-item-product">
                             <strong>Total:</strong>
-                            <span class="price">
+                            <span class="total-price-checkout">
                                 <i class="fa fa-inr" aria-hidden="true"></i>
                                 {{ number_format($cartTotal) }}
                             </span>
@@ -577,128 +578,125 @@ document.querySelector('.billing-address-checkbox-cc').addEventListener('change'
 
 
 <script>
-  document.getElementById("payNowButton").addEventListener("click", async function (e) {
-    e.preventDefault();
+document.addEventListener("DOMContentLoaded", () => {
+    hideLoader();
 
-    if (!validateForm()) {
-        return;
-    }
+    document.getElementById("payNowButton").addEventListener("click", async function (e) {
+        e.preventDefault();
+        if (!validateForm()) return;
 
-    let orderData = {
-        customer_info: {
-            first_name: document.getElementById("first-name").value,
-            last_name: document.getElementById("lname").value,
-            email: document.getElementById("email-address").value,
-            phone: document.getElementById("phone-number").value,
-            street: document.getElementById("street-sec").value,
-            city: document.getElementById("city").value,
-            state: document.getElementById("state").value,
-            postal_code: document.getElementById("postalcode").value,
-            country: "India",
-            billing_address: document.getElementById("billing_address").value,
-            shipping_address: document.getElementById("shipping-address").value,
-            description: document.getElementById("note") ? document.getElementById("note").value : ""
-        },
-        cart_items: []
-    };
+        const orderData = collectOrderData();
+        const amount = parseFloat(
+            document.querySelector(".total-price-checkout").innerText.replace(/[₹,]/g, "").trim()
+        );
 
-    document.querySelectorAll(".shopping-cart-list-product").forEach((item) => {
-        let productElement = item.querySelector(".name-product");
-        let quantityElement = item.querySelector(".quantity strong");
-        let imageElement = item.querySelector(".product-image");
-        let sizeElement = item.querySelector(".product-size");
-        let printElement = item.querySelector(".product-print");
+        showLoader();
 
-        orderData.cart_items.push({
-            product_id: productElement.getAttribute("data-id"),
-            product_name: productElement.innerText,
-            quantity: quantityElement ? parseInt(quantityElement.innerText) : 1,
-            price: item.querySelector(".price").innerText.replace("₹", "").trim(),
-            image: imageElement ? imageElement.getAttribute("src") : "",
-            size: sizeElement ? sizeElement.innerText : "N/A",
-            print: printElement ? printElement.innerText.replace("Print: ", "").trim() : "N/A"
-        });
-    });
-
-    showLoader();
-
-    try {
-        let response = await fetch("{{ route('payment.process') }}", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "X-CSRF-TOKEN": document.querySelector("meta[name='csrf-token']").getAttribute("content")
-            },
-            body: JSON.stringify({
-                amount: document.querySelector(".total-price-checkout").innerText.replace("₹", "").trim(),
-                order_data: orderData
-            })
-        });
-
-        let data = await response.json();
-
-        let order_id = null;
-
-        if (data.order_id) {
-            order_id = data.order_id;
-            
-            let options = {
-                key: data.razorpay_key,
-                amount: data.amount * 100,
-                currency: "INR",
-                order_id: data.order_id,
-                handler: async function (response) {
-                    try {
-                        let verifyResponse = await fetch("{{ route('payment.verify') }}", {
-                            method: "POST",
-                            headers: {
-                                "Content-Type": "application/json",
-                                "X-CSRF-TOKEN": document.querySelector("meta[name='csrf-token']").getAttribute("content")
-                            },
-                            body: JSON.stringify({
-                                razorpay_order_id: response.razorpay_order_id,
-                                razorpay_payment_id: response.razorpay_payment_id,
-                                razorpay_signature: response.razorpay_signature,
-                                order_id: order_id,
-                                order_data: orderData
-                            })
-                        });
-
-                        let verifyData = await verifyResponse.json();
-                        console.log("Verify Data:", verifyData);
-
-                        if (verifyData.status === 1) {
-                            // Redirect to Order Confirmation with order data
-                            let url = "{{ route('order.confirm') }}" + "?order_id=" + order_id;
-                            window.location.href = url;
-                        } else {
-                            alert("Payment verification failed. Please try again.");
-                        }
-                    } catch (error) {
-                        alert("Something went wrong. Please try again.");
-                    } finally {
-                        hideLoader();
-                    }
-                }
-            };
-
-            let rzp1 = new Razorpay(options);
-            rzp1.open();
-
-            // Hide loader if payment is failed or popup is closed
-            rzp1.on("payment.failed", function () {
-                hideLoader();
+        try {
+            const response = await fetch("{{ route('payment.process') }}", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": document.querySelector("meta[name='csrf-token']").content
+                },
+                body: JSON.stringify({ amount, order_data: orderData })
             });
-        } else {
-            alert("Order creation failed. Please try again.");
+
+            const rawText = await response.text();
+            console.log("Backend Response Raw:", rawText);
+            const data = JSON.parse(rawText);
+
+            if (data.order_id) {
+                initiateRazorpayPayment(data, orderData);
+            } else {
+                alert("Order creation failed. Please try again.");
+                hideLoader();
+            }
+        } catch (error) {
+            console.error("Error:", error);
+            alert("An error occurred while processing the payment.");
             hideLoader();
         }
-    } catch (error) {
-        alert("An error occurred while processing the payment.");
-        hideLoader();
-    }
+    });
 });
 
+// Collects customer and cart details
+function collectOrderData() {
+    const customerInfo = {
+        first_name: document.getElementById("first-name").value,
+        last_name: document.getElementById("lname").value,
+        email: document.getElementById("email-address").value,
+        phone: document.getElementById("phone-number").value,
+        street: document.getElementById("street-sec").value,
+        city: document.getElementById("city").value,
+        state: document.getElementById("state").value,
+        postal_code: document.getElementById("postalcode").value,
+        country: "India",
+        billing_address: document.getElementById("billing_address").value,
+        shipping_address: document.getElementById("shipping-address").value,
+        description: document.getElementById("note")?.value || ""
+    };
+
+    const cartItems = Array.from(document.querySelectorAll(".shopping-cart-list-product")).map(item => ({
+        product_id: item.querySelector(".name-product").getAttribute("data-id"),
+        product_name: item.querySelector(".name-product").innerText,
+        quantity: parseInt(item.querySelector(".quantity strong")?.innerText || 1),
+        price: item.querySelector(".price").innerText.replace("₹", "").trim(),
+        image: item.querySelector(".product-image")?.src || "",
+        size: item.querySelector(".product-size")?.innerText || "N/A",
+        print: item.querySelector(".product-print")?.innerText.replace("Print: ", "").trim() || "N/A"
+    }));
+
+    return { customer_info: customerInfo, cart_items: cartItems };
+}
+
+// Razorpay integration and payment verification
+function initiateRazorpayPayment(data, orderData) {
+    const options = {
+        key: data.razorpay_key,
+        amount: data.amount * 100,
+        currency: "INR",
+        order_id: data.order_id,
+        handler: async function (response) {
+            try {
+                const verifyRes = await fetch("{{ route('payment.verify') }}", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRF-TOKEN": document.querySelector("meta[name='csrf-token']").content
+                    },
+                    body: JSON.stringify({
+                        razorpay_order_id: response.razorpay_order_id,
+                        razorpay_payment_id: response.razorpay_payment_id,
+                        razorpay_signature: response.razorpay_signature,
+                        order_id: data.order_id,
+                        order_data: orderData
+                    })
+                });
+
+                const verifyData = await verifyRes.json();
+                console.log("Verify Data:", verifyData);
+
+                if (verifyData.status === 1) {
+                    window.location.href = "{{ route('order.confirm') }}?order_id=" + data.order_id;
+                } else {
+                    alert("Payment verification failed. Please try again.");
+                }
+            } catch (error) {
+                console.error("Verification Error:", error);
+                alert("Something went wrong. Please try again.");
+            } finally {
+                hideLoader();
+            }
+        }
+    };
+
+    const rzp = new Razorpay(options);
+    rzp.open();
+    rzp.on("payment.failed", hideLoader);
+}
+
+// Loader utility
 function showLoader() {
     document.getElementById("loading-overlay").style.display = "flex";
 }
@@ -707,123 +705,68 @@ function hideLoader() {
     document.getElementById("loading-overlay").style.display = "none";
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-    hideLoader();
-});
-
-// Form Validation Function
+// Form Validation
 function validateForm() {
     let isValid = true;
 
-    function showError(input, message) {
-        const errorElement = input.nextElementSibling;
-        errorElement.innerText = message;
-        errorElement.style.color = "red";
-        input.style.borderColor = "red";
-    }
+    const fields = {
+        "first-name": { regex: /^[A-Za-z\s]+$/, message: "First Name should only contain letters." },
+        "lname": { regex: /^[A-Za-z\s]+$/, message: "Last Name should only contain letters." },
+        "email-address": { regex: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, message: "Enter a valid Email Address." },
+        "phone-number": { regex: /^\d{10}$/, message: "Phone Number should be exactly 10 digits." },
+        "postalcode": { regex: /^\d{6}$/, message: "Postal Code must be exactly 6 digits." },
+        "street-sec": { required: true, message: "Street is required." },
+        "city": { required: true, message: "City is required." },
+        "state": { required: true, message: "State is required." },
+        "billing_address": { required: true, message: "Billing Address is required." },
+        "shipping-address": { required: true, message: "Shipping Address is required." }
+    };
 
-    function clearError(input) {
-    // Check if the next sibling exists and is an error message container
-    const errorElement = input.nextElementSibling;
+    for (const [id, rules] of Object.entries(fields)) {
+        const input = document.getElementById(id);
+        const value = input.value.trim();
 
-    if (errorElement && errorElement.classList.contains('error-message')) {
-        errorElement.innerText = "";  // Clear the error message
-    }
-    
-    input.style.borderColor = "";  // Reset the border color
-}
-
-
-    const firstName = document.getElementById("first-name");
-    const lastName = document.getElementById("lname");
-    const email = document.getElementById("email-address");
-    const phone = document.getElementById("phone-number");
-    const street = document.getElementById("street-sec");
-    const city = document.getElementById("city");
-    const state = document.getElementById("state");
-    const postalCode = document.getElementById("postalcode");
-    const billingAddress = document.getElementById("billing_address");
-    const shippingAddress = document.getElementById("shipping-address");
-    const sameAsBilling = document.querySelector('.billing-address-checkbox-cc');
-
-    const nameRegex = /^[A-Za-z\s]+$/;
-    if (!nameRegex.test(firstName.value.trim())) {
-        showError(firstName, "First Name should only contain letters.");
-        isValid = false;
-    } else {
-        clearError(firstName);
-    }
-
-    if (!nameRegex.test(lastName.value.trim())) {
-        showError(lastName, "Last Name should only contain letters.");
-        isValid = false;
-    } else {
-        clearError(lastName);
-    }
-
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    if (!emailRegex.test(email.value.trim())) {
-        showError(email, "Enter a valid Email Address.");
-        isValid = false;
-    } else {
-        clearError(email);
-    }
-
-    const phoneRegex = /^\d{10}$/;
-    if (!phoneRegex.test(phone.value.trim())) {
-        showError(phone, "Phone Number should be exactly 10 digits.");
-        isValid = false;
-    } else {
-        clearError(phone);
-    }
-
-    if (street.value.trim() === "") {
-        showError(street, "Street is required.");
-        isValid = false;
-    } else {
-        clearError(street);
-    }
-
-    if (city.value.trim() === "") {
-        showError(city, "City is required.");
-        isValid = false;
-    } else {
-        clearError(city);
-    }
-
-    if (state.value.trim() === "") {
-        showError(state, "State is required.");
-        isValid = false;
-    } else {
-        clearError(state);
-    }
-
-    const postalCodeRegex = /^\d{6}$/;
-    if (!postalCodeRegex.test(postalCode.value.trim())) {
-        showError(postalCode, "Postal Code must be exactly 6 digits.");
-        isValid = false;
-    } else {
-        clearError(postalCode);
-    }
-
-    if (billingAddress.value.trim() === "") {
-        showError(billingAddress, "Billing Address is required.");
-        isValid = false;
-    } else {
-        clearError(billingAddress);
-    }
-
-    if (!sameAsBilling.checked && shippingAddress.value.trim() === "") {
-        showError(shippingAddress, "Shipping Address is required.");
-        isValid = false;
-    } else {
-        clearError(shippingAddress);
+        if (rules.required && !value) {
+            showError(input, rules.message);
+            isValid = false;
+        } else if (rules.regex && !rules.regex.test(value)) {
+            showError(input, rules.message);
+            isValid = false;
+        } else if (id === "shipping-address") {
+            const sameAsBilling = document.querySelector(".billing-address-checkbox-cc");
+            if (!sameAsBilling.checked && !value) {
+                showError(input, rules.message);
+                isValid = false;
+            } else {
+                clearError(input);
+            }
+        } else {
+            clearError(input);
+        }
     }
 
     return isValid;
 }
 
+// Error handling helpers
+function showError(input, message) {
+    const errorElement = input.nextElementSibling;
+    if (errorElement) {
+        errorElement.innerText = message;
+        errorElement.style.color = "red";
+    }
+    input.style.borderColor = "red";
+}
+
+function clearError(input) {
+    const errorElement = input.nextElementSibling;
+    if (errorElement && errorElement.classList.contains("error-message")) {
+        errorElement.innerText = "";
+    }
+    input.style.borderColor = "";
+}
 </script>
+
 </body>
 
 </html>

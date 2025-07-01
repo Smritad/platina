@@ -11,6 +11,8 @@ use App\Models\Cart;
 use Illuminate\Support\Facades\Mail;
 use App\Models\LoggedInUserDetails;
 use App\Models\Otp;
+use App\Models\OrderDetail;
+
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session; // ✅ Import Session here
@@ -164,5 +166,19 @@ public function verifyOtp(Request $request)
     ]);
 }
 
+     public function order_confirmation(Request $request)
+    {
+        $orderId = $request->query('order_id'); 
     
+        $order = OrderDetail::where('order_id', $orderId)->first(); 
+        // dd($order);
+    
+        if (!$order) {
+            return redirect()->route('frontend.index')->with('error', 'Order not found.');
+        }
+    
+        return view('frontend.order-confirmation', compact('order'));
+    }
+    
+
 }

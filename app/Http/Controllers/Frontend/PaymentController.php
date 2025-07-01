@@ -25,11 +25,10 @@ class PaymentController extends Controller
 {
 
     public function processPayment(Request $request) {
-        // dd($request);
+        
 
         $api = new Api(config('services.razorpay.key'), config('services.razorpay.secret'));
-
-        $orderData = [
+    $orderData = [
             'receipt'         => 'test_order_' . rand(),
             'amount'          => intval(str_replace(',', '', $request->amount)) * 100,
             'currency'        => 'INR',

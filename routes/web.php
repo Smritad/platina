@@ -165,7 +165,7 @@ Route::post('/buy-now', [CartController::class, 'buyNow'])->name('buy.now');
 Route::get('/buy-now/checkout', [CartController::class, 'showBuyNowCheckout'])->name('show.buy.now.checkout');
 
 // ===== Payment Integration URL
-Route::post('/process-payment', [PaymentController::class, 'processPayment'])->name('payment.process');
+Route::post('/process-payment', [PaymentController::class, 'processPayment'])->name('payment.process')->middleware('auth:frontend');;
 Route::post('/verify-payment', [PaymentController::class, 'verifyPayment'])->name('payment.verify');
   //===== Order confirmation
     Route::get('/order-confirmation', [CheckoutController::class, 'order_confirmation'])->name('order.confirm');
