@@ -5,10 +5,28 @@
 <head>
        @include('components.frontend.head')
 <meta name="csrf-token" content="{{ csrf_token() }}">
+ <!-- CSS for the spinner -->
+    <style>
+       .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255, 255, 255, 0.2); 
+            border-top: 5px solid #ffffff; 
+            border-radius: 50%;
+            animation: spin 1.2s cubic-bezier(0.42, 0, 0.58, 1) infinite;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); 
+        }
 
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        
+    </style>
 </head>
 
-<body>
+<body class="preload-wrapper">
   <!-- Loader -->
   <div class="rx-loader">
     <span class="loader"></span>
@@ -19,7 +37,7 @@
 
   </header>
   <!-- Hero -->
-
+    
   <!-- Breadcrumb -->
   <section class="section-breadcrumb padding-b-50">
     <div class="rx-breadcrumb-image">
@@ -62,289 +80,244 @@
     </div>
   </section>
 
+
+
+
   <!-- Checkout -->
-  <section class="section-checkout padding-t-50 padding-b-100">
+<section class="section-checkout padding-t-50 padding-b-100">
     <div class="container">
-      <div class="row mb-minus-24">
-        <div class="col-lg-7 col-12 mb-24">
-          <div class="rx-checkout">
-  @if(!Auth::guard('frontend')->check())
-<div class="checkout-login-now-button-sec">
-    <p class="checkout-login-para-cont">Already have an account?</p>
-    <div class="checkout-login-now-under">
-        <a href="{{ route('user.login') }}" class="direct-to">Login Here</a>
-    </div>
-</div>
+        <div class="row mb-minus-24">
+            <div class="col-lg-7 col-12 mb-24">
+                <div class="rx-checkout">
+                    @if (!Auth::guard('frontend')->check())
+                        <div class="checkout-login-now-button-sec">
+                            <p class="checkout-login-para-cont">Already have an account?</p>
+                            <div class="checkout-login-now-under">
+                                <a href="{{ route('user.login') }}" class="direct-to">Login Here</a>
+                            </div>
+                        </div>
 
-<div class="checkout-login-wrap" data-aos="fade-up" data-aos-duration="1000">
-    <div class="checkout-login-form">
-        <form id="otpForm" class="login-box">
-            @csrf
-            <div class="checkout-login-phone-number-wrap">
-                <input type="email" name="email" id="email" placeholder="Enter Email" required>
-            </div>
+                        <div class="checkout-login-wrap" data-aos="fade-up" data-aos-duration="1000">
+                            <div class="checkout-login-form">
+                                <form id="otpForm" class="login-box">
+                                    @csrf
+                                    <div class="checkout-login-phone-number-wrap">
+                                        <input type="email" name="email" id="email" placeholder="Enter Email" required>
+                                    </div>
 
-            <div class="checkout-login-button">
-                <button type="button" id="sendOtpBtn" class="rx-btn-two"><span id="btnText">Send OTP</span></button>
-            </div>
+                                    <div class="checkout-login-button">
+                                        <button type="button" id="sendOtpBtn" class="rx-btn-two"><span id="btnText">Send OTP</span></button>
+                                    </div>
 
-            <div id="otpSection" style="display: none;">
-                <input type="text" name="otp" id="otp" placeholder="Enter OTP" required><br><br>
-                <button class="tf-btn" type="submit"><span class="text">Verify OTP</span></button>
-                <button type="button" id="resendOtpBtn" class="tf-btn" style="display: none;"><span id="resendBtnText">Resend OTP</span></button>
-            </div>
-        </form>
-        <div id="otpMessage"></div>
-    </div>
-</div>
-@endif
- 
-                                                      
-            <div class="rx-checkout-wrap checkout-information-sec" data-aos="fade-up" data-aos-duration="1000">
-              <div class="inner-title">
-                <h4>Information</h4>
-              </div>
-              <div class="rx-billing-details">
-                <div class="row mb-minus-24">
-                  <div class="col-sm-6 col-12 mb-24">
-                    <div class="rx-input-box">
-                      <input type="text" name="firstname" id="fname" placeholder="First Name*" required>
-                    </div>
-                  </div>
-                  <div class="col-sm-6 col-12 mb-24">
-                    <div class="rx-input-box">
-                      <input type="text" name="lasttname" id="lname" placeholder="Last Name*" required>
-                    </div>
-                  </div>
-                  <div class="col-sm-6 col-12 mb-24">
-                    <div class="rx-input-box">
-                      <input type="email" name="email-address" id="email-address" placeholder="Email Address*" required>
-                    </div>
-                  </div>
-                  <div class="col-sm-6 col-12 mb-24">
-                    <div class="rx-input-box">
-                      <input type="tel" name="phone-number" id="phone-number" placeholder="Phone Number*" required>
-                    </div>
-                  </div>
-                  <div class="col-sm-6 col-12 mb-24">
-                    <div class="rx-input-box">
-                      <input type="text" id="town-city-sec" name="town-city-sec" placeholder="Town/City*">
-                    </div>
-                  </div>
-                  <div class="col-sm-6 col-12 mb-24">
-                    <div class="rx-input-box">
-                      <input type="text" id="street-sec" name="street-sec" placeholder="Street...">
-                    </div>
-                  </div>
-                  <div class="col-sm-6 col-12 mb-24">
-                    <div class="rx-input-box">
-                      <select class="rx-from-control form-select" aria-label="Select Method" id="city">
-                        <option selected>Choose State</option>
-                        <option value="Andhra Pradesh">Andhra Pradesh</option>
-                        <option value="Arunachal Pradesh">Arunachal Pradesh</option>
-                        <option value="Assam">Assam</option>
-                        <option value="Bihar">Bihar</option>
-                        <option value="Chhattisgarh">Chhattisgarh</option>
-                        <option value="Goa">Goa</option>
-                        <option value="Gujarat">Gujarat</option>
-                        <option value="Haryana">Haryana</option>
-                        <option value="Himachal Pradesh">Himachal Pradesh</option>
-                        <option value="Jharkhand">Jharkhand</option>
-                        <option value="Karnataka">Karnataka</option>
-                        <option value="Kerala">Kerala</option>
-                        <option value="Madhya Pradesh">Madhya Pradesh</option>
-                        <option value="Maharashtra">Maharashtra</option>
-                        <option value="Manipur">Manipur</option>
-                        <option value="Meghalaya">Meghalaya</option>
-                        <option value="Mizoram">Mizoram</option>
-                        <option value="Nagaland">Nagaland</option>
-                        <option value="Odisha">Odisha</option>
-                        <option value="Punjab">Punjab</option>
-                        <option value="Rajasthan">Rajasthan</option>
+                                    <div id="otpSection" style="display: none;">
+                                        <input type="text" name="otp" id="otp" placeholder="Enter OTP" required><br><br>
+                                        <button class="tf-btn" type="submit"><span class="text">Verify OTP</span></button>
+                                        <button type="button" id="resendOtpBtn" class="tf-btn" style="display: none;"><span id="resendBtnText">Resend OTP</span></button>
+                                    </div>
+                                </form>
+                                <div id="otpMessage"></div>
+                            </div>
+                        </div>
                        
-                       
-                      </select>
+                    @endif
+
+                    @php use App\Models\OrderDetail; @endphp
+
+                    @if (Auth::guard('frontend')->check())
+                        @php
+                            $user = Auth::guard('frontend')->user();
+                            $latestOrder = OrderDetail::where('user_id', $user->id)->latest()->first();
+                        @endphp
+                        <p>Latest Order ID: {{ $latestOrder->order_id ?? 'No orders yet' }}</p>
+                    @else
+                        <p>Please log in to view your orders.</p>
+                    @endif
+
+                    <div class="rx-checkout-wrap checkout-information-sec" data-aos="fade-up" data-aos-duration="1000">
+                        <div class="inner-title">
+                            <h4>Information</h4>
+                        </div>
+                        <form class="info-box">
+                            <div class="rx-billing-details">
+                                <div class="row mb-minus-24">
+
+                                    <!-- First Name -->
+                                    <div class="col-sm-6 col-12 mb-24">
+                                        <div class="rx-input-box">
+                                            <input type="text" id="first-name" name="first_name" placeholder="First Name*"
+                                                value="{{ old('first_name', isset($latestOrder->customer_name) ? explode(' ', $latestOrder->customer_name)[0] : ($userInfo->name ?? '')) }}">
+                                        </div>
+                                    </div>
+
+                                    <!-- Last Name -->
+                                    <div class="col-sm-6 col-12 mb-24">
+                                        <div class="rx-input-box">
+                                            <input type="text" name="last_name" id="lname" placeholder="Last Name*"
+                                                value="{{ old('last_name', isset($latestOrder->customer_name) ? explode(' ', $latestOrder->customer_name)[1] ?? '' : ($userInfo->last_name ?? '')) }}">
+                                        </div>
+                                    </div>
+
+                                    <!-- Email -->
+                                    <div class="col-sm-6 col-12 mb-24">
+                                        <div class="rx-input-box">
+                                            <input type="email" name="email" id="email-address" placeholder="Email Address*" required
+                                                value="{{ old('email', $userInfo->email ?? '') }}">
+                                        </div>
+                                    </div>
+
+                                    <!-- Phone Number -->
+                                    <div class="col-sm-6 col-12 mb-24">
+                                        <div class="rx-input-box">
+                                            <input type="tel" name="phone" id="phone-number" placeholder="Phone Number*" required
+                                                value="{{ old('phone', $userInfo->phone ?? '') }}">
+                                        </div>
+                                    </div>
+
+                                    <!-- City -->
+                                    <div class="col-sm-6 col-12 mb-24">
+                                        <div class="rx-input-box">
+                                            <input type="text" id="city" name="city" placeholder="City" readonly>
+                                        </div>
+                                    </div>
+
+                                    <!-- Street -->
+                                    <div class="col-sm-6 col-12 mb-24">
+                                        <div class="rx-input-box">
+                                            <input type="text" id="street-sec" name="street" placeholder="Street"
+                                                value="{{ old('street', $latestOrder->street ?? '') }}">
+                                        </div>
+                                    </div>
+
+                                    <!-- State -->
+                                    <div class="col-sm-6 col-12 mb-24">
+                                        <div class="rx-input-box">
+                                            <input type="text" id="state" name="state" placeholder="State" readonly>
+                                        </div>
+                                    </div>
+
+                                    <!-- Country -->
+                                    <div class="col-sm-6 col-12 mb-24">
+                                        <div class="rx-input-box">
+                                            <input type="text" id="country" name="country" placeholder="Country" value="India" readonly>
+                                        </div>
+                                    </div>
+
+                                    <!-- Postal Code -->
+                                    <div class="col-sm-6 col-12 mb-24">
+                                        <div class="rx-input-box">
+                                            <input type="text" id="postalcode" name="postal_code" placeholder="Postal Code*"
+                                                value="{{ old('postal_code', $latestOrder->postal_code ?? '') }}">
+                                        </div>
+                                    </div>
+
+                                    <!-- Billing Address -->
+                                    <div class="col-12 mb-24">
+                                        <div class="rx-input-box">
+                                            <textarea name="billing_address" id="billing_address" placeholder="Billing Address*" required>{{ old('billing_address', $latestOrder->billing_address ?? '') }}</textarea>
+                                        </div>
+                                    </div>
+
+                                    <!-- Same as Billing -->
+                                    <div class="col-12 mb-24">
+                                        <div class="billing-address-block-sec direct">
+                                            <label class="billing-address-label-sec">
+                                                <input type="checkbox" name="same_as_billing" class="billing-address-checkbox-cc">
+                                                Same as Billing Address
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <!-- Shipping Address -->
+                                    <div class="col-12 mb-24">
+                                        <div class="rx-input-box">
+                                            <input type="text" name="shipping_address" id="shipping-address" placeholder="Shipping Address" required
+                                                value="{{ old('shipping_address', $latestOrder->shipping_address ?? '') }}">
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                  </div>
-                  <div class="col-sm-6 col-12 mb-24">
-                    <div class="rx-input-box">
-                      <!-- <label for="postalcode">Postal Code*</label> -->
-                      <input type="text" id="postalcode" name="postalcode" placeholder="Postal Code*">
+
+                    <!-- Payment Option -->
+                    <div class="checkout-payment-sec">
+                        <h5 class="checkout-payment-title-sec">Payment Option:</h5>
+                       <form class="form-payment">
+                        <div class="form-check checkout-payment-credit-card-sec">
+                            <input class="form-check-input" type="radio" name="paymentMethod" id="creditCardOption" checked>
+                            <label class="form-check-label" for="creditCardOption">Online Payment</label>
+                            <p>Make your payment directly into our bank account. Your order will not be shipped until the funds have cleared in our account.</p>
+
+                           
+                        </div>
                     </div>
-                  </div>
-                  <div class="col-12 mb-24">
-                    <div class="rx-input-box">
-                      <!-- <label for="address">Address*</label> -->
-                      <input type="text" name="address" id="address" placeholder="Billing Address" required>
+
+                    <div class="checkout-page-btn">
+                        <button class="checkout-btn-two" id="payNowButton">Pay Now</button>
                     </div>
-                  </div>
-                  
-                  <div class="col-12 mb-24">
-                      <div class="billing-address-block-sec direct">
-                    <label class="billing-address-label-sec">
-                      <input type="checkbox" name="billing-address-details" class="billing-address-checkbox-cc">
-                      Same as Billing Address
-                    </label>
-                    <!--<a href="login.html" class="direct-to">Already have an account?</a>-->
-                  </div>
-                  </div>
-                  
-                  <div class="col-12 mb-24">
-                    <div class="rx-input-box">
-                      <!-- <label for="address">Address*</label> -->
-                      <input type="text" name="shipping-address" id="address" placeholder="Shipping Address" required>
+                  </form>
+                </div>
+            </div>
+
+            <!-- Sidebar Cart -->
+            <div class="col-lg-5 col-12 mb-24" data-aos="fade-up" data-aos-duration="1000">
+                <div class="rx-room-details-sidebar side-checkout-content">
+                    <div class="sub-title">
+                        <h4>Shopping Cart</h4>
                     </div>
-                  </div>
-                  
-                  
-                
+
+                    <div class="shopping-cart-list-product">
+                        @foreach ($checkoutCart as $item)
+                            <div class="shopping-cart-item-product">
+                                <a href="#" class="img-product">
+                                    <img src="{{ $item['image'] }}" alt="product" class="product-image">
+                                </a>
+                                <div class="content-box">
+                                    <div class="info">
+<a href="#" class="name-product link text-title" data-id="{{ $item['id'] }}">{{ $item['product_name'] }}</a>
+                                        <div class="variant text-caption-1">
+                                            <span class="desp-cat-sec">Size:</span>
+                                            <span class="product-size size">{{ $item['size'] }}</span>
+                                        </div>
+                                        <div class="variant text-caption-1">
+                                            <span class="desp-cat-sec">Color:</span>
+                                            <span class="product-print color">{{ $item['color'] }}</span>
+                                        </div>
+                                        <div class="variant text-caption-1">
+                                            <span class="desp-cat-sec">Quantity:</span>
+                                            <span class="size"><strong>{{ $item['quantity'] }}</strong></span>
+                                        </div>
+                                    </div>
+                                    <div class="total-price text-button">
+                                        <span class="price">
+                                            <i class="fa fa-inr" aria-hidden="true"></i>
+                                            {{ number_format($item['price'] * $item['quantity']) }}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+
+                        <div class="shopping-cart-item-product">
+                            <strong>Total:</strong>
+                            <span class="price">
+                                <i class="fa fa-inr" aria-hidden="true"></i>
+                                {{ number_format($cartTotal) }}
+                            </span>
+                        </div>
+                    </div>
                 </div>
-                
-
-              </div>
             </div>
 
-
-            <div class="checkout-payment-sec">
-              <h5 class="checkout-payment-title-sec">Choose Payment Option:</h5>
-
-              <!-- Credit Card Option -->
-              <div class="form-check checkout-payment-credit-card-sec">
-                <input class="form-check-input" type="radio" name="paymentMethod" id="creditCardOption" checked>
-                <label class="form-check-label" for="creditCardOption">Credit Card</label>
-                <p>Please make your payment directly to our bank account. Your order will be shipped once the payment is
-                  successfully received and cleared.</p>
-              </div>
-
-              <!-- Credit Card Form -->
-              <form>
-                <div class="choose-pay-margin">
-                  <input type="text" class="form-control" placeholder="Name On Card*" required>
-                </div>
-                <div class="position-relative choose-pay-margin">
-                  <input type="text" class="form-control" placeholder="Card Numbers*" required>
-                  <div class="position-absolute card-icons">
-                    <img src="assets/img/logo/visa-card-sec-img.png" width="40" alt="Visa">
-                    <img src="assets/img/logo/mastercard-card-sec-img.png" width="30" alt="MasterCard">
-                    <img src="assets/img/logo/jcb-card-sec-img.png" width="30" alt="JCB">
-                    <img src="assets/img/logo/american-express-card-sec-img.png" width="30" alt="Amex">
-                  </div>
-                </div>
-                <div class="row choose-pay-margin choose-date-cvv-sec">
-                  <div class="col-md-6">
-                    <input type="date" class="form-control date-sec" required>
-                  </div>
-                  <div class="col-md-6">
-                    <input type="text" class="form-control" placeholder="CVV*" required>
-                  </div>
-                </div>
-                <div class="form-check">
-                  <div class="choose-payment-block direct">
-                    <label class="choose-payment-label">
-                      <input type="checkbox" name="save-card-details" class="choose-payment-checkbox-cc">
-                      Save Card Details
-                    </label>
-                    <!--<a href="login.html" class="direct-to">Already have an account?</a>-->
-                  </div>
-                </div>
-              </form>
-              <hr>
-
-              <!-- Cash on Delivery -->
-              <div class="form-check checkout-payment-cod-sec">
-                <input class="form-check-input" type="radio" name="paymentMethod" id="codOption">
-                <label class="form-check-label" for="codOption">Cash on Delivery</label>
-                <p>Pay with cash at your doorstep. No advance payment required—your order will be processed and shipped
-                  immediately.</p>
-              </div>
-
-              <hr>
-
-              <!-- Apple Pay -->
-              <div class="form-check checkout-payment-apple-pay-sec">
-                <input class="form-check-input" type="radio" name="paymentMethod" id="applePayOption">
-                <label class="form-check-label" for="applePayOption">
-                  <i class="fa fa-apple"></i> Apple Pay
-                </label>
-                <p>Quick and secure payment using your Apple device. Fast checkout with Face ID or Touch ID.</p>
-              </div>
-
-              <hr>
-
-              <!-- PayPal -->
-              <div class="form-check checkout-payment-paypal-sec">
-                <input class="form-check-input" type="radio" name="paymentMethod" id="paypalOption">
-                <label class="form-check-label" for="paypalOption">
-                  <img src="assets/img/logo/paypal.png" alt="PayPal" width="70">
-                </label>
-                <p>Secure and convenient checkout with your PayPal account. Pay using your linked bank, debit, or credit
-                  card—no need to enter details every time.</p>
-              </div>
-            </div>
-
-
-
-
-          </div>
-        </div>
-        <div class="col-lg-5 col-12 mb-24" data-aos="fade-up" data-aos-duration="1000">
-          <div class="rx-room-details-sidebar side-checkout-content">
-            <div class="sub-title">
-              <h4>Shopping Cart</h4>
-            </div>
-
-            <div class="shopping-cart-list-product">
-             @foreach ($checkoutCart as $item)
-<div class="shopping-cart-item-product">
-    <a href="#" class="img-product">
-        <img src="{{ $item['image'] }}" alt="product">
-    </a>
-    <div class="content-box">
-        <div class="info">
-            <a href="#" class="name-product link text-title">{{ $item['product_name'] }}</a>
-            <div class="variant text-caption-1">
-                <span class="desp-cat-sec">Size:</span> 
-                <span class="size">{{ $item['size'] }}</span>
-            </div>
-            <div class="variant text-caption-1">
-                <span class="desp-cat-sec">Color:</span> 
-                <span class="size">{{ $item['color'] }}</span>
-            </div>
-            <div class="variant text-caption-1">
-                <span class="desp-cat-sec">Quantity:</span> 
-                <span class="size">{{ $item['quantity'] }}</span>
-            </div>
-        </div>
-        <div class="total-price text-button">
-            <span class="price">
-                <i class="fa fa-inr" aria-hidden="true"></i>
-                {{ number_format($item['price'] * $item['quantity']) }}
-            </span>
         </div>
     </div>
-</div>
-@endforeach
-
-            
-
-              <div class="shopping-cart-item-product">
-                  <strong>Total:</strong> 
-                  <span class="price">
-                      <i class="fa fa-inr" aria-hidden="true"></i> 
-                      {{ number_format($cartTotal) }}
-                  </span>
-              </div>
-
-            </div>
-
-           
-
-          </div>
+</section>
+ <!-- Loader Overlay (Initially Hidden) -->
+        <div id="loading-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0, 0, 0, 0.5); color: black; display: flex; align-items: center; justify-content: center; font-size: 24px; z-index: 9999; flex-direction: column; gap: 20px;">
+            <div class="spinner"></div><br><br>
+            <!-- <div>Processing...</div> -->
         </div>
-      </div>
-    </div>
-  </section>
-
          @include('components.frontend.footer')    
 
   <!-- Back to top  -->
@@ -570,7 +543,287 @@ document.getElementById('otpForm').addEventListener('submit', function(e) {
     });
 });
 </script>
+<script>
+document.getElementById('postalcode').addEventListener('blur', function () {
+    let pincode = this.value.trim();
+    if (pincode.length === 6) {
+        fetch(`/get-location-from-pincode/${pincode}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    document.getElementById('city').value = data.city || '';
+                    document.getElementById('state').value = data.state || '';
+                    // Only update country if the API sends it
+                    if (data.country) {
+                        document.getElementById('country').value = data.country;
+                    }
+                }
+            });
+    }
+});
+</script>
+<script>
+document.querySelector('.billing-address-checkbox-cc').addEventListener('change', function () {
+    const billing = document.getElementById('billing_address').value;
+    const shipping = document.getElementById('shipping-address');
 
+    if (this.checked) {
+        shipping.value = billing;
+    } else {
+        shipping.value = '';
+    }
+});
+</script>
+
+
+<script>
+  document.getElementById("payNowButton").addEventListener("click", async function (e) {
+    e.preventDefault();
+
+    if (!validateForm()) {
+        return;
+    }
+
+    let orderData = {
+        customer_info: {
+            first_name: document.getElementById("first-name").value,
+            last_name: document.getElementById("lname").value,
+            email: document.getElementById("email-address").value,
+            phone: document.getElementById("phone-number").value,
+            street: document.getElementById("street-sec").value,
+            city: document.getElementById("city").value,
+            state: document.getElementById("state").value,
+            postal_code: document.getElementById("postalcode").value,
+            country: "India",
+            billing_address: document.getElementById("billing_address").value,
+            shipping_address: document.getElementById("shipping-address").value,
+            description: document.getElementById("note") ? document.getElementById("note").value : ""
+        },
+        cart_items: []
+    };
+
+    document.querySelectorAll(".shopping-cart-list-product").forEach((item) => {
+        let productElement = item.querySelector(".name-product");
+        let quantityElement = item.querySelector(".quantity strong");
+        let imageElement = item.querySelector(".product-image");
+        let sizeElement = item.querySelector(".product-size");
+        let printElement = item.querySelector(".product-print");
+
+        orderData.cart_items.push({
+            product_id: productElement.getAttribute("data-id"),
+            product_name: productElement.innerText,
+            quantity: quantityElement ? parseInt(quantityElement.innerText) : 1,
+            price: item.querySelector(".price").innerText.replace("₹", "").trim(),
+            image: imageElement ? imageElement.getAttribute("src") : "",
+            size: sizeElement ? sizeElement.innerText : "N/A",
+            print: printElement ? printElement.innerText.replace("Print: ", "").trim() : "N/A"
+        });
+    });
+
+    showLoader();
+
+    try {
+        let response = await fetch("{{ route('payment.process') }}", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": document.querySelector("meta[name='csrf-token']").getAttribute("content")
+            },
+            body: JSON.stringify({
+                amount: document.querySelector(".total-price-checkout").innerText.replace("₹", "").trim(),
+                order_data: orderData
+            })
+        });
+
+        let data = await response.json();
+
+        let order_id = null;
+
+        if (data.order_id) {
+            order_id = data.order_id;
+            
+            let options = {
+                key: data.razorpay_key,
+                amount: data.amount * 100,
+                currency: "INR",
+                order_id: data.order_id,
+                handler: async function (response) {
+                    try {
+                        let verifyResponse = await fetch("{{ route('payment.verify') }}", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                                "X-CSRF-TOKEN": document.querySelector("meta[name='csrf-token']").getAttribute("content")
+                            },
+                            body: JSON.stringify({
+                                razorpay_order_id: response.razorpay_order_id,
+                                razorpay_payment_id: response.razorpay_payment_id,
+                                razorpay_signature: response.razorpay_signature,
+                                order_id: order_id,
+                                order_data: orderData
+                            })
+                        });
+
+                        let verifyData = await verifyResponse.json();
+                        console.log("Verify Data:", verifyData);
+
+                        if (verifyData.status === 1) {
+                            // Redirect to Order Confirmation with order data
+                            let url = "{{ route('order.confirm') }}" + "?order_id=" + order_id;
+                            window.location.href = url;
+                        } else {
+                            alert("Payment verification failed. Please try again.");
+                        }
+                    } catch (error) {
+                        alert("Something went wrong. Please try again.");
+                    } finally {
+                        hideLoader();
+                    }
+                }
+            };
+
+            let rzp1 = new Razorpay(options);
+            rzp1.open();
+
+            // Hide loader if payment is failed or popup is closed
+            rzp1.on("payment.failed", function () {
+                hideLoader();
+            });
+        } else {
+            alert("Order creation failed. Please try again.");
+            hideLoader();
+        }
+    } catch (error) {
+        alert("An error occurred while processing the payment.");
+        hideLoader();
+    }
+});
+
+function showLoader() {
+    document.getElementById("loading-overlay").style.display = "flex";
+}
+
+function hideLoader() {
+    document.getElementById("loading-overlay").style.display = "none";
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    hideLoader();
+});
+
+// Form Validation Function
+function validateForm() {
+    let isValid = true;
+
+    function showError(input, message) {
+        const errorElement = input.nextElementSibling;
+        errorElement.innerText = message;
+        errorElement.style.color = "red";
+        input.style.borderColor = "red";
+    }
+
+    function clearError(input) {
+    // Check if the next sibling exists and is an error message container
+    const errorElement = input.nextElementSibling;
+
+    if (errorElement && errorElement.classList.contains('error-message')) {
+        errorElement.innerText = "";  // Clear the error message
+    }
+    
+    input.style.borderColor = "";  // Reset the border color
+}
+
+
+    const firstName = document.getElementById("first-name");
+    const lastName = document.getElementById("lname");
+    const email = document.getElementById("email-address");
+    const phone = document.getElementById("phone-number");
+    const street = document.getElementById("street-sec");
+    const city = document.getElementById("city");
+    const state = document.getElementById("state");
+    const postalCode = document.getElementById("postalcode");
+    const billingAddress = document.getElementById("billing_address");
+    const shippingAddress = document.getElementById("shipping-address");
+    const sameAsBilling = document.querySelector('.billing-address-checkbox-cc');
+
+    const nameRegex = /^[A-Za-z\s]+$/;
+    if (!nameRegex.test(firstName.value.trim())) {
+        showError(firstName, "First Name should only contain letters.");
+        isValid = false;
+    } else {
+        clearError(firstName);
+    }
+
+    if (!nameRegex.test(lastName.value.trim())) {
+        showError(lastName, "Last Name should only contain letters.");
+        isValid = false;
+    } else {
+        clearError(lastName);
+    }
+
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailRegex.test(email.value.trim())) {
+        showError(email, "Enter a valid Email Address.");
+        isValid = false;
+    } else {
+        clearError(email);
+    }
+
+    const phoneRegex = /^\d{10}$/;
+    if (!phoneRegex.test(phone.value.trim())) {
+        showError(phone, "Phone Number should be exactly 10 digits.");
+        isValid = false;
+    } else {
+        clearError(phone);
+    }
+
+    if (street.value.trim() === "") {
+        showError(street, "Street is required.");
+        isValid = false;
+    } else {
+        clearError(street);
+    }
+
+    if (city.value.trim() === "") {
+        showError(city, "City is required.");
+        isValid = false;
+    } else {
+        clearError(city);
+    }
+
+    if (state.value.trim() === "") {
+        showError(state, "State is required.");
+        isValid = false;
+    } else {
+        clearError(state);
+    }
+
+    const postalCodeRegex = /^\d{6}$/;
+    if (!postalCodeRegex.test(postalCode.value.trim())) {
+        showError(postalCode, "Postal Code must be exactly 6 digits.");
+        isValid = false;
+    } else {
+        clearError(postalCode);
+    }
+
+    if (billingAddress.value.trim() === "") {
+        showError(billingAddress, "Billing Address is required.");
+        isValid = false;
+    } else {
+        clearError(billingAddress);
+    }
+
+    if (!sameAsBilling.checked && shippingAddress.value.trim() === "") {
+        showError(shippingAddress, "Shipping Address is required.");
+        isValid = false;
+    } else {
+        clearError(shippingAddress);
+    }
+
+    return isValid;
+}
+
+</script>
 </body>
 
 </html>

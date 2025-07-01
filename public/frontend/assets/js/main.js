@@ -620,20 +620,8 @@ $(".related-product-slider").owlCarousel({
   
   
   
-//   Read More
-document.addEventListener("DOMContentLoaded", function () {
-  const toggleBtn = document.querySelector(".read-more-toggle");
-  const content = document.querySelector(".read-more-content");
 
-  if (toggleBtn && content) {
-    toggleBtn.addEventListener("click", function () {
-      content.classList.toggle("expanded");
-      toggleBtn.textContent = content.classList.contains("expanded")
-        ? "Read less"
-        : "Read more";
-    });
-  }
-});
+
 
 
 

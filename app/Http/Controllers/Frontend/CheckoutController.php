@@ -13,6 +13,8 @@ use App\Models\LoggedInUserDetails;
 use App\Models\Otp;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session; // ✅ Import Session here
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Support\Facades\Validator;
 
@@ -31,21 +33,66 @@ class CheckoutController extends Controller
 }
 
 
+public function getLocationFromPincode($pincode)
+{
+    $location = DB::table('pincode_table')->where('pincode', $pincode)->first();
 
-   public function showCheckout()
+    if ($location) {
+        return response()->json([
+            'success' => true,
+            'city' => $location->City ?? '',
+            'state' => $location->State ?? '',
+            'country' => $location->Country ?? '',
+        ]);
+    }
+
+    return response()->json(['success' => false, 'message' => 'Pincode not found']);
+}
+
+  
+
+public function showCheckout()
 {
     $checkoutCart = session()->get('checkout_cart', []);
+    $userId = Auth::guard('frontend')->id();
+    $sessionId = Session::getId();
+
+    // Get cart items
+    $cartItems = DB::table('carts')
+        ->join('product_details', 'carts.product_id', '=', 'product_details.id')
+        ->where(function ($query) use ($userId, $sessionId) {
+            if ($userId) {
+                $query->where('carts.user_id', $userId);
+            } else {
+                $query->where('carts.session_id', $sessionId);
+            }
+        })
+        ->select('carts.*', 'product_details.product_name', 'product_details.slug')
+        ->get();
 
     $cartTotal = collect($checkoutCart)->sum(function ($item) {
         return $item['price'] * $item['quantity'];
     });
 
-    return view('frontend.checkout-details', compact('checkoutCart', 'cartTotal'));
+    $userInfo = null;
+
+    if ($userId) {
+        $userInfo = DB::table('logged_in_user_details')->where('id', $userId)->first();
+
+        // Optional: If you want to show last used address from order_details table
+        $latestOrder = DB::table('order_details')->where('user_id', $userId)->latest()->first();
+    } else {
+        $latestOrder = null;
+    }
+
+    return view('frontend.checkout-details', compact('checkoutCart', 'cartTotal', 'userInfo', 'latestOrder'));
+
 }
 
 
 
-public function sendOtp(Request $request)
+
+ public function sendOtp(Request $request)
 {
     $request->validate([
         'email' => 'required|email|max:255'

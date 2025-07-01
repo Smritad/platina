@@ -4,6 +4,9 @@
 
 <head>
        @include('components.frontend.head')
+       <!-- In <head> -->
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
 </head>
 
 <body>
@@ -16,7 +19,17 @@
          @include('components.frontend.header')
   </header>
   <!-- Hero -->
+<style>
+.read-more-content {
+  max-height: 100px; /* adjust height as needed */
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
 
+.read-more-content.expanded {
+  max-height: 1000px; /* large enough to show all content */
+}
+</style>
   <!-- Breadcrumb -->
   <section class="section-breadcrumb padding-b-50">
     <div class="rx-breadcrumb-image">
@@ -58,10 +71,76 @@
       </div>
     </div>
   </section>
+  @php
+            $colorMap = [
+                "Black" => "#000000",
+                "Ice Melt" => "#D3E4F1",
+                "Spell Bound" => "#4E646F",
+                "White" => "#FFFFFF",
+                "Red" => "#FF0000",
+                "Green" => "#00FF00",
+                "Blue" => "#0000FF",
+                "Yellow" => "#FFFF00",
+                "Orange" => "#FFA500",
+                "Purple" => "#800080",
+                "Pink" => "#FFC0CB",
+                "Brown" => "#A52A2A",
+                "Gray" => "#808080",
+                "Cyan" => "#00FFFF",
+                "Dark Green" => "#008000",
+                "Maroon" => "#800000",
+                "Teal" => "#006666",
+                "Dove" => "#D6D3D1",
+                "Sea Jet" => "#AAC9CE",
+                "Peach Beige" => "#FAD9C1",
+                "Nomad" => "#BBB3A2",
+                "Baby Lavender" => "#E3D1F5",
+                "Balistic Sea" => "#5D8AA8",
+                "Jet Black" => "#343434",
+                "Steel Blue" => "#4682B4",
+                "Dark Blue" => "#00008B",
+                "Country Blue" => "#9DB4C0",
+                "Skin Tan" => "#FFDAB9",
+                "Cream" => "#FFFDD0",
+                "Peach Pink" => "#FFD1DC",
+                "Sea Blue" => "#006994",
+                "Silver" => "#C0C0C0",
+                "Stone" => "#D8CAB8",
+                "Sand" => "#F4E1C1",
+                "Beige" => "#F5F5DC",
+                "Pearled Ivory" => "#F8F4E3",
+                "Lavender" => "#E6E6FA",
+                "Ivory" => "#FFFFF0",
+                "Beetroot Red" => "#7A263A",
+                "Dark Beige" => "#A89F91",
+                "Dark Grey" => "#A9A9A9",
+                "Light Green" => "#90EE90",
+                "Azure Blue" => "#007FFF",
+                "Stone Blue" => "#7D98A1",
+                "Sky Rocket" => "#AED7E0",
+                "Pale Dew" => "#D8E3D7",
+                "Frozen Dew" => "#E8F0F2",
+                "Amber Ash" => "#D4BFAA",
+                "Pista" => "#93C572",
+                "Dusty Blue" => "#5A86AD",
+                "Sky Blue" => "#87CEEB",
+                "Ice" => "#E0F7FA",
+                "Wood Ash" => "#C4BEB5",
+                "Northern Droplet" => "#D6D7D9",
+                "Travertine" => "#E6D8C3",
+                "Ash" => "#B2BEB5",
+                "Peach" => "#FFE5B4",
+                "Cuban Sand" => "#DDD0A8",
+                "Blue Breeze" => "#B2D8E1",
+                "Sky" => "#87CEFA"
+            ];
+
+            $colors = explode(',', $product->colors);
+        @endphp
 
 <section class="section-room-details padding-t-50 padding-b-50">
   <div class="container">
-    <form id="addToCartForm" action="{{ route('add.to.cart', $product->id) }}" method="get">
+<form id="addToCartForm" action="{{ route('add.to.cart', $product->id) }}" method="get">
      <input type="hidden" name="_token" value="I6JGJ3Qsjigj9R105VdGDXEiNVKHlerGmEKTcjAU" autocomplete="off">
             <div class="row mb-minus-24">  
     @csrf
@@ -124,20 +203,24 @@
           </div>
 
           <div class="product-details-color-sec">
-            <div class="product-details-color-variant">
-              <p class="product-details-title">Color :</p>
-              @php
-                $colors = explode(',', $product->colors);
-              @endphp
-              <ul class="product-details-color" id="color-options">
-                @foreach($colors as $index => $color)
-                  <li class="{{ $index === 0 ? 'active' : '' }}"
-                      style="background: {{ trim($color) }};"
-                      data-color="{{ trim($color) }}"></li>
-                @endforeach
-              </ul>
-              <input type="hidden" name="selected_color" id="selected_color" value="{{ trim($colors[0]) }}">
-            </div>
+              <div class="product-details-color-variant">
+                  <p class="product-details-title">Color :</p>
+                
+                  <ul class="product-details-color" id="color-options">
+                      @foreach($colors as $index => $color)
+                          @php
+                              $trimmedColor = trim($color);
+                              $hexColor = $colorMap[$trimmedColor] ?? '#ffffff'; // fallback to white
+                          @endphp
+                          <li class="{{ $index === 0 ? 'active' : '' }}"
+                              style="background: {{ $hexColor }};"
+                              data-color="{{ $trimmedColor }}">
+                          </li>
+                      @endforeach
+                  </ul>
+
+                  <input type="hidden" name="selected_color" id="selected_color" value="{{ trim($colors[0]) }}">
+              </div>
           </div>
 
           <input type="hidden" name="product_id" value="{{ $product->id }}">
@@ -178,11 +261,12 @@
             </div>
           </div>
 
-          <div class="product-details-desc-para-sec">
-            <p class="product-details-desc-title">Product Description:</p>
-            <p class="read-more-content">{{ $product->description }}</p>
-            <a href="javascript:void(0)" class="read-more-toggle">Read more</a>
-          </div>
+         <div class="product-details-desc-para-sec">
+          <p class="product-details-desc-title">Product Description:</p>
+          <p class="read-more-content">{{ $product->description }}</p>
+          <a href="javascript:void(0)" class="read-more-toggle">Read more</a>
+        </div>
+
 
             <div class="product-details-collection-sec">
             <div class="product-details-collection-wrap">
@@ -208,13 +292,11 @@
             </div>
           </div>
 
-<!-- Hidden fields for Connect Us -->
-<input type="hidden" name="connect_product_name" id="connect_product_name" value="{{ $product->product_name }}">
-<input type="hidden" name="connect_product_size" id="connect_product_size" value="">
-<input type="hidden" name="connect_product_qty" id="connect_product_qty" value="1">
-<!-- end Hidden fields for Connect Us -->
-
-
+            <!-- Hidden fields for Connect Us -->
+            <input type="hidden" name="connect_product_name" id="connect_product_name" value="{{ $product->product_name }}">
+            <input type="hidden" name="connect_product_size" id="connect_product_size" value="">
+            <input type="hidden" name="connect_product_qty" id="connect_product_qty" value="1">
+            <!-- end Hidden fields for Connect Us -->
 
           <div class="product-details-btn-sec">
             <div class="row">
@@ -224,13 +306,13 @@
                 </div>
               </div>
 
-              <!-- Connect Us Button -->
- <div class="col-md-5">
-                <div class="pro-det-add-to-cart-btn">
-                    <button type="button" class="prod-det-btn-two" data-bs-toggle="modal" data-bs-target="#connectUsModal">
-Enquire Now  </button>
-</div>
-</div>
+                <!-- Connect Us Button -->
+  <!-- <div class="col-md-5">
+                  <div class="pro-det-add-to-cart-btn">
+                      <button type="button" class="prod-det-btn-two" data-bs-toggle="modal" data-bs-target="#connectUsModal">
+  Enquire Now  </button>
+  </div>
+  </div> -->
               <div class="col-md-5">
                 <div class="pro-det-add-to-cart-btn">
                   <button type="submit" class="prod-det-btn-two">Add to cart</button>
@@ -272,7 +354,7 @@ Enquire Now  </button>
       <div class="modal-content" style="border-radius: 8px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.2); max-width: 500px; margin: auto;">
         
         <div class="modal-header" style="background-color: #f8f8f8; border-bottom: 1px solid #ddd;">
-<h5 class="modal-title text-center w-100" id="connectUsModalLabel" style="color: #9d7e54;">Connect With Us</h5>
+        <h5 class="modal-title text-center w-100" id="connectUsModalLabel" style="color: #9d7e54;">Connect With Us</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         
@@ -321,7 +403,7 @@ Enquire Now  </button>
         <div class="col-lg-12">
           <div class="tab-custom product-det-custom-tab-sec">
             <!-- Nav tabs -->
-            <!-- <ul class="nav nav-tabs justify-content-center mb-3 border-bottom-0" role="tablist">
+            <ul class="nav nav-tabs justify-content-center mb-3 border-bottom-0" role="tablist">
              
               <li class="nav-item" role="presentation">
                 <button class="nav-link active" id="section2-tab" data-bs-toggle="tab" data-bs-target="#section2" type="button"
@@ -331,9 +413,9 @@ Enquire Now  </button>
                 <button class="nav-link" id="section3-tab" data-bs-toggle="tab" data-bs-target="#section3" type="button"
                   role="tab" aria-controls="section3" aria-selected="true">Returns & Exchange</button>
               </li>
-            </ul> -->
+            </ul>
 
-            <!-- Tab panes
+            <!-- Tab panes -->
             <div class="tab-content product-detail-tab-sec bg-white rounded-3 p-4 border-light-subtle">
              
               <div class="tab-pane fade show active" id="section2" role="tabpanel" aria-labelledby="section2-tab">
@@ -343,7 +425,7 @@ Enquire Now  </button>
                 <p>{!! $product->return_exchange !!}</p>
 
               </div>
-            </div> -->
+            </div>
           </div>
         </div>
       </div>
@@ -649,51 +731,132 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 </script>
+<!-- 
+  <script>
+    document.getElementById('buyNowButton').addEventListener('click', function (e) {
+        e.preventDefault();
 
-<script>
+        const selectedColor = document.getElementById('selected_color').value;
+        const sizeSelect = document.getElementById('sizeSelect').value;
+        const qty = document.getElementById('qtyInput').value;
+
+        if (!selectedColor) {
+            alert('Please select a color.');
+            return;
+        }
+
+        if (!sizeSelect || sizeSelect === 'Select') {
+            alert('Please select a size.');
+            return;
+        }
+
+        if (!qty || isNaN(qty) || qty < 1) {
+            alert('Please enter a valid quantity.');
+            return;
+        }
+
+        // const data = {
+        //     _token: '{{ csrf_token() }}',
+        //     product_id: '{{ $product->id }}',
+        //     product_name: '{{ $product->product_name }}',
+        //     price: '{{ $product->mrp }}',
+        //     image: '{{ !empty($mediaFiles) ? asset("uploads/products/media/" . $mediaFiles[0]) : asset("default-image.jpg") }}',
+        //     fabric: '{{ optional($product->fabricType)->category_name ?? 'N/A' }}',
+        //     selected_color: selectedColor,
+        //     size: sizeSelect,
+        //     qty: qty
+        // };
+
+
+        const data = {
+            _token: document.querySelector('input[name="_token"]').value,
+            product_id: document.querySelector('input[name="product_id"]').value,
+            product_name: document.querySelector('input[name="product_name"]').value,
+            price: document.querySelector('input[name="price"]').value,
+            image: document.querySelector('input[name="image"]').value || '',
+            fabric: document.querySelector('input[name="fabric"]').value || '',
+            selected_color: selectedColor,
+            size: sizeSelect,
+            qty: qty
+        };
+
+    console.log('✅ Debug Product Name:', data.product_id);
+
+    // ❌ Stop further execution (like `die` in PHP)
+        fetch('{{ route('buy.now') }}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': data._token
+            },
+            body: JSON.stringify(data)
+        })
+        .then(res => res.json())
+        .then(response => {
+            if (response.status === 'success') {
+                window.location.href = response.redirect_url;
+            } else {
+                alert(response.message || 'Something went wrong');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Something went wrong.');
+        });
+    });
+  </script> -->
+
+
+
+  <script>
 document.getElementById('buyNowButton').addEventListener('click', function (e) {
     e.preventDefault();
 
     const selectedColor = document.getElementById('selected_color').value;
     const sizeSelect = document.getElementById('sizeSelect').value;
     const qty = document.getElementById('qtyInput').value;
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-    if (!selectedColor) {
-        alert('Please select a color.');
-        return;
-    }
-
-    if (!sizeSelect || sizeSelect === 'Select') {
-        alert('Please select a size.');
-        return;
-    }
-
-    if (!qty || isNaN(qty) || qty < 1) {
-        alert('Please enter a valid quantity.');
-        return;
-    }
+    if (!selectedColor) return alert('Please select a color.');
+    if (!sizeSelect || sizeSelect === 'Select') return alert('Please select a size.');
+    if (!qty || isNaN(qty) || qty < 1) return alert('Please enter a valid quantity.');
 
     const data = {
-        _token: '{{ csrf_token() }}',
-        product_id: '{{ $product->id }}',
-        product_name: '{{ $product->product_name }}',
-        price: '{{ $product->mrp }}',
-        image: '{{ !empty($mediaFiles) ? $mediaFiles[0] : '' }}',
-        fabric: '{{ optional($product->fabricType)->category_name ?? 'N/A' }}',
+        product_id: document.querySelector('input[name="product_id"]').value,
+        product_name: document.querySelector('input[name="product_name"]').value,
+        price: document.querySelector('input[name="price"]').value,
+        image: '{{ !empty($mediaFiles) ? asset("uploads/products/media/" . $mediaFiles[0]) : asset("default-image.jpg") }}',
+        fabric: document.querySelector('input[name="fabric"]').value || '',
         selected_color: selectedColor,
         size: sizeSelect,
         qty: qty
     };
 
+    console.log('✅ Debug Product ID:', data.product_id);
+
     fetch('{{ route('buy.now') }}', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': data._token
+            'X-CSRF-TOKEN': csrfToken
         },
         body: JSON.stringify(data)
     })
-    .then(res => res.json())
+    .then(async res => {
+        const contentType = res.headers.get('content-type');
+        if (!res.ok) {
+            let msg = 'Something went wrong.';
+            if (contentType && contentType.includes('application/json')) {
+                const json = await res.json();
+                msg = json.message || msg;
+            } else {
+                const text = await res.text();
+                console.error('❌ HTML error response:', text);
+            }
+            throw new Error(msg);
+        }
+        return res.json();
+    })
     .then(response => {
         if (response.status === 'success') {
             window.location.href = response.redirect_url;
@@ -702,11 +865,13 @@ document.getElementById('buyNowButton').addEventListener('click', function (e) {
         }
     })
     .catch(error => {
-        console.error('Error:', error);
-        alert('Something went wrong.');
+        console.error('❌ Error:', error);
+        alert(error.message || 'Something went wrong.');
     });
 });
 </script>
+
+
 
 <script>
   document.getElementById('addToCartForm').addEventListener('submit', function(e) {
@@ -746,6 +911,21 @@ document.getElementById('buyNowButton').addEventListener('click', function (e) {
 
   
 
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const toggleBtn = document.querySelector(".read-more-toggle");
+    const content = document.querySelector(".read-more-content");
+
+    if (toggleBtn && content) {
+      toggleBtn.addEventListener("click", function () {
+        content.classList.toggle("expanded");
+        toggleBtn.textContent = content.classList.contains("expanded")
+          ? "Read less"
+          : "Read more";
+      });
+    }
+  });
 </script>
 <script>
   document.querySelector('.qty-btn-plus').addEventListener('click', function(e) {

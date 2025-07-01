@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+
 use App\Models\ProductDetails;
 use App\Models\SizeDetails;
 use App\Models\FabricType;
@@ -16,25 +17,40 @@ class CartController extends Controller
 {
     $product = ProductDetails::findOrFail($id);
 
-    // Determine user or session
     $userId = auth('frontend')->check() ? auth('frontend')->id() : null;
     $sessionId = !$userId ? session()->getId() : null;
 
-    Cart::create([
-        'user_id'       => $userId,
-        'session_id'    => $sessionId,
-        'product_id'    => $product->id,
-        'product_name'  => $request->product_name,
-        'price'         => $request->price,
-        'image'         => $request->image,
-        'size'          => $request->size ?? 'N/A',
-        'color'         => $request->selected_color,
-        'fabric'        => $request->fabric,
-        'quantity'      => $request->qty ?? 1,
-    ]);
+    // Check if this product with same size & color already in cart
+    $existingCart = Cart::where('product_id', $product->id)
+        ->where('user_id', $userId)
+        ->where('session_id', $sessionId)
+        ->where('size', $request->size ?? 'N/A')
+        ->where('color', $request->selected_color)
+        ->first();
+
+    if ($existingCart) {
+        // If exists, just increment quantity
+        $existingCart->quantity += $request->qty ?? 1;
+        $existingCart->save();
+    } else {
+        // Else, create new entry
+        Cart::create([
+            'user_id'       => $userId,
+            'session_id'    => $sessionId,
+            'product_id'    => $product->id,
+            'product_name'  => $request->product_name,
+            'price'         => $request->price,
+            'image'         => $request->image,
+            'size'          => $request->size ?? 'N/A',
+            'color'         => $request->selected_color,
+            'fabric'        => $request->fabric,
+            'quantity'      => $request->qty ?? 1,
+        ]);
+    }
 
     return redirect()->back()->with('message', 'Product added to cart');
 }
+
 
 
     public function showCart()
@@ -76,7 +92,7 @@ public function buyNow(Request $request)
         'size' => 'required|string',
         'qty' => 'required|integer|min:1',
     ]);
-
+// dd($request);
     session()->put('buy_now_product', $validated);
 
     return response()->json([
@@ -85,22 +101,33 @@ public function buyNow(Request $request)
     ]);
 }
 
+
 public function showBuyNowCheckout()
 {
     $product = session('buy_now_product');
-dd($product);
+
     if (!$product) {
         return redirect()->back()->with('error', 'No product found for checkout.');
     }
 
-    $cartItems = collect([
-        (object) $product
-    ]);
+    // Structure data to match checkout blade
+    $checkoutCart = [
+        [
+            'product_name' => $product['product_name'],
+            'image' => $product['image'],
+            'size' => $product['size'],
+            'color' => $product['selected_color'],
+            'quantity' => $product['qty'],
+            'price' => $product['price'],
+            'fabric' => $product['fabric'],
+        ]
+    ];
 
     $cartTotal = $product['price'] * $product['qty'];
 
-    return view('frontend.checkout-details', compact('cartItems', 'cartTotal'));
+    return view('frontend.checkout-details', compact('checkoutCart', 'cartTotal'));
 }
+
 
 
 

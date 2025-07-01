@@ -53,6 +53,7 @@ use App\Http\Controllers\Frontend\CategoryProductsListingDetailsController;
 use App\Http\Controllers\Frontend\ComingSoonController;
 use App\Http\Controllers\Frontend\ConnectUsController;
 use App\Http\Controllers\Frontend\ContactController;
+use App\Http\Controllers\Frontend\PaymentController;
 
 
 // Route::get('/', function () {
@@ -153,6 +154,7 @@ Route::get('show-cart', [CartController::class, 'showCart'])->name('show.cart');
 Route::delete('remove-from-cart/{id}', [CartController::class, 'removeFromCart'])->name('remove.from.cart');
 Route::get('/checkout', [CheckoutController::class, 'showCheckout'])->name('show.checkout');
 Route::post('/cart/store-checkout-data', [CheckoutController::class, 'storeCheckoutData'])->name('cart.storeCheckoutData');
+Route::get('/get-location-from-pincode/{pincode}', [CheckoutController::class, 'getLocationFromPincode']);
 
 
 Route::post('/connect-us/send', [ConnectUsController::class, 'send'])->name('connect.us.send');
@@ -162,7 +164,11 @@ Route::post('/thankyou', [ThankyouController::class, 'index'])->name('Thank.you'
 Route::post('/buy-now', [CartController::class, 'buyNow'])->name('buy.now');
 Route::get('/buy-now/checkout', [CartController::class, 'showBuyNowCheckout'])->name('show.buy.now.checkout');
 
-
+// ===== Payment Integration URL
+Route::post('/process-payment', [PaymentController::class, 'processPayment'])->name('payment.process');
+Route::post('/verify-payment', [PaymentController::class, 'verifyPayment'])->name('payment.verify');
+  //===== Order confirmation
+    Route::get('/order-confirmation', [CheckoutController::class, 'order_confirmation'])->name('order.confirm');
 
 
 Route::get('/wishlist', [WishlistController::class, 'index'])->name('shows.wishlist');

@@ -45,6 +45,7 @@ class CategoryProductsDetailsController extends Controller
         'sizeName',
         'fabricName',
         'products'
+        
     ));
 }
 
