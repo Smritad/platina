@@ -247,7 +247,7 @@ document.getElementById('proceed-to-checkout').addEventListener('click', functio
 </script>
 
 
-   <script>
+<script>
 document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('.qty-btn-plus').forEach(button => {
         button.addEventListener('click', function () {

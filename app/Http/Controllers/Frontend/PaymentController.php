@@ -37,7 +37,7 @@ class PaymentController extends Controller
     
         try {
             $order = $api->order->create($orderData);
-            // dd($order);
+            
             return response()->json([
                 'order_id'     => $order['id'],
                 'razorpay_key' => config('services.razorpay.key'),
@@ -93,7 +93,7 @@ class PaymentController extends Controller
             $status = 1; // Successful payment
             $orderData = $request->order_data;
         
-            $orderData = $request->order_data; 
+            // $orderData = $request->order_data; 
 
             if (!empty($orderData) && isset($orderData['cart_items'])) {
                 $productIds   = [];
@@ -146,7 +146,7 @@ class PaymentController extends Controller
                     }
 
                     $order = OrderDetail::create([
-                        'user_id'       => Auth::check() ? Auth::id() : null,
+                        'user_id' => Auth::guard('frontend')->check() ? Auth::guard('frontend')->id() : null,
                         'order_id'       => $request->razorpay_order_id,
                         'payment_id'     => $request->razorpay_payment_id,
                         'customer_name'  => $orderData['customer_info']['first_name'] . ' ' . $orderData['customer_info']['last_name'],
@@ -170,7 +170,7 @@ class PaymentController extends Controller
                         'sizes'          => json_encode($sizes, JSON_UNESCAPED_UNICODE),
                         'colors'          => json_encode($colors, JSON_UNESCAPED_UNICODE),
                         'created_at'     => Carbon::now(),
-                        'created_by'     => Auth::check() ? Auth::id() : null,
+                        'created_by' => Auth::guard('frontend')->check() ? Auth::guard('frontend')->id() : null,
                     ]);
             
                     Log::info("Order Inserted Successfully: ", ['order_id' => $order->id]);
@@ -192,21 +192,29 @@ class PaymentController extends Controller
                             ->decrement('available_quantity', $quantities[$index]);
                     }
 
-                    if (Auth::check()) {
-                        DB::table('carts')
-                            ->where('user_id', Auth::id())
-                            ->whereIn('product_id', $productIds) 
-                            ->delete();
-                
-                        \Log::info("Cart items deleted for user: " . Auth::id());
-                    }
+                    if (Auth::guard('frontend')->check()) {
+                            $userId = Auth::guard('frontend')->id();
+                            
+                            \Log::info("Attempting to delete cart items", [
+                                'user_id' => $userId,
+                                'product_ids' => $productIds
+                            ]);
+
+                            $deleted = DB::table('carts')
+                                ->where('user_id', $userId)
+                                ->whereIn('product_id', $productIds) 
+                                ->delete();
+
+                            \Log::info("Cart Deletion Result", ['rows_deleted' => $deleted]);
+                        }
+
 
 
                     // Invoce Generation and sending mail 
                     
                     $invoiceNumber = mt_rand(10000000, 99999999); 
                     $invoiceFileName = 'invoice_' . $invoiceNumber . '.pdf';
-                    $pdfDirectory = public_path('/murupp/invoices');
+                    $pdfDirectory = public_path('/platina/invoices');
                     
                     // Ensure directory exists
                     if (!File::exists($pdfDirectory)) {
@@ -238,7 +246,7 @@ class PaymentController extends Controller
                     // Send the email
                     Mail::send('frontend.invoice_mail', ['order' => $order], function ($message) use ($order, $pdfPath, $invoiceFileName) {
                         $message->to($order->customer_email)
-                                ->cc('shweta@matrixbricks.com')
+                                ->cc('smrita@matrixbricks.com')
                                 ->subject('Your Invoice - ' . $order->invoice_id)
                                 ->attach($pdfPath, [
                                     'as' => $invoiceFileName,

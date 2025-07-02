@@ -110,7 +110,7 @@ public function showBuyNowCheckout()
         return redirect()->back()->with('error', 'No product found for checkout.');
     }
 
-    // Structure data to match checkout blade
+    // Structure product data
     $checkoutCart = [
         [
             'product_name' => $product['product_name'],
@@ -125,8 +125,21 @@ public function showBuyNowCheckout()
 
     $cartTotal = $product['price'] * $product['qty'];
 
-    return view('frontend.checkout-details', compact('checkoutCart', 'cartTotal'));
+    $userInfo = null;
+    $latestOrder = null;
+
+    if (auth('frontend')->check()) {
+        $user = auth('frontend')->user();
+        $userInfo = $user;
+
+        $latestOrder = \App\Models\OrderDetail::where('user_id', $user->id)
+            ->latest()
+            ->first();
+    }
+
+    return view('frontend.checkout-details', compact('checkoutCart', 'cartTotal', 'userInfo', 'latestOrder'));
 }
+
 
 
 
