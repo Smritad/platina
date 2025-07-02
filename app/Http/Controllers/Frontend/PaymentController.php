@@ -191,22 +191,38 @@ class PaymentController extends Controller
                             ->where('id', $productId)
                             ->decrement('available_quantity', $quantities[$index]);
                     }
+if (Auth::guard('frontend')->check()) {
+    $userId = Auth::guard('frontend')->id();
+    
+    // Log before deleting
+    \Log::info("Attempting to delete cart items", [
+        'user_id' => $userId,
+        'product_id' => $productIds
+    ]);
+    
+    // Delete the cart items for the user after the payment is successful
+ $deleted = DB::table('carts')
+    ->where('user_id', $userId)
+    ->get()
+    ->filter(function ($cart) use ($productIds) {
+        $cartProductIds = json_decode($cart->product_id, true);
 
-                    if (Auth::guard('frontend')->check()) {
-                            $userId = Auth::guard('frontend')->id();
-                            
-                            \Log::info("Attempting to delete cart items", [
-                                'user_id' => $userId,
-                                'product_ids' => $productIds
-                            ]);
+        // Debug output
+        dd([
+            'cart_id' => $cart->id,
+            'raw_product_id' => $cart->product_id,
+            'decoded_product_ids' => $cartProductIds,
+            'intersection' => array_intersect($productIds, (array) $cartProductIds),
+        ]);
 
-                            $deleted = DB::table('carts')
-                                ->where('user_id', $userId)
-                                ->whereIn('product_id', $productIds) 
-                                ->delete();
+        return count(array_intersect($productIds, (array) $cartProductIds)) > 0;
+    })
+    ->each(function ($cart) {
+        DB::table('carts')->where('id', $cart->id)->delete();
+    });
 
-                            \Log::info("Cart Deletion Result", ['rows_deleted' => $deleted]);
-                        }
+//dd($deleted);
+}
 
 
 
