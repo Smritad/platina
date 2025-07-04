@@ -141,7 +141,7 @@
 <section class="section-room-details padding-t-50 padding-b-50">
   <div class="container">
 <form id="addToCartForm" action="{{ route('add.to.cart', $product->id) }}" method="get">
-     <input type="hidden" name="_token" value="I6JGJ3Qsjigj9R105VdGDXEiNVKHlerGmEKTcjAU" autocomplete="off">
+     <!-- <input type="hidden" name="_token" value="I6JGJ3Qsjigj9R105VdGDXEiNVKHlerGmEKTcjAU" autocomplete="off"> -->
             <div class="row mb-minus-24">  
     @csrf
       <div class="row mb-minus-24">
@@ -743,9 +743,10 @@ document.getElementById('buyNowButton').addEventListener('click', function (e) {
     const qty = document.getElementById('qtyInput').value;
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-    if (!selectedColor) return alert('Please select a color.');
-    if (!sizeSelect || sizeSelect === 'Select') return alert('Please select a size.');
-    if (!qty || isNaN(qty) || qty < 1) return alert('Please enter a valid quantity.');
+    if (!selectedColor)    return notyf.error('Please select a color.');
+if (!sizeSelect || sizeSelect === 'Select')  return notyf.error('Please select a size.');
+if (!qty || isNaN(qty) || qty < 1)   return notyf.error('Please enter a valid quantity.');
+
 
     const data = {
         product_id: document.querySelector('input[name="product_id"]').value,
@@ -800,28 +801,33 @@ document.getElementById('buyNowButton').addEventListener('click', function (e) {
 
 
 <script>
+  // Assuming you have already initialized Notyf as `notyf`
   document.getElementById('addToCartForm').addEventListener('submit', function(e) {
-    let selectedColor = document.getElementById('selected_color').value;
-    let sizeSelect = document.getElementById('sizeSelect').value;
-    let qty = document.getElementById('qtyInput').value;
+    const selectedColor = document.getElementById('selected_color').value;
+    const sizeSelect    = document.getElementById('sizeSelect').value;
+    const qty           = document.getElementById('qtyInput').value;
 
+    // Validate Color
     if (!selectedColor) {
-      alert('Please select a color.');
+      notyf.error('Please select a color.');
       e.preventDefault();
       return false;
     }
 
+    // Validate Size
     if (!sizeSelect || sizeSelect === 'Select') {
-      alert('Please select a size.');
+      notyf.error('Please select a size11.');
       e.preventDefault();
       return false;
     }
 
+    // Validate Quantity
     if (!qty || isNaN(qty) || qty < 1) {
-      alert('Please enter a valid quantity.');
+      notyf.error('Please enter a valid quantity.');
       e.preventDefault();
       return false;
     }
+    // If we reach here, the form will submit normally
   });
 
   // Color selection handler
@@ -834,10 +840,8 @@ document.getElementById('buyNowButton').addEventListener('click', function (e) {
       document.getElementById('selected_color').value = this.dataset.color;
     });
   });
-
-  
-
 </script>
+
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     const toggleBtn = document.querySelector(".read-more-toggle");

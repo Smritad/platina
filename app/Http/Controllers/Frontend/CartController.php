@@ -104,6 +104,7 @@ public function buyNow(Request $request)
 
 public function showBuyNowCheckout()
 {
+
     $product = session('buy_now_product');
     if (!$product) {
         return redirect()->back()->with('error', 'No product found for checkout.');
@@ -144,6 +145,7 @@ public function showBuyNowCheckout()
             ->latest()
             ->first();
     }
+    session()->flash('message', 'Product moved to cart');
 
     return view('frontend.checkout-details', compact(
         'cartItems',

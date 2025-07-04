@@ -970,8 +970,32 @@ document.addEventListener('DOMContentLoaded', function () {
     // Optional: Recalculate if state field is manually edited
     stateInput.addEventListener('change', calculateGST);
 });
+
 </script>
 
+<script>
+  // (Your existing Notyf init here)
+  var notyf = new Notyf({
+    duration: 3000,
+    ripple: true,
+    position: { x: 'right', y: 'top' },
+    dismissible: true,
+    types: [
+      {
+        type: 'custom-success',
+        background: 'black',
+        icon: { className: 'fa fa-check-circle', tagName: 'i', color: 'white' }
+      }
+    ]
+  });
+
+  @if(session('message'))
+    notyf.open({
+      type: 'custom-success',
+      message: {!! json_encode(session('message')) !!}
+    });
+  @endif
+</script>
 
 
 </body>
