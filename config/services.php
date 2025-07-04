@@ -38,7 +38,7 @@ return [
     'razorpay' => [
     'key' => env('RAZORPAY_KEY'),
     'secret' => env('RAZORPAY_SECRET'),
-    'mode' => env('RAZORPAY_MODE', 'test'),
+    'mode' => env('RAZORPAY_MODE'),
 ],
 
 

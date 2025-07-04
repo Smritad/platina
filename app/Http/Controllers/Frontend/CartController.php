@@ -105,25 +105,33 @@ public function buyNow(Request $request)
 public function showBuyNowCheckout()
 {
     $product = session('buy_now_product');
-
     if (!$product) {
         return redirect()->back()->with('error', 'No product found for checkout.');
     }
 
-    // Structure product data
-    $checkoutCart = [
+    $cartItems = [
         [
+            'product_id'   => $product['product_id'],
             'product_name' => $product['product_name'],
-            'image' => $product['image'],
-            'size' => $product['size'],
-            'color' => $product['selected_color'],
-            'quantity' => $product['qty'],
-            'price' => $product['price'],
-            'fabric' => $product['fabric'],
+            'image'        => basename($product['image']), // Only filename
+            'size'         => $product['size'],
+            'color'        => $product['selected_color'],
+            'quantity'     => $product['qty'],
+            'price'        => $product['price'],
+            'fabric'       => $product['fabric'],
         ]
     ];
 
     $cartTotal = $product['price'] * $product['qty'];
+
+    // Cast quantity as string
+    $checkoutCart = [
+        [
+            'quantity' => (string) $product['qty'],
+        ]
+    ];
+
+    // dd($checkoutCart); // Optional: for testing
 
     $userInfo = null;
     $latestOrder = null;
@@ -137,7 +145,13 @@ public function showBuyNowCheckout()
             ->first();
     }
 
-    return view('frontend.checkout-details', compact('checkoutCart', 'cartTotal', 'userInfo', 'latestOrder'));
+    return view('frontend.checkout-details', compact(
+        'cartItems',
+        'checkoutCart',
+        'cartTotal',
+        'userInfo',
+        'latestOrder'
+    ));
 }
 
 

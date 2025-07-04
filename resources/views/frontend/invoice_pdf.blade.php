@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
- 
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invoice</title>
- 
 </head>
- 
+
 <style>
     @font-face {
         font-family: 'DejaVu Sans';
@@ -15,211 +14,116 @@
         font-weight: normal;
         src: url("{{ storage_path('fonts/DejaVuSans.ttf') }}") format('truetype');
     }
- 
+
     body {
         font-family: 'DejaVu Sans', sans-serif;
         font-size: 14px;
         line-height: 1.6;
         color: #333;
     }
- 
-    h2 {
+
+    h2, h3 {
         margin-bottom: 5px !important;
     }
- 
+
     p {
         margin-top: 0;
         margin-bottom: 10px;
     }
- 
+
     .table {
         width: 100%;
         border-collapse: collapse;
         margin-bottom: 20px;
     }
- 
+
     .table th, .table td {
         border: 1px solid #0a0a0a;
         padding: 8px;
         text-align: left;
     }
- 
+
     .table th {
         background-color: #f4f4f4;
         font-weight: bold;
     }
- 
-    .table td {
-        font-size: 14px;
-    }
- 
+
     .totals {
         text-align: right;
         margin-top: 20px;
     }
- 
-    .totals p {
-        margin: 4px 0;
-        font-size: 14px;
-    }
- 
-    .totals p:last-child {
-        font-weight: bold;
-    }
- 
+
     .footer {
         position: fixed;
         bottom: 0;
         left: 0;
         right: 0;
-        background-color: #000000;
+        background-color: #000;
         padding: 10px;
-        margin-top: 20px;
         text-align: center;
         font-size: 15px;
         color: #fff;
     }
- 
-    @media only screen and (max-width: 600px) {
-        @font-face {
-        font-family: 'DejaVu Sans';
-            font-style: normal;
-            font-weight: normal;
-            src: url("{{ storage_path('fonts/DejaVuSans.ttf') }}") format('truetype');
-        }
- 
-        body {
-            font-family: 'DejaVu Sans', sans-serif;
-            font-size: 14px;
-            line-height: 1.6;
-            color: #333;
-        }
- 
-        h2 {
-            margin-bottom: 15px !important;
-        }
- 
-        p {
-            margin-top: 0;
-            margin-bottom: 10px;
-        }
- 
-        table {
-            width: 100%;
-        }
- 
-        .table th, .table td {
-            font-size: 12px;
-            padding: 6px;
-        }
- 
-        td, th {
-            display: block;
-            width: 100%;
-        }
- 
-        .table thead {
-            display: none; /* Hide table header */
-        }
- 
-        .table tr {
-            display: block;
-            margin-bottom: 10px;
-            border: 1px solid #ddd;
-            padding: 8px;
-        }
- 
-        .table td {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            text-align: right;
-            font-size: 12px;
-        }
- 
-        .table td::before {
-            content: attr(data-label);
-            font-weight: bold;
-            text-align: left;
-            flex: 1;
-        }
- 
-        .totals {
-            text-align: center;
-        }
- 
-        .footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background-color:rgb(95, 92, 92);
-            padding: 10px;
-            margin-top: 20px;
-            text-align: center;
-            font-size: 15px;
-            color: #fff;
-        }
-    }
 </style>
- 
+
 <body>
     <table width="100%">
         <tr>
-            <td width="80%" style="text-align: left;">
-                <img src="data:image/jpeg;base64,{{ base64_encode(file_get_contents(public_path('frontend/assets/img/logo/logo.webp'))) }}" alt="Logo" style="width: 250px;">
+            <td width="70%" style="background-image: url('{{ asset('frontend/assets/img/bg/pattern-light.png') }}'); background-repeat: no-repeat; background-size: cover; padding: 20px;">
+                <img src="data:image/jpeg;base64,{{ base64_encode(file_get_contents(public_path('frontend/assets/img/logo/logo.webp'))) }}" alt="Logo" style="width: 200px;">
             </td>
-            <td width="50%" style="text-align: right;">
-                <h3 style="margin-bottom: 0;">INVOICE</h3>
-                <p style="margin-top: 0;"># {{ data_get($order, 'invoice_id', '-') }}</p>
+            <td width="30%" style="text-align: right;">
+                <h3>INVOICE</h3>
+                <p>#{{ data_get($order, 'invoice_id', '-') }}</p>
+                <p><strong>Date:</strong> {{ date('d M Y', strtotime(data_get($order, 'created_at', now()))) }}</p>
             </td>
-
+        </tr>
     </table>
- 
+
     <table width="100%">
         <tr>
-            <!-- Left Column: Bill To -->
-            <td width="50%" style="vertical-align: top;">
-                <h3>Billing Address :</h3>
+            <td width="50%">
+                <h3>Billing Address:</h3>
                 <p>
                     @foreach(explode(',', data_get($order, 'billing_address', '-')) as $part)
                         {{ trim($part) }}<br>
                     @endforeach
+                    {{ data_get($order, 'city') }}, {{ data_get($order, 'state') }}<br>
+                    {{ data_get($order, 'postal_code') }}, {{ data_get($order, 'country', 'India') }}
                 </p>
             </td>
- 
-            <!-- Right Column: From -->
-            <td width="50%" style="vertical-align: top; text-align: right;">
-                <h3>Shipping Address :</h3>
+            <td width="50%" style="text-align: right;">
+                <h3>Shipping Address:</h3>
                 <p>
                     @foreach(explode(',', data_get($order, 'shipping_address', '-')) as $part)
                         {{ trim($part) }}<br>
                     @endforeach
+                    {{ data_get($order, 'city') }}, {{ data_get($order, 'state') }}<br>
+                    {{ data_get($order, 'postal_code') }}, {{ data_get($order, 'country', 'India') }}
                 </p>
             </td>
         </tr>
     </table>
- 
+
     <table width="100%">
         <tr>
-            <!-- Left Column: Bill To -->
-            <td width="50%" style="vertical-align: top;">
-                <h3>Customer Details :</h3>
+            <td>
+                <h3>Customer Details:</h3>
                 <p>
-                    Customer Name: {{ data_get($order, 'customer_name', '-') }}<br>
-                    Email: {{ data_get($order, 'customer_email', '-') }}<br>
-                    Phone: +91 {{ data_get($order, 'customer_phone', '-') }}<br>
+                    <strong>Name:</strong> {{ data_get($order, 'customer_name', '-') }}<br>
+                    <strong>Email:</strong> {{ data_get($order, 'customer_email', '-') }}<br>
+                    <strong>Phone:</strong> +91 {{ data_get($order, 'customer_phone', '-') }}<br>
                 </p>
             </td>
         </tr>
-    </table><br>
- 
-    {{-- Table --}}
+    </table>
+
+    {{-- Product Table --}}
     <table class="table">
         <thead>
             <tr>
                 <th>#</th>
-                <th>Product Name</th>
+                <th>Product</th>
                 <th>Qty</th>
                 <th>Size</th>
                 <th>Print</th>
@@ -232,38 +136,66 @@
                 $items = json_decode(data_get($order, 'product_names', '[]'), true);
                 $quantities = json_decode(data_get($order, 'quantities', '[]'), true);
                 $prices = json_decode(data_get($order, 'prices', '[]'), true);
-                $prints = json_decode(data_get($order, 'prints', '[]'), true);
+                $prints = json_decode(data_get($order, 'colors', '[]'), true);
                 $sizes = json_decode(data_get($order, 'sizes', '[]'), true);
+                $subTotal = 0;
             @endphp
             @foreach($items as $index => $item)
+                @php
+                    $qty = $quantities[$index] ?? 1;
+                    $rate = $prices[$index] ?? 0;
+                    $lineTotal = $qty * $rate;
+                    $subTotal += $lineTotal;
+                @endphp
                 <tr>
                     <td>{{ $index + 1 }}</td>
                     <td>{{ $item }}</td>
-                    <td>{{ $quantities[$index] ?? '-' }}</td>
+                    <td>{{ $qty }}</td>
                     <td>{{ $sizes[$index] ?? '-' }}</td>
-                    <td>{{ !empty($prints[$index]) ? $prints[$index] : '-' }}</td>
-                    <td>₹ {{ number_format($prices[$index] ?? 0, 2) }}</td>
-                    <td>₹ {{ number_format(($prices[$index] ?? 0) * ($quantities[$index] ?? 1)) }}</td>
+                    <td>{{ $prints[$index] ?? '-' }}</td>
+                    <td>₹{{ number_format($rate, 2) }}</td>
+                    <td>₹{{ number_format($lineTotal, 2) }}</td>
                 </tr>
             @endforeach
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="6" style="text-align: right;"><b>Sub Total</b></td>
-                <td>₹ {{ number_format(data_get($order, 'total_price', 0)) }}</td>
+                <td colspan="6" style="text-align:right;"><b>Sub Total</b></td>
+                <td>₹{{ number_format($subTotal, 2) }}</td>
             </tr>
+            @php
+                $state = strtolower(data_get($order, 'state'));
+                $isMaharashtra = $state === 'maharashtra';
+                $cgst = $isMaharashtra ? data_get($order, 'cgst', 0) : 0;
+                $sgst = $isMaharashtra ? data_get($order, 'sgst', 0) : 0;
+                $igst = !$isMaharashtra ? data_get($order, 'igst', 0) : 0;
+                $total = $subTotal + $cgst + $sgst + $igst;
+            @endphp
+            @if($isMaharashtra)
+                <tr>
+                    <td colspan="6" style="text-align:right;"><b>CGST</b></td>
+                    <td>₹{{ number_format($cgst, 2) }}</td>
+                </tr>
+                <tr>
+                    <td colspan="6" style="text-align:right;"><b>SGST</b></td>
+                    <td>₹{{ number_format($sgst, 2) }}</td>
+                </tr>
+            @else
+                <tr>
+                    <td colspan="6" style="text-align:right;"><b>IGST</b></td>
+                    <td>₹{{ number_format($igst, 2) }}</td>
+                </tr>
+            @endif
             <tr>
-                <td colspan="6" style="text-align: right;"><b>Total (including Taxes)</b></td>
-                <td>₹ {{ number_format(data_get($order, 'total_price', 0)) }}</td>
+                <td colspan="6" style="text-align:right;"><b>Total</b></td>
+                <td><strong>₹{{ number_format($total, 2) }}</strong></td>
             </tr>
         </tfoot>
     </table>
 
- 
-    {{-- Footer --}}
     <div class="footer">
-        <b>© {{ date('Y') }} Murupp. All rights reserved. </b>
+        <b>&copy; {{ date('Y') }} Platina. All rights reserved.</b>
     </div>
 </body>
- 
+
 </html>

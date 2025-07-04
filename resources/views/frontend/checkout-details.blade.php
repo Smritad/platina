@@ -129,117 +129,128 @@
                             $user = Auth::guard('frontend')->user();
                             $latestOrder = OrderDetail::where('user_id', $user->id)->latest()->first();
                         @endphp
-                        <p>Latest Order ID: {{ $latestOrder->order_id ?? 'No orders yet' }}</p>
                     @else
                         <p>Please log in to view your orders.</p>
                     @endif
 
-                    <div class="rx-checkout-wrap checkout-information-sec" data-aos="fade-up" data-aos-duration="1000">
-                        <div class="inner-title">
-                            <h4>Information</h4>
-                        </div>
-                        <form class="info-box">
-                            <div class="rx-billing-details">
-                                <div class="row mb-minus-24">
+                <div class="rx-checkout-wrap checkout-information-sec" data-aos="fade-up" data-aos-duration="1000">
+    <div class="inner-title">
+        <h4>Information</h4>
+    </div>
+    <form class="info-box">
+        <div class="rx-billing-details">
+            <div class="row mb-minus-24">
 
-                                    <!-- First Name -->
-                                    <div class="col-sm-6 col-12 mb-24">
-                                        <div class="rx-input-box">
-                                            <input type="text" id="first-name" name="first_name" placeholder="First Name*"
-                                                value="{{ old('first_name', isset($latestOrder->customer_name) ? explode(' ', $latestOrder->customer_name)[0] : ($userInfo->name ?? '')) }}">
-                                        </div>
-                                    </div>
-
-                                    <!-- Last Name -->
-                                    <div class="col-sm-6 col-12 mb-24">
-                                        <div class="rx-input-box">
-                                            <input type="text" name="last_name" id="lname" placeholder="Last Name*"
-                                                value="{{ old('last_name', isset($latestOrder->customer_name) ? explode(' ', $latestOrder->customer_name)[1] ?? '' : ($userInfo->last_name ?? '')) }}">
-                                        </div>
-                                    </div>
-
-                                    <!-- Email -->
-                                    <div class="col-sm-6 col-12 mb-24">
-                                        <div class="rx-input-box">
-                                            <input type="email" name="email" id="email-address" placeholder="Email Address*" required
-                                                value="{{ old('email', $userInfo->email ?? '') }}">
-                                        </div>
-                                    </div>
-
-                                    <!-- Phone Number -->
-                                    <div class="col-sm-6 col-12 mb-24">
-                                        <div class="rx-input-box">
-                                            <input type="tel" name="phone" id="phone-number" placeholder="Phone Number*" required
-                                                value="{{ old('phone', $userInfo->phone ?? '') }}">
-                                        </div>
-                                    </div>
-
-                                    <!-- City -->
-                                    <div class="col-sm-6 col-12 mb-24">
-                                        <div class="rx-input-box">
-                                            <input type="text" id="city" name="city" placeholder="City" readonly>
-                                        </div>
-                                    </div>
-
-                                    <!-- Street -->
-                                    <div class="col-sm-6 col-12 mb-24">
-                                        <div class="rx-input-box">
-                                            <input type="text" id="street-sec" name="street" placeholder="Street"
-                                                value="{{ old('street', $latestOrder->street ?? '') }}">
-                                        </div>
-                                    </div>
-
-                                    <!-- State -->
-                                    <div class="col-sm-6 col-12 mb-24">
-                                        <div class="rx-input-box">
-                                            <input type="text" id="state" name="state" placeholder="State" readonly>
-                                        </div>
-                                    </div>
-
-                                    <!-- Country -->
-                                    <div class="col-sm-6 col-12 mb-24">
-                                        <div class="rx-input-box">
-                                            <input type="text" id="country" name="country" placeholder="Country" value="India" readonly>
-                                        </div>
-                                    </div>
-
-                                    <!-- Postal Code -->
-                                    <div class="col-sm-6 col-12 mb-24">
-                                        <div class="rx-input-box">
-                                            <input type="text" id="postalcode" name="postal_code" placeholder="Postal Code*"
-                                                value="{{ old('postal_code', $latestOrder->postal_code ?? '') }}">
-                                        </div>
-                                    </div>
-
-                                    <!-- Billing Address -->
-                                    <div class="col-12 mb-24">
-                                        <div class="rx-input-box">
-                                            <textarea name="billing_address" id="billing_address" placeholder="Billing Address*" required>{{ old('billing_address', $latestOrder->billing_address ?? '') }}</textarea>
-                                        </div>
-                                    </div>
-
-                                    <!-- Same as Billing -->
-                                    <div class="col-12 mb-24">
-                                        <div class="billing-address-block-sec direct">
-                                            <label class="billing-address-label-sec">
-                                                <input type="checkbox" name="same_as_billing" class="billing-address-checkbox-cc">
-                                                Same as Billing Address
-                                            </label>
-                                        </div>
-                                    </div>
-
-                                    <!-- Shipping Address -->
-                                    <div class="col-12 mb-24">
-                                        <div class="rx-input-box">
-                                            <input type="text" name="shipping_address" id="shipping-address" placeholder="Shipping Address" required
-                                                value="{{ old('shipping_address', $latestOrder->shipping_address ?? '') }}">
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </form>
+                <!-- First Name -->
+                <div class="col-sm-6 col-12 mb-24">
+                    <div class="rx-input-box">
+                        <input type="text" id="first-name" name="first_name" placeholder="First Name*"
+                            value="{{ old('first_name', isset($latestOrder->customer_name) ? explode(' ', $latestOrder->customer_name)[0] : ($userInfo->name ?? '')) }}">
+                        <span class="error-message"></span>
                     </div>
+                </div>
+
+                <!-- Last Name -->
+                <div class="col-sm-6 col-12 mb-24">
+                    <div class="rx-input-box">
+                        <input type="text" name="last_name" id="lname" placeholder="Last Name*"
+                            value="{{ old('last_name', isset($latestOrder->customer_name) ? explode(' ', $latestOrder->customer_name)[1] ?? '' : ($userInfo->last_name ?? '')) }}">
+                        <span class="error-message"></span>
+                    </div>
+                </div>
+
+                <!-- Email -->
+                <div class="col-sm-6 col-12 mb-24">
+                    <div class="rx-input-box">
+                        <input type="email" name="email" id="email-address" placeholder="Email Address*" required
+                            value="{{ old('email', $userInfo->email ?? '') }}">
+                        <span class="error-message"></span>
+                    </div>
+                </div>
+
+                <!-- Phone Number -->
+                <div class="col-sm-6 col-12 mb-24">
+                    <div class="rx-input-box">
+                        <input type="tel" name="phone" id="phone-number" placeholder="Phone Number*" required
+                            value="{{ old('phone', $userInfo->phone ?? '') }}">
+                        <span class="error-message"></span>
+                    </div>
+                </div>
+                <!-- Postal Code -->
+                <div class="col-sm-6 col-12 mb-24">
+                    <div class="rx-input-box">
+                        <input type="text" id="postalcode" name="postal_code" placeholder="Postal Code*"
+                            value="{{ old('postal_code', $latestOrder->postal_code ?? '') }}">
+                        <span class="error-message"></span>
+                    </div>
+                </div>
+                <!-- City -->
+                <div class="col-sm-6 col-12 mb-24">
+                    <div class="rx-input-box">
+                        <input type="text" id="city" name="city" placeholder="City" readonly>
+                        <span class="error-message"></span>
+                    </div>
+                </div>
+
+                <!-- Street -->
+                <div class="col-sm-6 col-12 mb-24">
+                    <div class="rx-input-box">
+                        <input type="text" id="street-sec" name="street" placeholder="Street"
+                            value="{{ old('street', $latestOrder->street ?? '') }}">
+                        <span class="error-message"></span>
+                    </div>
+                </div>
+
+                <!-- State -->
+                <div class="col-sm-6 col-12 mb-24">
+                    <div class="rx-input-box">
+                        <input type="text" id="state" name="state" placeholder="State" readonly>
+                        <span class="error-message"></span>
+                    </div>
+                </div>
+
+                <!-- Country -->
+                <div class="col-sm-6 col-12 mb-24">
+                    <div class="rx-input-box">
+                        <input type="text" id="country" name="country" placeholder="Country" value="India" readonly>
+                        <span class="error-message"></span>
+                    </div>
+                </div>
+
+
+                <!-- Billing Address -->
+                <div class="col-12 mb-24">
+                    <div class="rx-input-box">
+                        <textarea name="billing_address" id="billing_address" placeholder="Billing Address*" required>{{ old('billing_address', $latestOrder->billing_address ?? '') }}</textarea>
+                        <span class="error-message"></span>
+                    </div>
+                </div>
+
+                <!-- Same as Billing -->
+                <div class="col-12 mb-24">
+                    <div class="billing-address-block-sec direct">
+                        <label class="billing-address-label-sec">
+                            <input type="checkbox" name="same_as_billing" class="billing-address-checkbox-cc">
+                            Same as Billing Address
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Shipping Address -->
+                <div class="col-12 mb-24">
+                    <div class="rx-input-box">
+                        <input type="text" name="shipping_address" id="shipping-address" placeholder="Shipping Address" required
+                            value="{{ old('shipping_address', $latestOrder->shipping_address ?? '') }}">
+                        <span class="error-message"></span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </form>
+</div>
+
+
 
                     <!-- Payment Option -->
                     <div class="checkout-payment-sec">
@@ -262,54 +273,104 @@
             </div>
 
             <!-- Sidebar Cart -->
-            <div class="col-lg-5 col-12 mb-24" data-aos="fade-up" data-aos-duration="1000">
-                <div class="rx-room-details-sidebar side-checkout-content">
-                    <div class="sub-title">
-                        <h4>Shopping Cart</h4>
-                    </div>
+<div class="col-lg-5 col-12 mb-24" data-aos="fade-up" data-aos-duration="1000">
+    <div class="rx-room-details-sidebar side-checkout-content">
+        <div class="sub-title">
+            <h4>Shopping Cart</h4>
+        </div>
 
-                    <div class="shopping-cart-list-product">
-                        @foreach ($checkoutCart as $item)
-                            <div class="shopping-cart-item-product">
-                                <a href="#" class="img-product">
-                                    <img src="{{ $item['image'] }}" alt="product" class="product-image">
-                                </a>
-                                <div class="content-box">
-                                    <div class="info">
-                                        <a href="#" class="name-product link text-title" data-id="{{ $item['id'] }}">{{ $item['product_name'] }}</a>
-                                        <div class="variant text-caption-1">
-                                            <span class="desp-cat-sec">Size:</span>
-                                            <span class="product-size size">{{ $item['size'] }}</span>
-                                        </div>
-                                        <div class="variant text-caption-1">
-                                            <span class="desp-cat-sec">Color:</span>
-                                            <span class="product-print color">{{ $item['color'] }}</span>
-                                        </div>
-                                        <div class="variant text-caption-1">
-                                            <span class="desp-cat-sec">Quantity:</span>
-                                            <span class="quantity"><strong>{{ $item['quantity'] }}</strong></span>
-                                        </div>
-                                    </div>
-                                    <div class="total-price text-button">
-                                        <span class="price">
-                                            <i class="fa fa-inr" aria-hidden="true"></i>
-                                            {{ number_format($item['price'] * $item['quantity']) }}
-                                        </span>
-                                    </div>
-                                </div>
+        <div class="shopping-cart-list-product">
+    @foreach ($cartItems as $index => $item)
+                <div class="shopping-cart-item-product mb-3">
+                    <a href="#" class="img-product">
+                <img src="{{ asset('uploads/products/media/' . $item['image']) }}" alt="{{ $item['name'] ?? 'Product' }}" class="product-image img-fluid rounded">
+                    </a>
+                    <div class="content-box">
+                        <div class="info">
+                            <a href="#" class="name-product link text-title"
+                               data-id="{{ $item['product_id'] }}"
+                               data-price="{{ $item['price'] }}">
+                                {{ $item['product_name'] }}
+                            </a>
+                            <div class="variant text-caption-1">
+                                <span class="desp-cat-sec">Size:</span>
+                                <span class="product-size size">{{ $item['size'] }}</span>
                             </div>
-                        @endforeach
-
-                        <div class="shopping-cart-item">
-                            <strong>Total:</strong>
-                            <span class="total-price-checkout">
+                            <div class="variant text-caption-1">
+                                <span class="desp-cat-sec">Color:</span>
+                                <span class="product-print color">{{ $item['color'] }}</span>
+                            </div>
+                            <div class="variant text-caption-1">
+                                <span class="desp-cat-sec">Quantity:</span>
+                                <span class="quantity"><strong>{{ $checkoutCart[$index]['quantity'] ?? 1 }}</strong></span>
+                            </div>
+                        </div>
+                        <div class="total-price text-button">
+                            <span class="price">
                                 <i class="fa fa-inr" aria-hidden="true"></i>
-                                {{ number_format($cartTotal) }}
+                                {{ number_format($item['price'] * $checkoutCart[$index]['quantity'] ?? 1 ) }}
                             </span>
                         </div>
                     </div>
                 </div>
-            </div>
+            @endforeach
+        </div>
+
+        <!-- GST Sections -->
+        <div class="order-shipping-price-sec mt-3">
+             <fieldset class="ship-item">
+        <label>
+            <span>Subtotal</span>
+            <span class="price">
+                <i class="fa fa-inr" aria-hidden="true"></i>
+                <span id="subtotal">
+                   {{ number_format($cartTotal) }}
+                </span>
+            </span>
+        </label>
+    </fieldset>
+            <fieldset class="ship-item" id="cgstSection" style="display:none;">
+                <label>
+                    <span>CGST</span>
+                    <span class="price">
+                        <i class="fa fa-inr" aria-hidden="true"></i>
+                        <span id="cgstAmount">0</span>
+                    </span>
+                </label>
+            </fieldset>
+
+            <fieldset class="ship-item" id="sgstSection" style="display:none;">
+                <label>
+                    <span>SGST</span>
+                    <span class="price">
+                        <i class="fa fa-inr" aria-hidden="true"></i>
+                        <span id="sgstAmount">0</span>
+                    </span>
+                </label>
+            </fieldset>
+
+            <fieldset class="ship-item" id="igstSection" style="display:none;">
+                <label>
+                    <span>IGST</span>
+                    <span class="price">
+                        <i class="fa fa-inr" aria-hidden="true"></i>
+                        <span id="igstAmount">0</span>
+                    </span>
+                </label>
+            </fieldset>
+        </div>
+
+        <!-- Grand Total -->
+        <div class="order-summary-total-sec">
+            <span class="total-para">Total</span>
+            <span class="total-price-checkout">
+                <i class="fa fa-inr" aria-hidden="true"></i> 
+                <span id="total">{{ number_format($cartTotal) }}</span>
+            </span>
+        </div>
+    </div>
+</div>
+
 
         </div>
     </div>
@@ -431,7 +492,7 @@
   </div>
           @include('components.frontend.main-js')
 
-<script>
+     <script>
         $(document).ready(function () {
 
             $("#loginForm").submit(function (event) {
@@ -465,7 +526,7 @@
         });
     </script>
      <!----- OTP Sending verifying with timer---->  
-   <script>
+<script>
 document.getElementById('sendOtpBtn').addEventListener('click', sendOtp);
 document.getElementById('resendOtpBtn').addEventListener('click', resetForm);
 
@@ -603,24 +664,39 @@ document.querySelector('.billing-address-checkbox-cc').addEventListener('change'
         cart_items: []
     };
 
-    document.querySelectorAll(".shopping-cart-item-product").forEach((item) => {
-        let productElement = item.querySelector(".name-product");
-        let quantityElement = item.querySelector(".quantity strong");
-        let imageElement = item.querySelector(".product-image");
-        let sizeElement = item.querySelector(".product-size");
-        let printElement = item.querySelector(".product-print");
+   document.querySelectorAll(".shopping-cart-item-product").forEach((item) => {
+    let productElement = item.querySelector(".name-product");
+    let quantityElement = item.querySelector(".quantity strong");
+    let imageElement = item.querySelector(".product-image");
+    let sizeElement = item.querySelector(".product-size");
+    let printElement = item.querySelector(".product-print");
 
-        orderData.cart_items.push({
-            product_id: productElement.getAttribute("data-id"),
-            product_name: productElement.innerText,
-            quantity: quantityElement ? parseInt(quantityElement.innerText) : 1,
-            price: item.querySelector(".price").innerText.replace("₹", "").trim(),
-            image: imageElement ? imageElement.getAttribute("src") : "",
-            size: sizeElement ? sizeElement.innerText : "N/A",
-            print: printElement ? printElement.innerText.replace("Print: ", "").trim() : "N/A"
-        });
+    let quantity = quantityElement ? parseInt(quantityElement.innerText) : 1;
+    let unitPrice = parseFloat(productElement.getAttribute("data-price"));
+
+    orderData.cart_items.push({
+        product_id: productElement.getAttribute("data-id"),
+        product_name: productElement.innerText,
+        quantity: quantity,
+        price: unitPrice, // unit price
+        subtotal: unitPrice * quantity, // total for this item
+        image: imageElement ? imageElement.getAttribute("src") : "",
+        size: sizeElement ? sizeElement.innerText : "N/A",
+        print: printElement ? printElement.innerText.replace("Print: ", "").trim() : "N/A"
     });
+});
 
+ let gstData = {
+        cgst: document.getElementById("cgstAmount")?.innerText || "0",
+        sgst: document.getElementById("sgstAmount")?.innerText || "0",
+        igst: document.getElementById("igstAmount")?.innerText || "0",
+        total_gst: (
+            parseFloat(document.getElementById("cgstAmount")?.innerText || 0) +
+            parseFloat(document.getElementById("sgstAmount")?.innerText || 0) +
+            parseFloat(document.getElementById("igstAmount")?.innerText || 0)
+        ).toFixed(2)
+    };
+    orderData.gst_info = gstData;
     showLoader();
 
     try {
@@ -673,7 +749,7 @@ let data = JSON.parse(text);
                         let verifyData = await verifyResponse.json();
                         console.log("Verify Data:", verifyData);
 
-                        if (verifyData.status === 1) {
+                        if (verifyData.status === 'success') {
                             // Redirect to Order Confirmation with order data
                             let url = "{{ route('order.confirm') }}" + "?order_id=" + order_id;
                             window.location.href = url;
@@ -775,13 +851,14 @@ function validateForm() {
         clearError(email);
     }
 
-    const phoneRegex = /^\d{10}$/;
-    if (!phoneRegex.test(phone.value.trim())) {
-        showError(phone, "Phone Number should be exactly 10 digits.");
-        isValid = false;
-    } else {
-        clearError(phone);
-    }
+    const phoneRegex = /^\d{10,12}$/;
+if (!phoneRegex.test(phone.value.trim())) {
+    showError(phone, "Phone Number should be 10 to 12 digits.");
+    isValid = false;
+} else {
+    clearError(phone);
+}
+
 
     if (street.value.trim() === "") {
         showError(street, "Street is required.");
@@ -830,6 +907,73 @@ function validateForm() {
 }
 
 </script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const gstRate = 0.06; // 6%
+    const cartTotal = {{ $cartTotal ?? 0 }};
+    const stateInput = document.getElementById('state');
+
+    function calculateGST() {
+    const state = stateInput.value.trim().toLowerCase();
+    const gstAmount = Math.round(cartTotal * gstRate);
+    const gstDisplay = gstAmount.toFixed(2);
+
+    // Hide all first
+    document.getElementById('cgstSection').style.display = 'none';
+    document.getElementById('sgstSection').style.display = 'none';
+    document.getElementById('igstSection').style.display = 'none';
+
+    if (state === 'maharashtra') {
+        let half = Math.round(gstAmount / 2);
+        document.getElementById('cgstAmount').innerText = half;
+        document.getElementById('sgstAmount').innerText = half;
+        document.getElementById('cgstSection').style.display = 'block';
+        document.getElementById('sgstSection').style.display = 'block';
+        console.log("GST Type: CGST + SGST");
+    } else {
+        document.getElementById('igstAmount').innerText = gstDisplay;
+        document.getElementById('igstSection').style.display = 'block';
+        console.log("GST Type: IGST");
+    }
+
+    // Update total
+    let newTotal = Math.round(cartTotal + gstAmount);
+    document.getElementById('total').innerText = newTotal;
+    console.log("Total with GST:", newTotal);
+}
+
+
+
+
+
+    // 📦 When pincode is filled, fetch location
+    document.getElementById('postalcode').addEventListener('blur', function () {
+        let pincode = this.value.trim();
+        if (pincode.length === 6) {
+            fetch(`/get-location-from-pincode/${pincode}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        document.getElementById('city').value = data.city || '';
+                        document.getElementById('state').value = data.state || '';
+                        if (data.country) {
+                            document.getElementById('country').value = data.country;
+                        }
+
+                        // ✅ Trigger GST calculation once state is updated
+                        calculateGST();
+                    }
+                });
+        }
+    });
+
+    // Optional: Recalculate if state field is manually edited
+    stateInput.addEventListener('change', calculateGST);
+});
+</script>
+
+
+
 </body>
 
 </html>

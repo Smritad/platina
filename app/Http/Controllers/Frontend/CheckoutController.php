@@ -59,7 +59,7 @@ public function showCheckout()
     $userId = Auth::guard('frontend')->id();
     $sessionId = Session::getId();
 
-    // Get cart items
+    // Get cart items from DB
     $cartItems = DB::table('carts')
         ->join('product_details', 'carts.product_id', '=', 'product_details.id')
         ->where(function ($query) use ($userId, $sessionId) {
@@ -69,26 +69,36 @@ public function showCheckout()
                 $query->where('carts.session_id', $sessionId);
             }
         })
-        ->select('carts.*', 'product_details.product_name', 'product_details.slug')
-        ->get();
+        ->select('carts.*', 'product_details.id', 'product_details.product_name', 'product_details.slug')
+        ->get()
+        ->map(function ($item) {
+            return (array) $item;
+        })
+        ->toArray();
 
+    // Calculate total amount and quantity
     $cartTotal = collect($checkoutCart)->sum(function ($item) {
         return $item['price'] * $item['quantity'];
     });
 
+    $cartQuantity = collect($checkoutCart)->sum('quantity');
+//dd($cartQuantity);
     $userInfo = null;
-
     if ($userId) {
         $userInfo = DB::table('logged_in_user_details')->where('id', $userId)->first();
-
-        // Optional: If you want to show last used address from order_details table
         $latestOrder = DB::table('order_details')->where('user_id', $userId)->latest()->first();
     } else {
         $latestOrder = null;
     }
 
-    return view('frontend.checkout-details', compact('checkoutCart', 'cartTotal', 'userInfo', 'latestOrder'));
-
+    return view('frontend.checkout-details', compact(
+        'checkoutCart',
+        'cartTotal',
+        'cartQuantity',
+        'userInfo',
+        'latestOrder',
+        'cartItems'
+    ));
 }
 
 

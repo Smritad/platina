@@ -156,7 +156,7 @@
                         <span class="subtotal-price"><i class="fa fa-inr" aria-hidden="true"></i> <span id="subtotal">{{ number_format($subtotal) }}</span></span>
                     </div>
 
-                    <div class="order-shipping-price-sec">
+                    <!-- <div class="order-shipping-price-sec">
                         <fieldset class="ship-item">
                             <label>
                                 <span>Discount</span>
@@ -169,17 +169,16 @@
                                 <span class="price"><i class="fa fa-inr" aria-hidden="true"></i> {{ number_format($shipping) }}</span>
                             </label>
                         </fieldset>
-                    </div>
+                    </div> -->
 
-                    <div class="order-summary-total-sec">
+                    <!-- <div class="order-summary-total-sec">
                         <span class="total-para">Total</span>
                         <span class="total-price"><i class="fa fa-inr" aria-hidden="true"></i> <span id="total">{{ number_format($total) }}</span></span>
-                    </div>
+                    </div> -->
 
                     <div class="process-to-checkout-sec">
-                        <button id="proceed-to-checkout" class="btn btn-primary">Proceed to Checkout</button>
 
-                        <a href="{{ route('show.checkout') }}" class="process-to-checkout-btn">Process To Checkout</a>
+                        <a href="{{ route('show.checkout') }}" id="proceed-to-checkout" class="process-to-checkout-btn">Process To Checkout</a>
                         <p class="text-center">OR</p>
                         <a href="{{ route('product.all') }}" class="continue-shopping-btn">Continue Shopping</a>
                     </div>
