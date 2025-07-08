@@ -54,6 +54,8 @@ use App\Http\Controllers\Frontend\ComingSoonController;
 use App\Http\Controllers\Frontend\ConnectUsController;
 use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\PaymentController;
+use App\Http\Controllers\Frontend\OrdersdetailsController;
+use App\Http\Controllers\Frontend\MyAccountController;
 
 
 // Route::get('/', function () {
@@ -114,9 +116,14 @@ Route::post('/user-login', [RegisterController::class, 'authenticate_login'])->n
 
 
 Route::get('/logout', [RegisterController::class, 'logout'])->name('user.logout');
-Route::get('/my-account', function() {
-    return view('frontend.my_account'); // Create this blade or link to actual account page
-})->name('frontend.account');
+Route::get('/my-account', [MyAccountController::class, 'index'])->name('frontend.account');
+
+
+Route::post('/my-account/update', [MyAccountController::class, 'updateAccount'])->name('myaccount.update');
+Route::post('/my-account/update-password', [MyAccountController::class, 'updatePassword'])->name('myaccount.password.update');
+Route::post('/my-address/update', [MyAccountController::class, 'updateAddress'])->name('user.address.update');
+
+
 
 //===== Checkout Page Login Functionality
     Route::post('/checkout-register', [RegistrationController::class, 'authenticate_checkout_register'])->name('login.authenticate');
@@ -167,9 +174,11 @@ Route::get('/buy-now/checkout', [CartController::class, 'showBuyNowCheckout'])->
 // ===== Payment Integration URL
 Route::post('/process-payment', [PaymentController::class, 'processPayment'])->name('payment.process')->middleware('auth:frontend');;
 Route::post('/verify-payment', [PaymentController::class, 'verifyPayment'])->name('payment.verify');
-  //===== Order confirmation
-    Route::get('/order-confirmation', [CheckoutController::class, 'order_confirmation'])->name('order.confirm');
+  
+//===== Order confirmation
+Route::get('/order-confirmation', [CheckoutController::class, 'order_confirmation'])->name('order.confirm');
 
+Route::get('/my-order/view/{id}', [MyAccountController::class, 'viewOrder'])->name('order.view');
 
 Route::get('/wishlist', [WishlistController::class, 'index'])->name('shows.wishlist');
 Route::get('/wishlist/add/{id}', [WishlistController::class, 'add'])->name('wishlist.add');

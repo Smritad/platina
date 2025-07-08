@@ -210,7 +210,19 @@ public function processPayment(Request $request)
                     'status_updated_at' => Carbon::now(),
                     'status_updated_by' => Auth::check() ? Auth::id() : null,
                 ]);
+if ($order->customer_email) {
+    \App\Models\LoggedInUserDetails::updateOrCreate(
+        ['email' => $order->customer_email], // match by email
+        [
+            'name'  => trim(($orderData['customer_info']['first_name'] ?? '') . ' ' . ($orderData['customer_info']['last_name'] ?? '')),
+            'email'     => $orderData['customer_info']['email'] ?? '',
+            'phone'     => $orderData['customer_info']['phone'] ?? '',
+           
+        ]
+    );
 
+    \Log::info("User saved to LoggedInUserDetails for email: " . $order->customer_email);
+}
                 // Decrement stock
                 foreach ($productIds as $index => $productId) {
                     DB::table('product_details')
