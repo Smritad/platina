@@ -79,9 +79,21 @@
                     $images = json_decode($order->images, true);
                     $firstImage = $images[0] ?? 'default.jpg'; // fallback if empty
                 @endphp
+@php
+    $product = \App\Models\ProductDetails::find($order['product_ids']);
+    $sabCategory = DB::table('sub_product_category')
+                    ->where('id', $product->product_sab_category_id ?? null)
+                    ->first();
+
+    $sabSlug = $sabCategory ? $sabCategory->slug : 'coming-soon';
+    $productSlug = $product ? $product->slug : \Illuminate\Support\Str::slug($order['product_names']);
+    $productLink = route('product.categoryproduct', [$sabSlug, $productSlug]);
+@endphp
 
                   <figure class="img-product">
-                      <img src="{{ asset($firstImage) }}" alt="product">
+<a href="{{ $productLink }}" target="_blank">
+    <img src="{{ asset($firstImage) }}" alt="product">
+</a>
                   </figure>
 
                  <div class="content">

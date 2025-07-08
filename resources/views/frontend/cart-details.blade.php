@@ -13,7 +13,71 @@
     <header>
         @include('components.frontend.header')
     </header>
+@php
+            $colorMap = [
+                "Black" => "#000000",
+                "Ice Melt" => "#D3E4F1",
+                "Spell Bound" => "#4E646F",
+                "White" => "#FFFFFF",
+                "Red" => "#FF0000",
+                "Green" => "#00FF00",
+                "Blue" => "#0000FF",
+                "Yellow" => "#FFFF00",
+                "Orange" => "#FFA500",
+                "Purple" => "#800080",
+                "Pink" => "#FFC0CB",
+                "Brown" => "#A52A2A",
+                "Gray" => "#808080",
+                "Cyan" => "#00FFFF",
+                "Dark Green" => "#008000",
+                "Maroon" => "#800000",
+                "Teal" => "#006666",
+                "Dove" => "#D6D3D1",
+                "Sea Jet" => "#AAC9CE",
+                "Peach Beige" => "#FAD9C1",
+                "Nomad" => "#BBB3A2",
+                "Baby Lavender" => "#E3D1F5",
+                "Balistic Sea" => "#5D8AA8",
+                "Jet Black" => "#343434",
+                "Steel Blue" => "#4682B4",
+                "Dark Blue" => "#00008B",
+                "Country Blue" => "#9DB4C0",
+                "Skin Tan" => "#FFDAB9",
+                "Cream" => "#FFFDD0",
+                "Peach Pink" => "#FFD1DC",
+                "Sea Blue" => "#006994",
+                "Silver" => "#C0C0C0",
+                "Stone" => "#D8CAB8",
+                "Sand" => "#F4E1C1",
+                "Beige" => "#F5F5DC",
+                "Pearled Ivory" => "#F8F4E3",
+                "Lavender" => "#E6E6FA",
+                "Ivory" => "#FFFFF0",
+                "Beetroot Red" => "#7A263A",
+                "Dark Beige" => "#A89F91",
+                "Dark Grey" => "#A9A9A9",
+                "Light Green" => "#90EE90",
+                "Azure Blue" => "#007FFF",
+                "Stone Blue" => "#7D98A1",
+                "Sky Rocket" => "#AED7E0",
+                "Pale Dew" => "#D8E3D7",
+                "Frozen Dew" => "#E8F0F2",
+                "Amber Ash" => "#D4BFAA",
+                "Pista" => "#93C572",
+                "Dusty Blue" => "#5A86AD",
+                "Sky Blue" => "#87CEEB",
+                "Ice" => "#E0F7FA",
+                "Wood Ash" => "#C4BEB5",
+                "Northern Droplet" => "#D6D7D9",
+                "Travertine" => "#E6D8C3",
+                "Ash" => "#B2BEB5",
+                "Peach" => "#FFE5B4",
+                "Cuban Sand" => "#DDD0A8",
+                "Blue Breeze" => "#B2D8E1",
+                "Sky" => "#87CEFA"
+            ];
 
+        @endphp
     <!-- Breadcrumb -->
     <section class="section-breadcrumb padding-b-50">
         <div class="rx-breadcrumb-image">
@@ -51,6 +115,7 @@
     </section>
 
     <!-- Cart Section -->
+     @if ($cartItems->isNotEmpty())
 <section class="section-room-details cart-details-one-sec padding-t-50 padding-b-50">
     <div class="container">
         <div class="row mb-minus-24">
@@ -92,20 +157,43 @@
 
                                             </div>
                                         </td>
-                                        <td class="color-box">
-                                            <div class="color-box">
-                                                <select class="rx-from-control form-select">
-                                                    <option selected><a >{{ $item->color }}</a></option>
+                                       
+ 
+                                        @php
+                                            $availableColors = array_keys($colorMap); // use all defined colors
+                                        @endphp
+                                        <td>
+                                            <div class="color-boxx">
+                                                <select name="color[]" class="form-select">
+                                                @foreach($availableColors as $color)
+                                                    <option value="{{ $color }}" {{ trim($item['color']) === trim($color) ? 'selected' : '' }}>
+                                                    {{ $color }}
+                                                    </option>
+                                                @endforeach
                                                 </select>
                                             </div>
-                                        </td>
+                                            </td>
+
+
+                                        @php
+                                            // Get all unique size values from the category_name column
+                                            $availableSizes = \App\Models\SizeDetails::distinct()
+                                                                ->pluck('category_name')
+                                                                ->toArray();
+                                        @endphp
+
                                         <td class="size-box">
-                                            <div class="variant-box">
-                                                <select class="rx-from-control form-select">
-                                                    <option selected>{{ $item->size }}</option>
-                                                </select>
-                                            </div>
+                                        <div class="variant-box">
+                                            <select name="size[]" class="rx-from-control form-select">
+                                            @foreach($availableSizes as $size)
+                                                <option value="{{ $size }}" {{ $size == $item->size ? 'selected' : '' }}>
+                                                {{ $size }}
+                                                </option>
+                                            @endforeach
+                                            </select>
+                                        </div>
                                         </td>
+
                                         <td class="quantity-box">
                                             <div class="quantity-table-box-sec">
                                                 <div class="qty-container-box">
@@ -178,7 +266,11 @@
 
                     <div class="process-to-checkout-sec">
 
-                        <a href="{{ route('show.checkout') }}" id="proceed-to-checkout" class="process-to-checkout-btn">Process To Checkout</a>
+                            @if ($cartItems->isNotEmpty())
+                                <a href="{{ route('show.checkout') }}" id="proceed-to-checkout" class="process-to-checkout-btn">Process To Checkout</a>
+                            @else
+                                <a href="javascript:void(0)" class="process-to-checkout-btn disabled" style="pointer-events: none; opacity: 0.6;">Process To Checkout</a>
+                            @endif
                         <p class="text-center">OR</p>
                         <a href="{{ route('product.all') }}" class="continue-shopping-btn">Continue Shopping</a>
                     </div>
@@ -188,7 +280,17 @@
         </div>
     </div>
 </section>
-
+@else
+    {{-- ❌ No items in cart --}}
+    <section class="section-room-details padding-t-50 padding-b-50">
+        <div class="container text-center">
+            <h4>No products found in your cart.</h4>
+<a href="{{ route('product.all') }}" class="btn mt-3" style="background-color: #9d7e54; color: white;">
+    Continue Shopping
+</a>
+        </div>
+    </section>
+@endif
 
     @include('components.frontend.footer')
 
@@ -215,7 +317,7 @@ document.getElementById('proceed-to-checkout').addEventListener('click', functio
             id: row.dataset.id,
             product_name: row.querySelector('.cart-details-product-name-sec a').innerText.trim(),
             size: row.querySelector('.size-box select').value.trim(),
-            color: row.querySelector('.color-box select').value.trim(),
+            color: row.querySelector('.color-boxx select').value.trim(),
             quantity: parseInt(row.querySelector('.table-input-qty').value),
             price: parseInt(row.querySelector('.price').dataset.unitPrice),
             image: row.querySelector('.cart-details-img-box img').getAttribute('src')
@@ -301,32 +403,33 @@ function updateCartSummary() {
 
 <script>
 $(document).ready(function() {
-    $('.remove-cart-btn').on('click', function() {
-        let itemId = $(this).data('id');
-        let row = $('.cart-det-item[data-id="' + itemId + '"]');
+   $('.remove-cart-btn').on('click', function () {
+    let itemId = $(this).data('id');
+    let row = $('.cart-det-item[data-id="' + itemId + '"]');
 
-        if (confirm('Are you sure you want to remove this item from cart?')) {
-            $.ajax({
-                url: '{{ url("remove-from-cart") }}/' + itemId,
-                type: 'DELETE',
-                data: {
-                    _token: '{{ csrf_token() }}'
-                },
-                success: function(response) {
-                    if (response.success) {
-                        row.remove();
-                        updateCartSummary();
-                        alert(response.message);
-                    } else {
-                        alert(response.message);
-                    }
-                },
-                error: function() {
-                    alert('Something went wrong. Please try again.');
+    if (confirm('Are you sure you want to remove this item from cart?')) {
+        $.ajax({
+            url: '{{ url("remove-from-cart") }}/' + itemId,
+            type: 'DELETE',
+            data: {
+                _token: '{{ csrf_token() }}'
+            },
+            success: function (response) {
+                if (response.success) {
+                    row.remove();
+                    updateCartSummary();
+                    window.notyf.success(response.message);  // ✅ use existing instance
+                } else {
+                    window.notyf.error(response.message);    // ✅ use existing instance
                 }
-            });
-        }
-    });
+            },
+            error: function () {
+                window.notyf.error('Something went wrong. Please try again.');
+            }
+        });
+    }
+});
+
 
     function updateCartSummary() {
         let subtotal = 0;

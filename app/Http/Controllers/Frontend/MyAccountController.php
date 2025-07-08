@@ -91,6 +91,7 @@ public function index()
     // Update user password
     public function updatePassword(Request $request)
     {
+       // dd($request);
         $request->validate([
             'password_current' => 'required',
             'password_new' => 'required|min:6|confirmed',

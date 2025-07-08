@@ -89,25 +89,28 @@
             </div>
 
             {{-- Email --}}
-            <div class="col-lg-12 col-12">
-                <div class="rx-input-box login-input-box">
-                    <input type="email" id="email" name="email" class="rx-form-control" placeholder="Username or email address*" value="{{ old('email') }}" required>
-                </div>
-                @error('email')
-                    <span class="text-danger">{{ $message }}</span>
-                @enderror
-            </div>
+              <div class="col-lg-12 col-12">
+                  <div class="rx-input-box login-input-box">
+                      <input type="email" id="email" name="email" class="rx-form-control" placeholder="Username or email address*" value="{{ old('email') }}">
+                      <span class="text-danger" id="email-error"></span>
+                  </div>
+                  @error('email')
+                      <span class="text-danger">{{ $message }}</span>
+                  @enderror
+              </div>
 
-            {{-- Password --}}
-            <div class="col-lg-12 col-12">
-                <div class="rx-input-box login-input-box">
-                    <input type="password" id="password-field" name="password" class="rx-form-control" placeholder="Password*" required>
-                    <i toggle="#password-field" class="toggle-password ri-eye-line"></i>
-                </div>
-                @error('password')
-                    <span class="text-danger">{{ $message }}</span>
-                @enderror
-            </div>
+              {{-- Password --}}
+              <div class="col-lg-12 col-12">
+                  <div class="rx-input-box login-input-box">
+                      <input type="password" id="password-field" name="password" class="rx-form-control" placeholder="Password*">
+                      <i toggle="#password-field" class="toggle-password ri-eye-line"></i>
+                      <span class="text-danger" id="password-error"></span>
+                  </div>
+                  @error('password')
+                      <span class="text-danger">{{ $message }}</span>
+                  @enderror
+              </div>
+
 
             {{-- Remember + Forgot --}}
             <div class="login-inline-block direct">
@@ -266,6 +269,42 @@
   </div>
   <!-- Plugins -->
          @include('components.frontend.main-js')
+
+         <script>
+function validateLoginForm() {
+    let email = document.getElementById("email").value.trim();
+    let password = document.getElementById("password-field").value.trim();
+    let isValid = true;
+
+    // Clear previous errors
+    document.getElementById("email-error").innerText = "";
+    document.getElementById("password-error").innerText = "";
+
+    // Email validation
+    if (email === "") {
+        document.getElementById("email-error").innerText = "Email is required.";
+        isValid = false;
+    } else if (!validateEmail(email)) {
+        document.getElementById("email-error").innerText = "Enter a valid email.";
+        isValid = false;
+    }
+
+    // Password validation
+    if (password === "") {
+        document.getElementById("password-error").innerText = "Password is required.";
+        isValid = false;
+    }
+
+    return isValid;
+}
+
+// Simple email pattern check
+function validateEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+}
+</script>
+
          <script>
     document.addEventListener('DOMContentLoaded', function () {
         const togglePassword = document.querySelector('.toggle-password');

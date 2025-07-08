@@ -156,35 +156,76 @@
 
 
               <div class="my-account-details-password-main-sec">
-                <form action="{{ route('myaccount.password.update') }}" method="POST" class="my-account-password-form-sec">
-                    @csrf
-                    <div class="acc-pass-sec" data-aos="fade-up" data-aos-duration="1000">
-                        <div class="inner-title">
-                            <h4>Change Password</h4>
-                        </div>
-                        <div class="row mb-minus-24">
-                           <div class="col-12 mb-24">
-                            <input type="password" name="password_current" placeholder="Current Password*" required>
+                <form id="passwordUpdateForm" action="{{ route('myaccount.password.update') }}" method="POST" class="my-account-password-form-sec">
+    @csrf
+    <div class="acc-pass-sec" data-aos="fade-up" data-aos-duration="1000">
+        <div class="inner-title">
+            <h4>Change Password</h4>
+        </div>
+        <div class="row mb-minus-24">
+            <div class="col-12 mb-24">
+                <input type="password" name="password_current" id="password_current" placeholder="Current Password*">
+                <small id="currentError" class="text-danger"></small>
 
-                            <div class="text-end mt-1">
-                                <a href="{{ route('user.forgotpassword') }}" class="text-primary" style="font-size: 14px;">
-                                    Forgot Password?
-                                </a>
-                            </div>
-                        </div>
+                <div class="text-end mt-1">
+                    <a href="{{ route('user.forgotpassword') }}" class="text-primary" style="font-size: 14px;">
+                        Forgot Password?
+                    </a>
+                </div>
+            </div>
 
-                            <div class="col-12 mb-24">
-                                <input type="password" name="password_new" placeholder="New Password*" required>
-                            </div>
-                            <div class="col-12 mb-24">
-                                <input type="password" name="password_new_confirmation" placeholder="Confirm Password*" required>
-                            </div>
-                            <div class="col-12 mb-24">
-                                <button type="submit" class="rx-btn-two">Update Password</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
+            <div class="col-12 mb-24">
+                <input type="password" name="password_new" id="password_new" placeholder="New Password*">
+                <small id="newPasswordError" class="text-danger"></small>
+            </div>
+
+            <div class="col-12 mb-24">
+                <input type="password" name="password_new_confirmation" id="password_new_confirmation" placeholder="Confirm Password*">
+                <small id="confirmPasswordError" class="text-danger"></small>
+            </div>
+
+            <div class="col-12 mb-24">
+                <button type="submit" class="rx-btn-two">Update Password</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script>
+document.getElementById('passwordUpdateForm').addEventListener('submit', function(e) {
+    let valid = true;
+
+    // Reset errors
+    document.getElementById('currentError').innerText = '';
+    document.getElementById('newPasswordError').innerText = '';
+    document.getElementById('confirmPasswordError').innerText = '';
+
+    const current = document.getElementById('password_current').value.trim();
+    const newPass = document.getElementById('password_new').value.trim();
+    const confirmPass = document.getElementById('password_new_confirmation').value.trim();
+
+    // Current password required
+    if (!current) {
+        document.getElementById('currentError').innerText = 'Please enter current password.';
+        valid = false;
+    }
+
+    // New password validation
+    if (newPass.length < 6) {
+        document.getElementById('newPasswordError').innerText = 'Password must be at least 6 characters.';
+        valid = false;
+    }
+
+    // Match confirm password
+    if (newPass !== confirmPass) {
+        document.getElementById('confirmPasswordError').innerText = 'Passwords do not match.';
+        valid = false;
+    }
+
+    if (!valid) e.preventDefault(); // stop form
+});
+</script>
+
 
               </div>
             </div>

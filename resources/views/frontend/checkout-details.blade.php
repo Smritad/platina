@@ -130,7 +130,7 @@
                             $latestOrder = OrderDetail::where('user_id', $user->id)->latest()->first();
                         @endphp
                     @else
-                        <p>Please log in to view your orders.</p>
+                        <!-- <p>Please log in to view your orders.</p> -->
                     @endif
 
                 <div class="rx-checkout-wrap checkout-information-sec" data-aos="fade-up" data-aos-duration="1000">
@@ -280,26 +280,39 @@
         </div>
 
         <div class="shopping-cart-list-product">
-    @foreach ($cartItems as $index => $item)
+           @foreach ($cartItems as $index => $item)
+          @php
+    $product = \App\Models\ProductDetails::find($item['product_id']);
+    $sabCategory = DB::table('sub_product_category')
+                    ->where('id', $product->product_sab_category_id ?? null)
+                    ->first();
+
+    $sabSlug = $sabCategory ? $sabCategory->slug : 'coming-soon';
+    $productSlug = $product ? $product->slug : \Illuminate\Support\Str::slug($item['product_name']);
+    $productLink = route('product.categoryproduct', [$sabSlug, $productSlug]);
+@endphp
+
                 <div class="shopping-cart-item-product mb-3">
-                    <a href="#" class="img-product">
+                    <a href="{{ $productLink }}" class="img-product">
                 <img src="{{ asset('uploads/products/media/' . $item['image']) }}" alt="{{ $item['name'] ?? 'Product' }}" class="product-image img-fluid rounded">
                     </a>
                     <div class="content-box">
                         <div class="info">
-                            <a href="#" class="name-product link text-title"
+                            <a href="{{ $productLink }}" class="name-product link text-title"
                                data-id="{{ $item['product_id'] }}"
                                data-price="{{ $item['price'] }}">
                                 {{ $item['product_name'] }}
                             </a>
                             <div class="variant text-caption-1">
                                 <span class="desp-cat-sec">Size:</span>
-                                <span class="product-size size">{{ $item['size'] }}</span>
+                                <span class="product-size size">{{ $checkoutCart[$index]['size'] ?? '-' }}</span>
                             </div>
+
                             <div class="variant text-caption-1">
                                 <span class="desp-cat-sec">Color:</span>
-                                <span class="product-print color">{{ $item['color'] }}</span>
+                                <span class="product-print color">{{ $checkoutCart[$index]['color'] ?? '-' }}</span>
                             </div>
+
                             <div class="variant text-caption-1">
                                 <span class="desp-cat-sec">Quantity:</span>
                                 <span class="quantity"><strong>{{ $checkoutCart[$index]['quantity'] ?? 1 }}</strong></span>
@@ -973,7 +986,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 </script>
 
-<script>
+<!-- <script>
   // (Your existing Notyf init here)
   var notyf = new Notyf({
     duration: 3000,
@@ -995,7 +1008,7 @@ document.addEventListener('DOMContentLoaded', function () {
       message: {!! json_encode(session('message')) !!}
     });
   @endif
-</script>
+</script> -->
 
 
 </body>

@@ -220,7 +220,19 @@
                   </ul>
 
                   <input type="hidden" name="selected_color" id="selected_color" value="{{ trim($colors[0]) }}">
-              </div>
+                     
+
+                </div>
+          </div>
+
+              <div class="product-details-color-sec">
+              <div class="product-details-color-variant">
+                  <p class="product-details-title" id="selected-color-name" class="mt-2 fw-bold text-capitalize">
+                        Selected Color: {{ trim($colors[0]) }}
+                      </p>
+                     
+
+                </div>
           </div>
 
           <input type="hidden" name="product_id" value="{{ $product->id }}">
@@ -816,7 +828,7 @@ if (!qty || isNaN(qty) || qty < 1)   return notyf.error('Please enter a valid qu
 
     // Validate Size
     if (!sizeSelect || sizeSelect === 'Select') {
-      notyf.error('Please select a size11.');
+      notyf.error('Please select a size.');
       e.preventDefault();
       return false;
     }
@@ -840,6 +852,26 @@ if (!qty || isNaN(qty) || qty < 1)   return notyf.error('Please enter a valid qu
       document.getElementById('selected_color').value = this.dataset.color;
     });
   });
+
+  document.querySelectorAll('#color-options li').forEach(function(el) {
+  el.addEventListener('click', function() {
+    // Remove active class
+    document.querySelectorAll('#color-options li').forEach(function(li) {
+      li.classList.remove('active');
+    });
+
+    // Add active to selected
+    this.classList.add('active');
+
+    // Update hidden input
+    const selectedColor = this.dataset.color;
+    document.getElementById('selected_color').value = selectedColor;
+
+    // Update color name text
+    document.getElementById('selected-color-name').innerText = 'Selected Color: ' + selectedColor;
+  });
+});
+
 </script>
 
 <script>

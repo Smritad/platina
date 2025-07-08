@@ -69,15 +69,23 @@ class CartController extends Controller
         return view('frontend.cart-details', compact('cartItems'));
     }
 
-    public function removeFromCart($id)
-    {
-        $item = Cart::find($id);
-        if ($item) {
-            $item->delete();
-            return response()->json(['success' => true, 'message' => 'Item removed']);
-        }
-        return response()->json(['success' => false, 'message' => 'Item not found']);
+   public function removeFromCart($id)
+{
+    $item = Cart::find($id);
+    if ($item) {
+        $item->delete();
+        return response()->json([
+            'success' => true,
+            'message' => 'Item removed'
+        ]);
     }
+
+    return response()->json([
+        'success' => false,
+        'message' => 'Item not found'
+    ]);
+}
+
 
 
 public function buyNow(Request $request)
@@ -124,15 +132,18 @@ public function showBuyNowCheckout()
     ];
 
     $cartTotal = $product['price'] * $product['qty'];
-
+   $colors = $product['selected_color'];
+   $sizes = $product['size'];
     // Cast quantity as string
     $checkoutCart = [
         [
             'quantity' => (string) $product['qty'],
+            'size' => (string) $product['size'],
+            'color' => (string) $product['selected_color'],
         ]
     ];
 
-    // dd($checkoutCart); // Optional: for testing
+   // dd($checkoutCart); // Optional: for testing
 
     $userInfo = null;
     $latestOrder = null;
@@ -152,7 +163,9 @@ public function showBuyNowCheckout()
         'checkoutCart',
         'cartTotal',
         'userInfo',
-        'latestOrder'
+        'latestOrder',
+        'colors',
+        'sizes'
     ));
 }
 

@@ -87,30 +87,28 @@
 
     <div class="col-lg-12 col-12">
       <div class="rx-input-box register-input-box">
-        <input type="text" name="name" id="name" class="rx-form-control" placeholder="Full Name*" required>
+        <input type="text" name="name" id="name" class="rx-form-control" placeholder="Full Name*">
         <small id="nameError" class="text-danger"></small>
       </div>
     </div>
 
     <div class="col-lg-6 col-12">
       <div class="rx-input-box register-input-box">
-        <input type="email" name="email" id="email" class="rx-form-control" placeholder="Email Id*" required>
+        <input type="email" name="email" id="email" class="rx-form-control" placeholder="Email Id*">
         <small id="emailError" class="text-danger"></small>
       </div>
     </div>
 
     <div class="col-lg-6 col-12">
       <div class="rx-input-box register-input-box">
-        <input type="tel" name="phone" id="phone" class="rx-form-control" placeholder="Phone Number*" required>
+        <input type="tel" name="phone" id="phone" class="rx-form-control" placeholder="Phone Number*">
         <small id="phoneError" class="text-danger"></small>
       </div>
     </div>
 
-  
-
     <div class="col-lg-6 col-12">
       <div class="rx-input-box register-input-box register-pb-sec">
-        <input type="password" name="password" id="password" class="rx-form-control" placeholder="Password*" required>
+        <input type="password" name="password" id="password" class="rx-form-control" placeholder="Password*">
         <i toggle="#password" class="toggle-password ri-eye-line"></i>
         <small id="passwordError" class="text-danger"></small>
       </div>
@@ -118,7 +116,7 @@
 
     <div class="col-lg-6 col-12">
       <div class="rx-input-box register-input-box register-pb-sec">
-        <input type="password" name="password_confirmation" id="confirm_password" class="rx-form-control" placeholder="Confirm Password*" required>
+        <input type="password" name="password_confirmation" id="confirm_password" class="rx-form-control" placeholder="Confirm Password*">
         <i toggle="#confirm_password" class="toggle-password ri-eye-line"></i>
         <small id="confirmPasswordError" class="text-danger"></small>
       </div>
@@ -148,6 +146,7 @@
     </div>
   </div>
 </form>
+
 
 
           </div>
@@ -343,6 +342,76 @@ document.querySelectorAll(".toggle-password").forEach(function(toggle) {
     }
   });
 });
+</script>
+<script>
+function validateForm() {
+  let name = document.getElementById("name").value.trim();
+  let email = document.getElementById("email").value.trim();
+  let phone = document.getElementById("phone").value.trim();
+  let password = document.getElementById("password").value.trim();
+  let confirmPassword = document.getElementById("confirm_password").value.trim();
+  let agree = document.getElementById("agree_checkbox").checked;
+
+  let isValid = true;
+
+  // Clear previous errors
+  document.getElementById("nameError").innerText = "";
+  document.getElementById("emailError").innerText = "";
+  document.getElementById("phoneError").innerText = "";
+  document.getElementById("passwordError").innerText = "";
+  document.getElementById("confirmPasswordError").innerText = "";
+  document.getElementById("agreeError").innerText = "";
+
+  // Name
+  if (name === "") {
+    document.getElementById("nameError").innerText = "Name is required.";
+    isValid = false;
+  }
+
+  // Email
+  if (email === "") {
+    document.getElementById("emailError").innerText = "Email is required.";
+    isValid = false;
+  } else if (!/^\S+@\S+\.\S+$/.test(email)) {
+    document.getElementById("emailError").innerText = "Enter a valid email.";
+    isValid = false;
+  }
+
+  // Phone
+  if (phone === "") {
+    document.getElementById("phoneError").innerText = "Phone number is required.";
+    isValid = false;
+  } else if (!/^\d{10}$/.test(phone)) {
+    document.getElementById("phoneError").innerText = "Enter a valid 10-digit phone number.";
+    isValid = false;
+  }
+
+  // Password
+  if (password === "") {
+    document.getElementById("passwordError").innerText = "Password is required.";
+    isValid = false;
+  } else if (password.length < 6) {
+    document.getElementById("passwordError").innerText = "Password must be at least 6 characters.";
+    isValid = false;
+  }
+
+  // Confirm Password
+  if (confirmPassword === "") {
+    document.getElementById("confirmPasswordError").innerText = "Please confirm your password.";
+    isValid = false;
+  } else if (password !== confirmPassword) {
+    document.getElementById("confirmPasswordError").innerText = "Passwords do not match.";
+    isValid = false;
+  }
+
+  // Terms checkbox
+  if (!agree) {
+    document.getElementById("agreeError").innerText = "You must agree to the terms.";
+    isValid = false;
+  }
+
+  return isValid;
+}
 </script>
 
 </body>

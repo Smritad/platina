@@ -426,7 +426,7 @@
                 <div class="product-icons">
                     <a href="{{ route('wishlist.add', $product->id) }}" class="icon"><i class="fa fa-heart-o"></i></a>
                 </div>
-                <a href="#">
+                <a href="{{ route('product.categoryproduct', [$catSlug, $product->slug]) }}">
                     <img src="{{ asset('uploads/products/thumbnails/' . $defaultImage) }}" alt="{{ $product->product_name }}" class="img-default">
                     <img src="{{ asset('uploads/products/thumbnails/' . $hoverImage) }}" alt="{{ $product->product_name }}" class="img-hover">
                 </a>

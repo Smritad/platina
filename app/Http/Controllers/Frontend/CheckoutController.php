@@ -27,7 +27,7 @@ class CheckoutController extends Controller
     public function storeCheckoutData(Request $request)
 {
     $cartData = $request->cart;
-
+// dd($cartData);
     // You can store this data in session or database as per your requirement
     session()->put('checkout_cart', $cartData);
 
@@ -58,7 +58,7 @@ public function showCheckout()
     $checkoutCart = session()->get('checkout_cart', []);
     $userId = Auth::guard('frontend')->id();
     $sessionId = Session::getId();
-
+    //dd($checkoutCart);
     // Get cart items from DB
     $cartItems = DB::table('carts')
         ->join('product_details', 'carts.product_id', '=', 'product_details.id')
@@ -82,7 +82,12 @@ public function showCheckout()
     });
 
     $cartQuantity = collect($checkoutCart)->sum('quantity');
-//dd($cartQuantity);
+
+  $colors = collect($checkoutCart)->pluck('color');
+  $sizes = collect($checkoutCart)->pluck('size');
+
+
+// dd($colors);
     $userInfo = null;
     if ($userId) {
         $userInfo = DB::table('logged_in_user_details')->where('id', $userId)->first();
@@ -97,7 +102,9 @@ public function showCheckout()
         'cartQuantity',
         'userInfo',
         'latestOrder',
-        'cartItems'
+        'cartItems',
+        'colors',
+        'sizes'
     ));
 }
 
@@ -127,9 +134,9 @@ public function showCheckout()
             $message->to($email)->subject('Your OTP for Login');
         });
 
-        return response()->json(['success' => true, 'message' => 'OTP sent successfully!']);
+        return response()->json(['message' => true, 'message' => 'OTP sent successfully!']);
     } catch (\Exception $e) {
-        return response()->json(['success' => false, 'message' => 'Failed to send OTP.']);
+        return response()->json(['message' => false, 'message' => 'Failed to send OTP.']);
     }
 }
 
@@ -144,15 +151,15 @@ public function verifyOtp(Request $request)
     $otpRecord = Otp::where('email', $request->email)->first();
 
     if (!$otpRecord) {
-        return response()->json(['success' => false, 'message' => 'Invalid OTP.']);
+        return response()->json(['message' => false, 'message' => 'Invalid OTP.']);
     }
 
     if (Carbon::parse($otpRecord->created_at)->addMinutes(5)->isPast()) {
-        return response()->json(['success' => false, 'message' => 'OTP expired. Please request again.']);
+        return response()->json(['message' => false, 'message' => 'OTP expired. Please request again.']);
     }
 
     if ($otpRecord->otp != $request->otp) {
-        return response()->json(['success' => false, 'message' => 'OTP does not match.']);
+        return response()->json(['message' => false, 'message' => 'OTP does not match.']);
     }
 
     // Find or create user from logged_in_user_details
