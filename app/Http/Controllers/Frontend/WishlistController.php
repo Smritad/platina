@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\ProductDetails;
 use App\Models\Wishlist;
+use App\Models\Cart;
 
 class WishlistController extends Controller
 {
@@ -70,4 +71,47 @@ class WishlistController extends Controller
 
         return back()->with('message', 'Product removed from wishlist.');
     }
+
+    public function moveToCart(Request $request, $productId)
+{
+    $product = ProductDetails::findOrFail($productId);
+
+    $user = auth('frontend')->user();
+    $userId = $user ? $user->id : null;
+    $sessionId = $user ? null : session()->getId();
+
+    // Add to Cart
+    $existingCart = Cart::where('product_id', $product->id)
+        ->where('user_id', $userId)
+        ->where('session_id', $sessionId)
+        ->where('size', 'N/A') // default
+        ->where('color', 'N/A') // default
+        ->first();
+
+    if ($existingCart) {
+        $existingCart->quantity += 1;
+        $existingCart->save();
+    } else {
+        Cart::create([
+            'user_id'       => $userId,
+            'session_id'    => $sessionId,
+            'product_id'    => $product->id,
+            'product_name'  => $product->product_name,
+            'price'         => $product->mrp,
+            'image'         => json_decode($product->media_files, true)[0] ?? '',
+            'size'          => 'N/A',
+            'color'         => 'N/A',
+            'fabric'        => 'N/A',
+            'quantity'      => 1,
+        ]);
+    }
+
+    // Remove from Wishlist
+    Wishlist::where('product_id', $productId)
+        ->when($userId, fn($q) => $q->where('user_id', $userId))
+        ->when(!$userId, fn($q) => $q->where('session_id', $sessionId))
+        ->delete();
+
+    return redirect()->back()->with('message', 'Product moved to cart.');
+}
 }

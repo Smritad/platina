@@ -86,7 +86,9 @@
                 <form action="{{ route('add.to.cart', $product->id) }}" method="get">
                   @csrf
                   <input type="hidden" name="qty" value="1">
-                  <button class="rx-btn-two" type="submit">Add To Cart</button>
+<a href="{{ route('wishlist.moveToCart', $product->id) }}" class="rx-btn-two d-inline-block text-center mt-2">
+    Add To Cart
+</a>
                 </form>
               </div>
             </div>

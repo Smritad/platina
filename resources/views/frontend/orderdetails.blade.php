@@ -45,9 +45,9 @@
                   <div class="last-contact">
                     <ul>
                       <li>
-                        <a href="index.html">Home</a>
+                        <a href="{{route('frontend.index') }}">Home</a>
                       </li>
-                       <li>My Account</li> 
+                       <li><a href="{{route('frontend.account') }}">My Account</a></li> 
                       <li>Order Details</li>
                     </ul>
                   </div>
@@ -91,9 +91,9 @@
 @endphp
 
                   <figure class="img-product">
-<a href="{{ $productLink }}" target="_blank">
+<!-- <a href="{{ $productLink }}" target="_blank">
     <img src="{{ asset($firstImage) }}" alt="product">
-</a>
+</a> -->
                   </figure>
 
                  <div class="content">
@@ -207,59 +207,65 @@
 
               <div class="tab-pane fade" id="breakfast" role="tabpanel" aria-labelledby="breakfast-tab">
                 <div class="order-details-items-details-sec">
-                @foreach($items as $item)
-<div class="order-details-items-details-head">
-    <figure class="order-details-items-details-img-product">
-        <img src="{{ asset($item['image']) }}" alt="{{ $item['name'] }}">
-    </figure>
-    <div class="od-item-details-content">
-        <div class="od-item-details-title">{{ $item['name'] }}</div>
-        <div class="mt_4"><span class="fw-6">Size:</span> {{ $item['size'] }}</div>
-        <div class="mt_4"><span class="fw-6">Quantity:</span> {{ $item['quantity'] }}</div>
-        <div class="mt_4"><span class="fw-6">Color:</span> {{ $item['color'] }}</div>
-        <div class="mt_4">
-            <span class="fw-6">Price:</span>
-            <i class="fa fa-inr" aria-hidden="true"></i> {{ number_format($item['price'], 2) }}
+@php
+    $totalPrice = 0;
+@endphp
+
+@foreach($items as $item)
+    <div class="order-details-items-details-head">
+        <figure class="order-details-items-details-img-product">
+            <img src="{{ asset($item['image']) }}" alt="{{ $item['name'] }}">
+        </figure>
+        <div class="od-item-details-content">
+            <div class="od-item-details-title">{{ $item['name'] }}</div>
+            <div class="mt_4"><span class="fw-6">Size:</span> {{ $item['size'] }}</div>
+            <div class="mt_4"><span class="fw-6">Quantity:</span> {{ $item['quantity'] }}</div>
+            <div class="mt_4"><span class="fw-6">Color:</span> {{ $item['color'] }}</div>
+            <div class="mt_4">
+                <span class="fw-6">Price:</span>
+                <i class="fa fa-inr" aria-hidden="true"></i> {{ number_format($item['price'], 2) }}
+            </div>
         </div>
-        <!-- <div class="mt_4">
-            <span class="fw-6">Total:</span>
-            <i class="fa fa-inr" aria-hidden="true"></i> {{ number_format($item['total'], 2) }}
-        </div> -->
     </div>
-</div>
 
-                  <ul class="od-items-details-list">
-                    <li class="odid-total-content-sec">
-                      <span class="od-id-list-total-price">Total Price</span>
-                      <span class="fw-6">{{ number_format($item['total'], 2) }}</span>
-                    </li>
+    @php
+        $totalPrice += $item['total'];
+    @endphp
 
-                    @if(($order->cgst ?? 0) > 0 || ($order->sgst ?? 0) > 0)
-    <li class="odid-order-content-sec">
-        <span class="od-id-list-order-price">CGST</span>
-        <span class="fw-6">₹{{ number_format($order->cgst, 2) }}</span>
-    </li>
-    <li class="odid-order-content-sec">
-        <span class="od-id-list-order-price">SGST</span>
-        <span class="fw-6">₹{{ number_format($order->sgst, 2) }}</span>
-    </li>
-@elseif(($order->igst ?? 0) > 0)
-    <li class="odid-order-content-sec">
-        <span class="od-id-list-order-price">IGST</span>
-        <span class="fw-6">₹{{ number_format($order->igst, 2) }}</span>
-    </li>
-@endif
-<br>
-<li class="odid-order-content-sec">
-    <span class="od-id-list-order-price">Order Total</span>
-    <span class="fw-6">₹{{ number_format($totalPrice, 2) }}</span>
-</li>
-
-                  </ul>
-                </div>
-              </div>
+    <ul class="od-items-details-list mb-4">
+        <li class="odid-total-content-sec">
+            <span class="od-id-list-total-price">Total Price</span>
+            <span class="fw-6">₹{{ number_format($item['total'], 2) }}</span>
+        </li>
+    </ul>
 @endforeach
 
+{{-- Show GST and Order Total only once after all items --}}
+<ul class="od-items-details-list">
+    @if(($order->cgst ?? 0) > 0 || ($order->sgst ?? 0) > 0)
+        <li class="odid-order-content-sec">
+            <span class="od-id-list-order-price">CGST</span>
+            <span class="fw-6">₹{{ number_format($order->cgst, 2) }}</span>
+        </li>
+        <li class="odid-order-content-sec">
+            <span class="od-id-list-order-price">SGST</span>
+            <span class="fw-6">₹{{ number_format($order->sgst, 2) }}</span>
+        </li>
+    @elseif(($order->igst ?? 0) > 0)
+        <li class="odid-order-content-sec">
+            <span class="od-id-list-order-price">IGST</span>
+            <span class="fw-6">₹{{ number_format($order->igst, 2) }}</span>
+        </li>
+    @endif
+
+    <li class="odid-order-content-sec">
+        <span class="od-id-list-order-price">Order Total</span>
+        <span class="fw-6">
+            ₹{{ number_format($totalPrice + ($order->cgst ?? 0) + ($order->sgst ?? 0) + ($order->igst ?? 0), 2) }}
+        </span>
+    </li>
+</ul>
+</div></div>
 
 
               <div class="tab-pane fade" id="lunch" role="tabpanel" aria-labelledby="lunch-tab">

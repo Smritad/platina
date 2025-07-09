@@ -18,6 +18,7 @@
   </header>
   <!-- Hero -->
 
+
   <!-- Breadcrumb -->
   <section class="section-breadcrumb padding-b-50">
     <div class="rx-breadcrumb-image">
@@ -45,7 +46,7 @@
                   <div class="last-contact">
                     <ul>
                       <li>
-                        <a href="index.html">Home</a>
+                        <a href="{{route('frontend.index') }}">Home</a>
                       </li>
                       <!-- <li>Products</li> -->
                       <li>My Account</li>
@@ -234,43 +235,35 @@ document.getElementById('passwordUpdateForm').addEventListener('submit', functio
               <div class="my-orders-section">
                 <form>
                   <div class="my-orders-table-repsonsive">
-                    <table class="my-orders-table-sec">
-                      <thead>
-                        <tr class="my-orders-details-header-sec">
-                          <th>Orders</th>
-                          <th>Date</th>
-                          <th>Status</th>
-                          <th>Total</th>
-                          <th>Action</th>
-                        </tr>
-                      </thead>
-              <tbody>
+                    <table class="my-orders-table-sec" id="ordersTable">
+  <thead>
+    <tr class="my-orders-details-header-sec">
+      <th>Orders</th>
+      <th>Date</th>
+      <th>Status</th>
+      <th>Total</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
     @forelse($orders as $order)
-        <tr class="my-orders-det-item">
-            <td>{{ $order->order_id }}</td>
-    <td class="my-orders-date-sec">{{ \Carbon\Carbon::parse($order->created_at)->format('d F Y') }}</td>
-            <!-- <td class="my-orders-status-sec">{{ ucfirst($order->status ?? 'Pending') }}</td> -->
-              <td class="my-orders-status-sec">Order Placed</td>
-            <td class="my-orders-details-price-sec">
-                <i class="fa fa-inr" aria-hidden="true"></i>
-                {{ number_format($order->total_price, 2) }}
-                for {{ $order->total_quantity }} {{ Str::plural('item', $order->total_quantity) }}
-            </td>
-            <td>
-                <div class="my-orders-view-btn">
-                    <a href="{{ route('order.view', $order->order_id) }}" class="rx-btn-two">View</a>
-                </div>
-            </td>
-        </tr>
+    <tr class="my-orders-det-item">
+      <td>{{ $order->order_id }}</td>
+      <td>{{ \Carbon\Carbon::parse($order->created_at)->format('d F Y') }}</td>
+      <td>Order Placed</td>
+      <td><i class="fa fa-inr"></i> {{ number_format($order->total_price, 2) }} for {{ $order->total_quantity }} {{ Str::plural('item', $order->total_quantity) }}</td>
+      <td>
+        <a href="{{ route('order.view', $order->order_id) }}" class="rx-btn-two">View</a>
+      </td>
+    </tr>
     @empty
-        <tr>
-            <td colspan="5" class="text-center">No orders found.</td>
-        </tr>
+    <tr>
+      <td colspan="5" class="text-center">No orders found.</td>
+    </tr>
     @endforelse
-</tbody>
+  </tbody>
+</table>
 
-
-                    </table>
                   </div>
 
                 </form>
@@ -480,6 +473,37 @@ function editAddress(type) {
 }
 </script>
 
+<!-- DataTables CSS -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+<!-- Optional Responsive CSS -->
+<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
+
+<!-- jQuery (required for DataTables) -->
+
+<!-- DataTables JS -->
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+<script>
+  $(document).ready(function() {
+      $('#ordersTable').DataTable({
+          responsive: true,
+          ordering: true,
+          pageLength: 10,
+          lengthChange: false,
+          language: {
+              search: "Search Orders:",
+              emptyTable: "No orders available",
+              paginate: {
+                  previous: "Prev",
+                  next: "Next"
+              }
+          },
+          columnDefs: [
+              { orderable: false, targets: -1 } // Disable sorting on 'Action' column
+          ]
+      });
+  });
+</script>
 
 </body>
 

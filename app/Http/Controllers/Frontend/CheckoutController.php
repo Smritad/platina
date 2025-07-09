@@ -111,7 +111,7 @@ public function showCheckout()
 
 
 
- public function sendOtp(Request $request)
+public function sendOtp(Request $request)
 {
     $request->validate([
         'email' => 'required|email|max:255'
@@ -134,9 +134,9 @@ public function showCheckout()
             $message->to($email)->subject('Your OTP for Login');
         });
 
-        return response()->json(['message' => true, 'message' => 'OTP sent successfully!']);
+        return response()->json(['success' => true, 'message' => 'OTP sent successfully!']);
     } catch (\Exception $e) {
-        return response()->json(['message' => false, 'message' => 'Failed to send OTP.']);
+        return response()->json(['success' => false, 'message' => 'Failed to send OTP.']);
     }
 }
 
@@ -151,15 +151,15 @@ public function verifyOtp(Request $request)
     $otpRecord = Otp::where('email', $request->email)->first();
 
     if (!$otpRecord) {
-        return response()->json(['message' => false, 'message' => 'Invalid OTP.']);
+        return response()->json(['success' => false, 'message' => 'Invalid OTP.']);
     }
 
     if (Carbon::parse($otpRecord->created_at)->addMinutes(5)->isPast()) {
-        return response()->json(['message' => false, 'message' => 'OTP expired. Please request again.']);
+        return response()->json(['success' => false, 'message' => 'OTP expired. Please request again.']);
     }
 
     if ($otpRecord->otp != $request->otp) {
-        return response()->json(['message' => false, 'message' => 'OTP does not match.']);
+        return response()->json(['success' => false, 'message' => 'OTP does not match.']);
     }
 
     // Find or create user from logged_in_user_details

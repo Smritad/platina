@@ -183,5 +183,6 @@ Route::get('/my-order/view/{id}', [MyAccountController::class, 'viewOrder'])->na
 Route::get('/wishlist', [WishlistController::class, 'index'])->name('shows.wishlist');
 Route::get('/wishlist/add/{id}', [WishlistController::class, 'add'])->name('wishlist.add');
 Route::get('/wishlist/remove/{id}', [WishlistController::class, 'remove'])->name('wishlist.remove');
+Route::get('/wishlist/move-to-cart/{productId}', [WishlistController::class, 'moveToCart'])->name('wishlist.moveToCart');
 
 Route::get('/coming-soon', [ComingSoonController::class, 'index'])->name('coming.soon');

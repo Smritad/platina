@@ -64,11 +64,11 @@
       <div class="col-lg-8">
         <div class="thank-you-box bg-white p-4 p-md-5 shadow-sm rounded">
 
-          <!-- Logo -->
-          <img src="{{ asset('frontend/assets/img/logo/logo.webp') }}" alt="Logo" class="mb-4" style="max-width: 120px;">
-
+  
           <!-- Heading -->
-<h3 class="mb-3" style="color: #8B4513;">Thank You for Your Purchase!</h3> <!-- SaddleBrown -->
+<h3 class="mb-3" style="color: #8B4513;">
+  Thank You for Your <span style="color: inherit;">Purchase!</span>
+</h3> <!-- SaddleBrown -->
           <p class="mb-4">
             Your order has been successfully placed. A confirmation email has been sent to
             <a href="mailto:{{ $order->customer_email }}">{{ $order->customer_email }}</a>.
@@ -101,17 +101,22 @@
             <div class="d-flex justify-content-between mb-2"><span>Order ID</span><strong>#{{ $order->order_id }}</strong></div>
           </div>
 
-          @foreach($productNames as $index => $productName)
-          <div class="border p-3 rounded mb-3">
-            <div class="d-flex justify-content-between mb-2"><span>Product</span><strong>{{ $productName ?? 'N/A' }}</strong></div>
-            <div class="d-flex justify-content-between mb-2"><span>Quantity</span><strong>{{ $quantities[$index] ?? 'N/A' }}</strong></div>
-            <div class="d-flex justify-content-between mb-2"><span>Size</span><strong>{{ $sizes[$index] ?? '-' }}</strong></div>
-            <div class="d-flex justify-content-between mb-2"><span>Print Option</span><strong>{{ $prints[$index] ?? 'Front & Back Print' }}</strong></div>
-            <div class="d-flex justify-content-between"><span>Price</span>
-              <strong><i class="fa fa-inr"></i> {{ number_format($prices[$index] ?? '-') }} INR</strong>
-            </div>
-          </div>
-          @endforeach
+@foreach($productNames as $index => $productName)
+  <div class="border p-3 rounded mb-3">
+    <div class="d-flex justify-content-between mb-2"><span>Product</span><strong>{{ $productName ?? 'N/A' }}</strong></div>
+    <div class="d-flex justify-content-between mb-2"><span>Quantity</span><strong>{{ $quantities[$index] ?? 'N/A' }}</strong></div>
+    <div class="d-flex justify-content-between mb-2"><span>Size</span><strong>{{ $sizes[$index] ?? '-' }}</strong></div>
+    <div class="d-flex justify-content-between mb-2"><span>Print Option</span><strong>{{ $prints[$index] ?? 'Front & Back Print' }}</strong></div>
+    <div class="d-flex justify-content-between">
+      <span>Price</span>
+      <strong>
+        <i class="fa fa-inr"></i>
+        {{ number_format(($prices[$index] ?? 0) * ($quantities[$index] ?? 0)) }} INR
+      </strong>
+    </div>
+  </div>
+@endforeach
+
 
           <!-- Total -->
           <div class="bg-light p-3 rounded mb-4">

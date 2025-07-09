@@ -112,8 +112,8 @@
 
                                     <div id="otpSection" style="display: none;">
                                         <input type="text" name="otp" id="otp" placeholder="Enter OTP" required><br><br>
-                                        <button class="tf-btn" type="submit"><span class="text">Verify OTP</span></button>
-                                        <button type="button" id="resendOtpBtn" class="tf-btn" style="display: none;"><span id="resendBtnText">Resend OTP</span></button>
+                                        <button class="rx-btn-two" type="submit" ><span class="text">Verify OTP</span></button>
+                                        <button type="button" id="resendOtpBtn" class="rx-btn-two" style="display: none;"><span id="resendBtnText">Resend OTP</span></button>
                                     </div>
                                 </form>
                                 <div id="otpMessage"></div>
@@ -540,84 +540,119 @@
     </script>
      <!----- OTP Sending verifying with timer---->  
 <script>
-document.getElementById('sendOtpBtn').addEventListener('click', sendOtp);
-document.getElementById('resendOtpBtn').addEventListener('click', resetForm);
+document.addEventListener('DOMContentLoaded', function () {
+    const otpForm = document.getElementById('otpForm');
+    const emailInput = document.getElementById('email');
+    const otpInput = document.getElementById('otp');
+    const sendOtpBtn = document.getElementById('sendOtpBtn');
+    const resendOtpBtn = document.getElementById('resendOtpBtn');
+    const otpSection = document.getElementById('otpSection');
+    const resendBtnText = document.getElementById('resendBtnText');
+    const otpMessage = document.getElementById('otpMessage');
+    const sendBtnText = document.getElementById('btnText');
 
-function sendOtp() {
-    let email = document.getElementById('email').value;
-    let otpSection = document.getElementById('otpSection');
-    let resendBtn = document.getElementById('resendOtpBtn');
-
-    fetch("{{ route('send.otp') }}", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').content
-        },
-        body: JSON.stringify({ email: email })
-    })
-    .then(res => res.json())
-    .then(data => {
-        document.getElementById('otpMessage').innerHTML = `<p style="color: ${data.success ? 'green' : 'red'};">${data.message}</p>`;
-        if (data.success) {
-            otpSection.style.display = 'block';
-            document.getElementById('sendOtpBtn').style.display = 'none';
-            document.getElementById('email').style.display = 'none';
-            resendBtn.style.display = 'inline-block';
-            startTimer(120, resendBtn, document.getElementById('resendBtnText'));
-        }
-    });
-}
-
-function resetForm() {
-    document.getElementById('email').style.display = 'block';
-    document.getElementById('email').value = '';
-    document.getElementById('sendOtpBtn').style.display = 'inline-block';
-    document.getElementById('resendOtpBtn').style.display = 'none';
-    document.getElementById('otpSection').style.display = 'none';
-    document.getElementById('otp').value = '';
-    document.getElementById('otpMessage').innerHTML = '';
-}
-
-function startTimer(duration, button, btnText) {
-    let timeLeft = duration;
-    button.disabled = true;
-    function updateTimer() {
-        let min = Math.floor(timeLeft / 60);
-        let sec = timeLeft % 60;
-        btnText.innerHTML = `Resend OTP in <b>${min}:${sec < 10 ? '0' : ''}${sec}s</b>`;
-        if (timeLeft-- > 0) {
-            setTimeout(updateTimer, 1000);
-        } else {
-            button.disabled = false;
-            btnText.innerHTML = 'Resend OTP';
-        }
-    }
-    updateTimer();
-}
-
-document.getElementById('otpForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    fetch("{{ route('verify.otp') }}", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').content
-        },
-        body: JSON.stringify({
-            email: document.getElementById('email').value,
-            otp: document.getElementById('otp').value
+    otpForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        fetch("{{ route('verify.otp') }}", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').content
+            },
+            body: JSON.stringify({
+                email: emailInput.value,
+                otp: otpInput.value
+            })
         })
-    })
-    .then(res => res.json())
-    .then(data => {
-        document.getElementById('otpMessage').innerHTML = `<p style="color: ${data.success ? 'green' : 'red'};">${data.message}</p>`;
-        if (data.success) {
-            window.location.reload(); // Or redirect if needed
-        }
+        .then(res => res.json())
+        .then(data => {
+            otpMessage.innerHTML = `<p style="color: ${data.success ? 'green' : 'red'};">${data.message}</p>`;
+            if (data.success) {
+                window.location.reload(); // Or redirect
+            }
+        });
     });
+
+    sendOtpBtn.addEventListener('click', sendOtp);
+    resendOtpBtn.addEventListener('click', resetForm);
+
+    function sendOtp() {
+        const email = emailInput.value.trim();
+
+        // Validate email before sending
+        if (!email) {
+            otpMessage.innerHTML = `<p style="color: red;">Please enter a valid email address.</p>`;
+            return;
+        }
+
+        // Show loading state
+        sendOtpBtn.disabled = true;
+        sendBtnText.textContent = 'Sending...';
+
+        fetch("{{ route('send.otp') }}", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').content
+            },
+            body: JSON.stringify({ email })
+        })
+        .then(res => res.json())
+        .then(data => {
+            otpMessage.innerHTML = `<p style="color: ${data.success ? 'green' : 'red'};">${data.message}</p>`;
+
+            if (data.success) {
+                otpSection.style.display = 'block';
+                sendOtpBtn.style.display = 'none';
+                emailInput.style.display = 'none';
+                resendOtpBtn.style.display = 'inline-block';
+                startTimer(120, resendOtpBtn, resendBtnText);
+            }
+
+            // Reset button
+            sendOtpBtn.disabled = false;
+            sendBtnText.textContent = 'Send OTP';
+        })
+        .catch(() => {
+            otpMessage.innerHTML = `<p style="color: red;">Something went wrong. Please try again.</p>`;
+            sendOtpBtn.disabled = false;
+            sendBtnText.textContent = 'Send OTP';
+        });
+    }
+
+    function resetForm() {
+        emailInput.style.display = 'block';
+        emailInput.value = '';
+        sendOtpBtn.style.display = 'inline-block';
+        sendOtpBtn.disabled = false;
+        sendBtnText.textContent = 'Send OTP';
+        resendOtpBtn.style.display = 'none';
+        otpSection.style.display = 'none';
+        otpInput.value = '';
+        otpMessage.innerHTML = '';
+    }
+
+    function startTimer(duration, button, btnText) {
+        let timeLeft = duration;
+        button.disabled = true;
+
+        function updateTimer() {
+            let min = Math.floor(timeLeft / 60);
+            let sec = timeLeft % 60;
+            btnText.innerHTML = `Resend OTP in <b>${min}:${sec < 10 ? '0' : ''}${sec}s</b>`;
+            if (timeLeft-- > 0) {
+                setTimeout(updateTimer, 1000);
+            } else {
+                button.disabled = false;
+                btnText.innerHTML = 'Resend OTP';
+            }
+        }
+
+        updateTimer();
+    }
 });
 </script>
+
 <script>
 document.getElementById('postalcode').addEventListener('blur', function () {
     let pincode = this.value.trim();
