@@ -24,6 +24,7 @@ use Illuminate\Support\Facades\Validator;
 class CheckoutController extends Controller
 {
   
+    
     public function storeCheckoutData(Request $request)
 {
     $cartData = $request->cart;
