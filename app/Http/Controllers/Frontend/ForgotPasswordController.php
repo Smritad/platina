@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Models\LoggedInUserDetails;
-
 class ForgotPasswordController extends Controller
 {
     public function forgot_password()

@@ -13,7 +13,6 @@ use App\Models\AgeGroup;
 use App\Models\FabricType;
 use App\Models\ProductContent;
 
-
 class AllProductsController extends Controller
 {
 

@@ -41,7 +41,6 @@ class ProductsListingDetailsController extends Controller
     $collections = ProductDetails::whereNull('deleted_at')->select('collection')->distinct()->pluck('collection');
     $fabricTypes = FabricType::whereNull('deleted_at')->pluck('category_name', 'id');
     $sizes = SizeDetails::whereNull('deleted_at')->pluck('category_name', 'id');
-
     // Extract unique colors
     $uniqueColors = collect();
     foreach ($products as $product) {

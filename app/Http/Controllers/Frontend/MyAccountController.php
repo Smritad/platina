@@ -96,7 +96,6 @@ public function index()
             'password_current' => 'required',
             'password_new' => 'required|min:6|confirmed',
         ]);
-
         $user = Auth::guard('frontend')->user();
 
         if ($user && Hash::check($request->password_current, $user->password)) {

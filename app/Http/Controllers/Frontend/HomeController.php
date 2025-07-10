@@ -13,7 +13,6 @@ use App\Models\PremiumDetail;
 use App\Models\TestimonialsDetail;
 use App\Models\BlogsDetail;
 
-
 class HomeController extends Controller
 {
 

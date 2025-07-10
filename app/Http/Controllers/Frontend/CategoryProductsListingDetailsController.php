@@ -82,5 +82,4 @@ public function index($slug)
 }
 
 
-
 }

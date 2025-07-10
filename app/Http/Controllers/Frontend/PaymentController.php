@@ -281,7 +281,6 @@ if ($order->customer_email) {
                 ], 500);
             }
         }
-
         return response()->json(['status' => 'success']);
 
     } catch (\Exception $e) {

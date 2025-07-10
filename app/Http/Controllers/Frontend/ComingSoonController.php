@@ -12,7 +12,6 @@ class ComingSoonController extends Controller
     public function index()
 {
     
-
         return view('frontend.coming-soon');
 }
 

@@ -112,7 +112,6 @@ public function authenticate_login(Request $request)
     ]);
 }
 
-
     public function logout(Request $request) 
 {
      Session::flush();

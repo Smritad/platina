@@ -7,9 +7,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\PlatinaBrandDetail;
 
-
-
-
 class PlatinaBrndController extends Controller
 {
    public function index(Request $request)

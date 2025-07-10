@@ -9,8 +9,6 @@ use App\Models\ReturnPolicyDetail;
 use App\Models\PrivacyPolicyDetail;
 use App\Models\TermsConditions;
 
-
-
 class PoliciesController extends Controller
 {
    public function index(Request $request)

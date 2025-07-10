@@ -8,7 +8,6 @@ use App\Models\ProductDetails;
 use App\Models\Wishlist;
 use App\Models\Cart;
 
-
 class WishlistController extends Controller
 {
     // Show wishlist items

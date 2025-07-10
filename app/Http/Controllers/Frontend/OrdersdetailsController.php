@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\OrderDetail;
 use App\Models\ProductDetail;
-
 class OrdersdetailsController extends Controller
 {
     public function index($id)

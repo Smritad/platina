@@ -32,7 +32,6 @@ class CategoryProductsDetailsController extends Controller
     $fabricName = DB::table('fabric_type')
         ->where('id', $product->fabric_type_id)
         ->value('category_name');
-
     // Fetch related products (same sub-category, exclude current product)
     $products = ProductDetails::where('product_sab_category_id', $product->product_sab_category_id)
         ->where('id', '!=', $product->id)

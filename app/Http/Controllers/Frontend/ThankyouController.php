@@ -11,7 +11,6 @@ class ThankyouController extends Controller
    public function index()
 {
     
-
     return view('frontend.thankyou');
 }
 

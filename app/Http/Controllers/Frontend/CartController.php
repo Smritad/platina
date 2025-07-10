@@ -9,11 +9,10 @@ use App\Models\ProductDetails;
 use App\Models\SizeDetails;
 use App\Models\FabricType;
 use App\Models\Cart;
-
 class CartController extends Controller
 {
   
-    
+
     public function addToCart(Request $request, $id)
 {
     $product = ProductDetails::findOrFail($id);
