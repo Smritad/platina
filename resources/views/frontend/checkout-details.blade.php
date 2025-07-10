@@ -652,6 +652,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 
+
 <script>
 document.getElementById('postalcode').addEventListener('blur', function () {
     let pincode = this.value.trim();
