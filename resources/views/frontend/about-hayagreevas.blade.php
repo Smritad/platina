@@ -9,7 +9,6 @@
       <span class="loader"></span>
     </div>
     @include('components.frontend.header')
-
 <!-- Breadcrumb -->
 <section class="section-breadcrumb padding-b-50">
   <div class="rx-breadcrumb-image">

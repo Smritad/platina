@@ -80,16 +80,16 @@
               <a href="{{ route('product.details', $product->id) }}">
                 <img src="{{ $mainImage }}" alt="{{ $product->product_name }}">
               </a>
-              
+
               <div class="product-wishlist-name-wrap">
                 <h4>{{ $product->product_name }}</h4>
                 <h5>₹ {{ number_format($product->mrp, 2) }}</h5>
                 <form action="{{ route('add.to.cart', $product->id) }}" method="get">
                   @csrf
                   <input type="hidden" name="qty" value="1">
-<a href="{{ route('wishlist.moveToCart', $product->id) }}" class="rx-btn-two d-inline-block text-center mt-2">
-    Add To Cart
-</a>
+                    <a href="{{ route('wishlist.moveToCart', $product->id) }}" class="rx-btn-two d-inline-block text-center mt-2">
+                        Add To Cart
+                    </a>
                 </form>
               </div>
             </div>

@@ -213,6 +213,7 @@
                                 <img src="{{ asset('uploads/products/thumbnails/' . $defaultImage) }}" alt="{{ $product->product_name }}" class="img-default">
                                 <img src="{{ asset('uploads/products/thumbnails/' . $hoverImage) }}" alt="{{ $product->product_name }}" class="img-hover">
                             </a>
+                            
                             <div class="product-name-wrap">
                                 <a href="{{ route('product.categoryproduct', [$catSlug, $product->slug]) }}">
                                     <div class="product-inner-contact">

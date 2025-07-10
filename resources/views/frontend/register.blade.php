@@ -403,7 +403,6 @@ function validateForm() {
     document.getElementById("confirmPasswordError").innerText = "Passwords do not match.";
     isValid = false;
   }
-
   // Terms checkbox
   if (!agree) {
     document.getElementById("agreeError").innerText = "You must agree to the terms.";

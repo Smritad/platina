@@ -295,6 +295,7 @@ function validateLoginForm() {
         isValid = false;
     }
 
+
     return isValid;
 }
 

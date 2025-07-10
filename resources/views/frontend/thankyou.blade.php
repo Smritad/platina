@@ -14,7 +14,7 @@
         @include('components.frontend.header')
     </header>
     <!-- Hero -->
-    
+  
     <!-- Breadcrumb -->
     <section class="section-breadcrumb">
       <div class="rx-breadcrumb-image">

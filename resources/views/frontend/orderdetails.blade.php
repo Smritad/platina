@@ -45,6 +45,7 @@
                   <div class="last-contact">
                     <ul>
                       <li>
+                        
                         <a href="{{route('frontend.index') }}">Home</a>
                       </li>
                        <li><a href="{{route('frontend.account') }}">My Account</a></li> 

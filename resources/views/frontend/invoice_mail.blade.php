@@ -34,7 +34,6 @@
             text-align: left;
             margin-bottom: 20px;
         }
-       
         .footer {
             font-size: 14px;
             color: #777;

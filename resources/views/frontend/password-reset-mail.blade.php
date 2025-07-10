@@ -101,6 +101,7 @@
     <div class="button-wrapper">
       <a href="{{ route('user.resetpassword', $token) }}" class="reset-btn">Reset Password</a>
     </div>
+    
 
     <p>If you did not request a password reset, please ignore this email. Your account is still secure.</p>
     <p>For any assistance, feel free to contact our support team.</p>

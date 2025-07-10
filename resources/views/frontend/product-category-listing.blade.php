@@ -419,7 +419,6 @@
             ->where('id', $product->product_sab_category_id)
             ->value('slug');
     @endphp
-
     <div class="col-lg-4 col-sm-6 col-12 mb-24" data-aos="fade-up" data-aos-duration="1000">
         <div class="product-main-box-sec">
             <div class="product-box-front hover-image-wrap">

@@ -12,6 +12,7 @@
     </div>
     <!-- Header -->
     <header>
+      
          @include('components.frontend.header')
 
     </header>

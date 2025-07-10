@@ -11,6 +11,7 @@
   <div class="rx-loader">
     <span class="loader"></span>
   </div>
+  
   <!-- Header -->
      @include('components.frontend.header')
 

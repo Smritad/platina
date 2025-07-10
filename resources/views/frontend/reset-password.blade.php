@@ -6,7 +6,6 @@
          @include('components.frontend.head')
 
 </head>
-
 <body>
   <!-- Loader -->
   <div class="rx-loader">

@@ -61,8 +61,7 @@
 <section class="section-about padding-tb-50">
   <div class="container">
     <div class="row mb-minus-24 vertical-height-equal">
-
-      <!-- Left Image Column -->
+<!-- Left Image Column -->
       <div class="col-lg-6 col-12 mb-24" data-aos="fade-up" data-aos-duration="1000">
         <div class="rx-about-img">
           <img src="{{ asset('public/platina/home/banner/' . $about->image) }}" alt="about" class="rx-white-img">

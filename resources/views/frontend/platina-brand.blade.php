@@ -9,9 +9,6 @@
       <span class="loader"></span>
     </div>
     @include('components.frontend.header')
-
-
-
 <!-- Breadcrumb -->
 <section class="section-breadcrumb">
   <div class="rx-breadcrumb-image">

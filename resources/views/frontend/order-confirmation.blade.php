@@ -63,7 +63,6 @@
     <div class="row justify-content-center text-center">
       <div class="col-lg-8">
         <div class="thank-you-box bg-white p-4 p-md-5 shadow-sm rounded">
-
   
           <!-- Heading -->
 <h3 class="mb-3" style="color: #8B4513;">

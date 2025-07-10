@@ -143,6 +143,7 @@
                                                         ->first();
 
                                         $sabSlug = $sabCategory ? $sabCategory->slug : 'coming-soon';
+                              
                                         $productSlug = $product ? $product->slug : \Illuminate\Support\Str::slug($item->product_name);
                                         $productLink = route('product.categoryproduct', [$sabSlug, $productSlug]);
                                     @endphp

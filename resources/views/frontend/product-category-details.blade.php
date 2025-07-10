@@ -575,6 +575,7 @@
             </div>
           </div>
         </div>
+        
         <div class="rx-tools-block">
           <h3>Backgrounds</h3>
           <div class="rx-tools-bg">

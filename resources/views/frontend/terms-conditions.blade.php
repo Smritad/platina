@@ -11,7 +11,6 @@
     <!-- Header -->
         @include('components.frontend.header')
     <!-- end Header -->
-
   <section class="section-breadcrumb">
   <div class="rx-breadcrumb-image">
     <div class="rx-breadcrumb-overlay"></div>

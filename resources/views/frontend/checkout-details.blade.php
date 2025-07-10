@@ -328,8 +328,6 @@
                 </div>
             @endforeach
         </div>
-
-        
         <!-- GST Sections -->
         <div class="order-shipping-price-sec mt-3">
              <fieldset class="ship-item">
