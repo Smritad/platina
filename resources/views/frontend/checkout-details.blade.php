@@ -656,7 +656,7 @@ document.addEventListener('DOMContentLoaded', function () {
 document.getElementById('postalcode').addEventListener('blur', function () {
     let pincode = this.value.trim();
     if (pincode.length === 6) {
-        fetch(`/get-location-from-pincode/${pincode}`)
+        fetch(`platina-india/get-location-from-pincode/${pincode}`)
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
