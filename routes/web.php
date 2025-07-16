@@ -151,10 +151,12 @@ Route::get('/our-leadership', [TeamController::class, 'index'])->name('frontend.
 Route::get('/manufacturing-excellence', [ManufacturingController::class, 'index'])->name('frontend.manufacturing-unit');
 Route::get('/products', [AllProductsController::class, 'index'])->name('product.all');
 Route::get('/category/{slug}', [CategoryProductsListingDetailsController::class, 'index'])->name('product.category');
+Route::get('/all-products/filter', [AllProductsController::class, 'filter'])->name('allproducts.filter');
 
 
 Route::get('/products/{slug}', [ProductsListingDetailsController::class, 'index'])->name('product.details');
 Route::get('/products-details/{catSlug}/{productSlug}', [CategoryProductsDetailsController::class, 'index'])->name('product.categoryproduct');
+
 
 Route::get('add-to-cart/{id}', [CartController::class, 'addToCart'])->name('add.to.cart');
 Route::get('show-cart', [CartController::class, 'showCart'])->name('show.cart');

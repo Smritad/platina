@@ -539,7 +539,7 @@
     </script>
      <!----- OTP Sending verifying with timer---->  
 <script>
-document.addEventListener('DOMContentLoaded', function () {
+ document.addEventListener('DOMContentLoaded', function () {
     const otpForm = document.getElementById('otpForm');
     const emailInput = document.getElementById('email');
     const otpInput = document.getElementById('otp');

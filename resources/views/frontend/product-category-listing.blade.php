@@ -68,62 +68,51 @@
           <div id="sidebarOverlay" class="sidebar-overlay"></div>
 
           <!-- Sidebar: mobile view -->
-          <div id="mobileSidebar" class="sidebar d-block d-lg-none">
-            <div class="sidebar-header">
-              <h4>Filter</h4>
-              <button id="closeSidebar" class="close-btn">&times;</button>
-            </div>
-            <div class="sidebar-content">
-              <div class="product-listing-side-bar-sec">
-                <div class="sidebar-wrap">
+                      <div id="mobileSidebar" class="sidebar d-block d-lg-none">
+                        <div class="sidebar-header">
+                          <h4>Filter</h4>
+                          <button id="closeSidebar" class="close-btn">&times;</button>
+                        </div>
+                        <div class="sidebar-content">
+                          <div class="product-listing-side-bar-sec">
+                            <div class="sidebar-wrap">
 
-                        <!-- Category -->
-                        <!-- <div class="single-sidebar-item">
-                            <div class="single-sidebar-title">
-                                <h4>Category</h4>
-                            </div>
-                            <ul class="products-list">
-                                @foreach($categories as $id => $category)
-                                    <li><a href="#">{{ $category }}</a></li>
-                                @endforeach
-                            </ul>
-                        </div> -->
-
-<div class="single-sidebar-item">
-                    <div class="single-sidebar-title">
-                      <h4>Category</h4>
-                    </div>
-<div class="dropdown product-sub-cate-dropdown-sec">
-  <button class="btn custom-dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Bedding
-  </button>
-  <ul class="dropdown-menu custom-dropdown-menu">
-    <li><a class="dropdown-item" href="#">Bedding 1</a></li>
-    <li><a class="dropdown-item" href="#">Bedding 2</a></li>
-    <li><a class="dropdown-item" href="#">Bedding 3</a></li>
-  </ul>
-</div>
-<div class="dropdown product-sub-cate-dropdown-sec">
-  <button class="btn custom-dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Bedding
-  </button>
-  <ul class="dropdown-menu custom-dropdown-menu">
-    <li><a class="dropdown-item" href="#">Bedding 4</a></li>
-    <li><a class="dropdown-item" href="#">Bedding 5</a></li>
-    <li><a class="dropdown-item" href="#">Bedding 6</a></li>
-  </ul>
-</div>
- <div class="dropdown product-sub-cate-dropdown-sec">
-  <button class="btn custom-dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Bedding
-  </button>
-  <ul class="dropdown-menu custom-dropdown-menu">
-    <li><a class="dropdown-item" href="#">Bedding 7</a></li>
-    <li><a class="dropdown-item" href="#">Bedding 8</a></li>
-    <li><a class="dropdown-item" href="#">Bedding 9</a></li>
-  </ul>
-</div>
-</div>
+                       
+                        <div class="single-sidebar-item">
+                        <div class="single-sidebar-title">
+                          <h4>Category</h4>
+                        </div>
+                        <div class="dropdown product-sub-cate-dropdown-sec">
+                          <button class="btn custom-dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Bedding
+                          </button>
+                          <ul class="dropdown-menu custom-dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Bedding 1</a></li>
+                            <li><a class="dropdown-item" href="#">Bedding 2</a></li>
+                            <li><a class="dropdown-item" href="#">Bedding 3</a></li>
+                          </ul>
+                        </div>
+                        <div class="dropdown product-sub-cate-dropdown-sec">
+                          <button class="btn custom-dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Bedding
+                          </button>
+                          <ul class="dropdown-menu custom-dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Bedding 4</a></li>
+                            <li><a class="dropdown-item" href="#">Bedding 5</a></li>
+                            <li><a class="dropdown-item" href="#">Bedding 6</a></li>
+                          </ul>
+                        </div>
+                        <div class="dropdown product-sub-cate-dropdown-sec">
+                          <button class="btn custom-dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Bedding
+                          </button>
+                          <ul class="dropdown-menu custom-dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Bedding 7</a></li>
+                            <li><a class="dropdown-item" href="#">Bedding 8</a></li>
+                            <li><a class="dropdown-item" href="#">Bedding 9</a></li>
+                          </ul>
+                        </div>
+                        </div>
 
                         <!-- TC -->
                         <div class="single-sidebar-item">
@@ -205,30 +194,30 @@
                         </div>
 
                         <!-- Price Range -->
-              <div class="single-sidebar-item">
-                <div class="single-sidebar-title">
-                  <h4>Price</h4>
-                </div>
-                <div class="price-range-box">
-                  <div class="price-input">
-                    <div class="field">
-                      <label for="minPrice">Min</label>
-                      <input type="number" id="minPrice" value="1000">
-                    </div>
-                    <div class="field">
-                      <label for="maxPrice">Max</label>
-                      <input type="number" id="maxPrice" value="5000">
-                    </div>
-                  </div>
-                  <div class="slider">
-                    <div class="progress" style="left: 0%; right: 70%;"></div>
-                  </div>
-                  <div class="range-input">
-                    <input type="range" id="rangeMin" min="0" max="100000" value="0" step="100">
-                    <input type="range" id="rangeMax" min="0" max="100000" value="30000" step="100">
-                  </div>
-                </div>
-              </div>
+                        <div class="single-sidebar-item">
+                          <div class="single-sidebar-title">
+                            <h4>Price</h4>
+                          </div>
+                          <div class="price-range-box">
+                            <div class="price-input">
+                              <div class="field">
+                                <label for="minPrice">Min</label>
+                                <input type="number" id="minPrice" value="1000">
+                              </div>
+                              <div class="field">
+                                <label for="maxPrice">Max</label>
+                                <input type="number" id="maxPrice" value="5000">
+                              </div>
+                            </div>
+                            <div class="slider">
+                              <div class="progress" style="left: 0%; right: 70%;"></div>
+                            </div>
+                            <div class="range-input">
+                              <input type="range" id="rangeMin" min="0" max="100000" value="0" step="100">
+                              <input type="range" id="rangeMax" min="0" max="100000" value="30000" step="100">
+                            </div>
+                          </div>
+                        </div>
 
                     </div>
                 </div>
@@ -238,59 +227,43 @@
 
           
           <!-- -- Sidebar on desktop: visible only on desktop --> 
-
           <div class="product-listing-side-bar-sec d-none d-lg-block">
             <div class="sidebar-wrap">
-
-               <!-- Category -->
-                        <!-- <div class="single-sidebar-item">
-                            <div class="single-sidebar-title">
-                                <h4>Category</h4>
-                            </div>
-                            <ul class="products-list">
-                                @foreach($categories as $id => $category)
-                                    <li><a href="#">{{ $category }}</a></li>
-                                @endforeach
-                            </ul>
-                        </div> -->
-
-
-
-                        <div class="single-sidebar-item">
+              <div class="single-sidebar-item">
                     <div class="single-sidebar-title">
                       <h4>Category</h4>
                     </div>
-<div class="dropdown product-sub-cate-dropdown-sec">
-  <button class="btn custom-dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Bedding
-  </button>
-  <ul class="dropdown-menu custom-dropdown-menu">
-    <li><a class="dropdown-item" href="#">Bedding 1</a></li>
-    <li><a class="dropdown-item" href="#">Bedding 2</a></li>
-    <li><a class="dropdown-item" href="#">Bedding 3</a></li>
-  </ul>
-</div>
-<div class="dropdown product-sub-cate-dropdown-sec">
-  <button class="btn custom-dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Bedding
-  </button>
-  <ul class="dropdown-menu custom-dropdown-menu">
-    <li><a class="dropdown-item" href="#">Bedding 4</a></li>
-    <li><a class="dropdown-item" href="#">Bedding 5</a></li>
-    <li><a class="dropdown-item" href="#">Bedding 6</a></li>
-  </ul>
-</div>
- <div class="dropdown product-sub-cate-dropdown-sec">
-  <button class="btn custom-dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Bedding
-  </button>
-  <ul class="dropdown-menu custom-dropdown-menu">
-    <li><a class="dropdown-item" href="#">Bedding 7</a></li>
-    <li><a class="dropdown-item" href="#">Bedding 8</a></li>
-    <li><a class="dropdown-item" href="#">Bedding 9</a></li>
-  </ul>
-</div>
-</div>
+                      <div class="dropdown product-sub-cate-dropdown-sec">
+                        <button class="btn custom-dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          Bedding
+                        </button>
+                        <ul class="dropdown-menu custom-dropdown-menu">
+                          <li><a class="dropdown-item" href="#">Bedding 1</a></li>
+                          <li><a class="dropdown-item" href="#">Bedding 2</a></li>
+                          <li><a class="dropdown-item" href="#">Bedding 3</a></li>
+                        </ul>
+                      </div>
+                      <div class="dropdown product-sub-cate-dropdown-sec">
+                        <button class="btn custom-dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          Bedding
+                        </button>
+                        <ul class="dropdown-menu custom-dropdown-menu">
+                          <li><a class="dropdown-item" href="#">Bedding 4</a></li>
+                          <li><a class="dropdown-item" href="#">Bedding 5</a></li>
+                          <li><a class="dropdown-item" href="#">Bedding 6</a></li>
+                        </ul>
+                      </div>
+                      <div class="dropdown product-sub-cate-dropdown-sec">
+                        <button class="btn custom-dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          Bedding
+                        </button>
+                        <ul class="dropdown-menu custom-dropdown-menu">
+                          <li><a class="dropdown-item" href="#">Bedding 7</a></li>
+                          <li><a class="dropdown-item" href="#">Bedding 8</a></li>
+                          <li><a class="dropdown-item" href="#">Bedding 9</a></li>
+                        </ul>
+                      </div>
+                      </div>
 
                         <!-- TC -->
                         <div class="single-sidebar-item">
@@ -372,34 +345,34 @@
                         </div>
 
                         <!-- Price Range -->
-              <div class="single-sidebar-item">
-                <div class="single-sidebar-title">
-                  <h4>Price</h4>
-                </div>
-                <div class="price-range-box">
-                  <div class="price-input">
-                    <div class="field">
-                      <label for="minPrice">Min</label>
-                      <input type="number" id="minPrice" value="1000">
+                        <div class="single-sidebar-item">
+                          <div class="single-sidebar-title">
+                            <h4>Price</h4>
+                          </div>
+                          <div class="price-range-box">
+                            <div class="price-input">
+                              <div class="field">
+                                <label for="minPrice">Min</label>
+                                <input type="number" id="minPrice" value="1000">
+                              </div>
+                              <div class="field">
+                                <label for="maxPrice">Max</label>
+                                <input type="number" id="maxPrice" value="5000">
+                              </div>
+                            </div>
+                            <div class="slider">
+                              <div class="progress" style="left: 0%; right: 70%;"></div>
+                            </div>
+                            <div class="range-input">
+                              <input type="range" id="rangeMin" min="0" max="100000" value="0" step="100">
+                              <input type="range" id="rangeMax" min="0" max="100000" value="30000" step="100">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    <div class="field">
-                      <label for="maxPrice">Max</label>
-                      <input type="number" id="maxPrice" value="5000">
-                    </div>
-                  </div>
-                  <div class="slider">
-                    <div class="progress" style="left: 0%; right: 70%;"></div>
-                  </div>
-                  <div class="range-input">
-                    <input type="range" id="rangeMin" min="0" max="100000" value="0" step="100">
-                    <input type="range" id="rangeMax" min="0" max="100000" value="30000" step="100">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
 
-</div>  
+            </div>  
             <!-- Products -->
 <div class="col-12 col-sm-9">
     <div class="product-listing-sec">

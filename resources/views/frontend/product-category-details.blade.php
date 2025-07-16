@@ -318,13 +318,13 @@
                 </div>
               </div>
 
-                <!-- Connect Us Button -->
-  <!-- <div class="col-md-5">
-                  <div class="pro-det-add-to-cart-btn">
-                      <button type="button" class="prod-det-btn-two" data-bs-toggle="modal" data-bs-target="#connectUsModal">
-  Enquire Now  </button>
-  </div>
-  </div> -->
+                        <!-- Connect Us Button -->
+          <!-- <div class="col-md-5">
+                          <div class="pro-det-add-to-cart-btn">
+                              <button type="button" class="prod-det-btn-two" data-bs-toggle="modal" data-bs-target="#connectUsModal">
+          Enquire Now  </button>
+          </div>
+          </div> -->
               <div class="col-md-5">
                 <div class="pro-det-add-to-cart-btn">
                   <button type="submit" class="prod-det-btn-two">Add to cart</button>
