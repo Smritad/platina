@@ -355,7 +355,7 @@
                               </div>
                             </div>
                             <div class="slider">
-                              
+
                               <div class="progress" style="left: 0%; right: 70%;"></div>
                             </div>
                             <div class="range-input">
@@ -370,6 +370,7 @@
                         </div>
                       </div>
                     </div>
+                    
               </div>
 </div>
 
