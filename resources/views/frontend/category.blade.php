@@ -323,6 +323,7 @@
                           </div>
 
                           
+
                           <div class="dropdown">
                               <input type="text" id="colorSearchInput" class="form-control" placeholder="Search color..." data-bs-toggle="dropdown" aria-expanded="false" autocomplete="off">
                               <ul class="dropdown-menu w-100 color-search-dropdown" id="colorSearchDropdown">
