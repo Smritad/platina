@@ -653,3 +653,6 @@ $(".weaves-slider-sec").owlCarousel({
     },
   },
 });
+
+
+

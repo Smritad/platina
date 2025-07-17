@@ -78,43 +78,65 @@
                         </div>
                         <div class="sidebar-content">
                           <div class="product-listing-side-bar-sec">
-                            <div class="sidebar-wrap">
+                       <div class="sidebar-wrap" id="mobileFilterForm">
 
                        
                         <div class="single-sidebar-item">
-                        <div class="single-sidebar-title">
-                          <h4>Category</h4>
-                      </div>
+                       <div class="single-sidebar-title">
+                            <h4>Category</h4>
+                        </div>
 
-                      @foreach($categories as $category)
-                          <div class="dropdown product-sub-cate-dropdown-sec">
-                              <button class="btn custom-dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                  {{ $category->category_name }}
-                              </button>
-                              <ul class="dropdown-menu custom-dropdown-menu">
-                                  @if(isset($subCategories[$category->id]))
-                                      @foreach($subCategories[$category->id] as $subCategory)
-                                          <li>
-                                              <a class="dropdown-item" href="#">
-                                                  {{ $subCategory->sab_category_name }}
-                                              </a>
-                                          </li>
-                                      @endforeach
-                                  @else
-                                      <li><a class="dropdown-item" href="#">No Subcategories</a></li>
-                                  @endif
-                              </ul>
-                          </div>
-                      @endforeach
+                        @foreach($categories as $category)
+                            @php
+                                $masterSlug = \Illuminate\Support\Str::slug($category->category_name);
+                                $masterHasProducts = \Illuminate\Support\Facades\DB::table('product_details')
+                                    ->where('product_category_id', $category->id)
+                                    ->whereNull('deleted_at')
+                                    ->exists();
+                            @endphp
+
+                            <div class="dropdown product-sub-cate-dropdown-sec">
+                                <button class="btn custom-dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    {{ $category->category_name }}
+                                </button>
+                                <ul class="dropdown-menu custom-dropdown-menu">
+
+                                    <li>
+                                        <a class="dropdown-item master-link" href="{{ $masterHasProducts ? route('product.category', $masterSlug) : route('coming.soon') }}">
+                                            All {{ $category->category_name }}
+                                        </a>
+                                    </li>
+
+                                    @if(isset($subCategories[$category->id]))
+                                        @foreach($subCategories[$category->id] as $subCategory)
+                                            @php
+                                                $subHasProducts = \Illuminate\Support\Facades\DB::table('product_details')
+                                                    ->where('product_sab_category_id', $subCategory->id)
+                                                    ->whereNull('deleted_at')
+                                                    ->exists();
+                                            @endphp
+                                            <li>
+                                                <a class="dropdown-item" href="{{ $subHasProducts ? route('product.details', $subCategory->slug) : route('coming.soon') }}">
+                                                    {{ $subCategory->sab_category_name }}
+                                                </a>
+                                            </li>
+                                        @endforeach
+                                    @else
+                                        <li><a class="dropdown-item" href="#">No Subcategories</a></li>
+                                    @endif
+                                </ul>
+                            </div>
+                        @endforeach
+
 
                         </div>
 
-                        <!-- TC -->
+                          <!-- TC -->
                         <div class="single-sidebar-item">
                             <div class="single-sidebar-title">
                                 <h4>TC</h4>
                             </div>
-                            <select class="rx-from-control form-select">
+                            <select class="rx-from-control form-select" name="tc_name">
                                 <option selected>Select</option>
                                 @foreach($tcs as $tc)
                                     <option value="{{ $tc }}">{{ $tc }}</option>
@@ -127,7 +149,7 @@
                             <div class="single-sidebar-title">
                                 <h4>Age Group</h4>
                             </div>
-                            <select class="rx-from-control form-select">
+                            <select class="rx-from-control form-select" name="age_group">
                                 <option selected>Select</option>
                                 @foreach($ageGroups as $id => $ageGroup)
                                     <option value="{{ $ageGroup }}">{{ $ageGroup }}</option>
@@ -140,7 +162,7 @@
                             <div class="single-sidebar-title">
                                 <h4>Collection Name</h4>
                             </div>
-                            <select class="rx-from-control form-select">
+                            <select class="rx-from-control form-select" name="collection_name">
                                 <option selected>Select</option>
                                 @foreach($collections as $collection)
                                     <option value="{{ $collection }}">{{ $collection }}</option>
@@ -163,55 +185,70 @@
                             @endforeach
                         </div>
 
+                        
                         <!-- Color -->
-                        <div class="single-sidebar-item">
-                            <div class="single-sidebar-title">
-                                <h4>Select Color</h4>
-                            </div>
-                            <input type="text" class="product-select-color-search-box" placeholder="Search color...">
-                            <ul class="products-list">
-                                @foreach($uniqueColors as $color)
-                                    <li>{{ $color }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-
-                        <!-- Size -->
-                        <div class="single-sidebar-item">
-                            <div class="single-sidebar-title">
-                                <h4>Size</h4>
-                            </div>
-                            <ul class="list-inline">
-                                @foreach($sizes as $id => $size)
-                                    <li class="list-inline-item"><a href="#" class="size-btn">{{ $size }}</a></li>
-                                @endforeach
-                            </ul>
-                        </div>
-
-                        <!-- Price Range -->
-                        <div class="single-sidebar-item">
+                      <!-- Color -->
+                      <div class="single-sidebar-item">
                           <div class="single-sidebar-title">
-                            <h4>Price</h4>
+                              <h4>Select Color</h4>
                           </div>
-                          <div class="price-range-box">
-                            <div class="price-input">
-                              <div class="field">
-                                <label for="minPrice">Min</label>
-                                <input type="number" id="minPrice" value="1000">
-                              </div>
-                              <div class="field">
-                                <label for="maxPrice">Max</label>
-                                <input type="number" id="maxPrice" value="5000">
-                              </div>
-                            </div>
-                            <div class="slider">
-                              <div class="progress" style="left: 0%; right: 70%;"></div>
-                            </div>
-                            <div class="range-input">
-                              <input type="range" id="rangeMin" min="0" max="100000" value="0" step="100">
-                              <input type="range" id="rangeMax" min="0" max="100000" value="30000" step="100">
-                            </div>
+
+                          <div class="dropdown">
+                              <input type="text" id="colorSearchInputMobile" class="form-control" placeholder="Search color..." data-bs-toggle="dropdown" aria-expanded="false" autocomplete="off">
+                              <ul class="dropdown-menu w-100 color-search-dropdown" id="colorSearchDropdownMobile">
+                                  @foreach($uniqueColors as $color)
+                                      <li><a class="dropdown-item color-option-mobile" href="#" data-color="{{ $color }}">{{ $color }}</a></li>
+                                  @endforeach
+                              </ul>
                           </div>
+
+                          <div id="selectedColorDisplayMobile" class="mt-2"></div>
+                      </div>
+
+
+                       <!-- Size -->
+                      <div class="single-sidebar-item">
+                          <div class="single-sidebar-title">
+                              <h4>Size</h4>
+                          </div>
+                          <ul class="list-inline">
+                              @foreach($sizes as $id => $size)
+                                  <li class="list-inline-item">
+                                      <a href="#" class="size-btn">{{ $size }}</a>
+                                  </li>
+                              @endforeach
+                          </ul>
+                      </div>
+                     
+
+                          <!-- Price Range mobile-->
+                          <div class="single-sidebar-item">
+                              <div class="single-sidebar-title">
+                                  <h4>Price</h4>
+                              </div>
+                              <div class="price-range-box">
+                                  <div class="price-input">
+                                      <div class="field">
+                                          <label for="minPrice">Min</label>
+                                          <input type="number" id="minPriceMobile" value="0">
+                                      </div>
+                                      <div class="field">
+                                          <label for="maxPrice">Max</label>
+                                         <input type="number" id="maxPriceMobile" value="0">
+                                      </div>
+                                  </div>
+                                 <div class="slider">
+                                          <div class="progress" id="progressMobile" style="left: 0%; right: 70%;"></div>
+                                      </div>
+                                  <div class="range-input">
+                                     <input type="range" id="rangeMinMobile" min="0" max="100000" value="0" step="100">
+                                      <input type="range" id="rangeMaxMobile" min="0" max="100000" value="0" step="100">
+                                  </div>
+                              </div>
+                          </div>
+                          
+                         <div class="single-sidebar-item">
+                            <button type="submit" class="btn btn-primary w-100">Apply Filters</button>
                         </div>
 
                     </div>
@@ -223,56 +260,75 @@
           
             <!-- -- Sidebar on desktop: visible only on desktop --> 
             <div class="product-listing-side-bar-sec d-none d-lg-block">
-            <div class="sidebar-wrap">
-        <div id="filterForm">
+              <div class="sidebar-wrap" id="desktopFilterForm">
               <div class="single-sidebar-item">
-                    <div class="single-sidebar-title">
-                        <h4>Category</h4>
-                    </div>
+                       <div class="single-sidebar-title">
+                            <h4>Category</h4>
+                        </div>
 
-                      @foreach($categories as $category)
-                          <div class="dropdown product-sub-cate-dropdown-sec">
-                              <button class="btn custom-dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                  {{ $category->category_name }}
-                              </button>
-                              <ul class="dropdown-menu custom-dropdown-menu">
-                                  @if(isset($subCategories[$category->id]))
-                                      @foreach($subCategories[$category->id] as $subCategory)
-                                          <li>
-                                              <a class="dropdown-item" href="#">
-                                                  {{ $subCategory->sab_category_name }}
-                                              </a>
-                                          </li>
-                                      @endforeach
-                                  @else
-                                      <li><a class="dropdown-item" href="#">No Subcategories</a></li>
-                                  @endif
-                              </ul>
-                          </div>
-                      @endforeach
+                        @foreach($categories as $category)
+                            @php
+                                $masterSlug = \Illuminate\Support\Str::slug($category->category_name);
+                                $masterHasProducts = \Illuminate\Support\Facades\DB::table('product_details')
+                                    ->where('product_category_id', $category->id)
+                                    ->whereNull('deleted_at')
+                                    ->exists();
+                            @endphp
+
+                            <div class="dropdown product-sub-cate-dropdown-sec">
+                                <button class="btn custom-dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    {{ $category->category_name }}
+                                </button>
+                                <ul class="dropdown-menu custom-dropdown-menu">
+
+                                    <li>
+                                        <a class="dropdown-item master-link" href="{{ $masterHasProducts ? route('product.category', $masterSlug) : route('coming.soon') }}">
+                                            All {{ $category->category_name }}
+                                        </a>
+                                    </li>
+
+                                    @if(isset($subCategories[$category->id]))
+                                        @foreach($subCategories[$category->id] as $subCategory)
+                                            @php
+                                                $subHasProducts = \Illuminate\Support\Facades\DB::table('product_details')
+                                                    ->where('product_sab_category_id', $subCategory->id)
+                                                    ->whereNull('deleted_at')
+                                                    ->exists();
+                                            @endphp
+                                            <li>
+                                                <a class="dropdown-item" href="{{ $subHasProducts ? route('product.details', $subCategory->slug) : route('coming.soon') }}">
+                                                    {{ $subCategory->sab_category_name }}
+                                                </a>
+                                            </li>
+                                        @endforeach
+                                    @else
+                                        <li><a class="dropdown-item" href="#">No Subcategories</a></li>
+                                    @endif
+                                </ul>
+                            </div>
+                        @endforeach
 
                       </div>
 
                         <!-- TC -->
                         <div class="single-sidebar-item">
-        <div class="single-sidebar-title">
-            <h4>TC</h4>
-        </div>
-        <select name="tc_name" class="rx-from-control form-select">
-            <option value="">Select</option>
-            @foreach($tcs as $tc)
-                <option value="{{ $tc }}">{{ $tc }}</option>
-            @endforeach
-        </select>
-    </div>
-
+                            <div class="single-sidebar-title">
+                                <h4>TC</h4>
+                            </div>
+                            <select class="rx-from-control form-select" name="tc_name">
+                                <option selected>Select</option>
+                                @foreach($tcs as $tc)
+                                    <option value="{{ $tc }}">{{ $tc }}</option>
+                                @endforeach
+                            </select>
+                        </div>
 
                         <!-- Age Group -->
                         <div class="single-sidebar-item">
                             <div class="single-sidebar-title">
                                 <h4>Age Group</h4>
                             </div>
-                            <select class="rx-from-control form-select">
+                            <select class="rx-from-control form-select" name="age_group">
                                 <option selected>Select</option>
                                 @foreach($ageGroups as $id => $ageGroup)
                                     <option value="{{ $ageGroup }}">{{ $ageGroup }}</option>
@@ -285,7 +341,7 @@
                             <div class="single-sidebar-title">
                                 <h4>Collection Name</h4>
                             </div>
-                            <select class="rx-from-control form-select">
+                            <select class="rx-from-control form-select" name="collection_name">
                                 <option selected>Select</option>
                                 @foreach($collections as $collection)
                                     <option value="{{ $collection }}">{{ $collection }}</option>
@@ -308,153 +364,110 @@
                             @endforeach
                         </div>
 
+                        
                         <!-- Color -->
-                        <div class="single-sidebar-item">
-                            <div class="single-sidebar-title">
-                                <h4>Select Color</h4>
-                            </div>
-
-                            <div class="dropdown">
-                                <input type="text" id="colorSearchInput" class="form-control" placeholder="Search color..." data-bs-toggle="dropdown" aria-expanded="false" autocomplete="off">
-                                <ul class="dropdown-menu w-100 color-search-dropdown" id="colorSearchDropdown">
-                                    @foreach($uniqueColors as $color)
-                                        <li><a class="dropdown-item color-option" href="#" data-color="{{ $color }}">{{ $color }}</a></li>
-                                    @endforeach
-                                </ul>
-                            </div>
-
-                            <div id="selectedColorDisplay" class="mt-2"></div>
-                        </div>
-
-                        <!-- Size -->
-                        <div class="single-sidebar-item">
-                            <div class="single-sidebar-title">
-                                <h4>Size</h4>
-                            </div>
-                            <ul class="list-inline">
-                                @foreach($sizes as $id => $size)
-                                    <li class="list-inline-item"><a href="#" class="size-btn">{{ $size }}</a></li>
-                                @endforeach
-                            </ul>
-                        </div>
-
-                        <!-- Price Range -->
-                        <div class="single-sidebar-item">
+                      <div class="single-sidebar-item">
                           <div class="single-sidebar-title">
-                            <h4>Price</h4>
+                              <h4>Select Color</h4>
                           </div>
-                          <div class="price-range-box">
-                            <div class="price-input">
-                              <div class="field">
-                                <label for="minPrice">Min</label>
-                                <input type="number" id="minPrice" value="1000">
-                              </div>
-                              <div class="field">
-                                <label for="maxPrice">Max</label>
-                                <input type="number" id="maxPrice" value="5000">
-                              </div>
-                            </div>
-                            <div class="slider">
 
-                              <div class="progress" style="left: 0%; right: 70%;"></div>
-                            </div>
-                            <div class="range-input">
-                              <input type="range" id="rangeMin" min="0" max="100000" value="0" step="100">
-                              <input type="range" id="rangeMax" min="0" max="100000" value="30000" step="100">
-                            </div>
+                          <div class="dropdown">
+                              <input type="text" id="colorSearchInput" class="form-control" placeholder="Search color..." data-bs-toggle="dropdown" aria-expanded="false" autocomplete="off">
+                              <ul class="dropdown-menu w-100 color-search-dropdown" id="colorSearchDropdown">
+                                  @foreach($uniqueColors as $color)
+                                      <li><a class="dropdown-item color-option" href="#" data-color="{{ $color }}">{{ $color }}</a></li>
+                                  @endforeach
+                              </ul>
                           </div>
-                        </div>
+
+                          <!-- Selected colors shown here -->
+                          <div id="selectedColorDisplay" class="mt-2"></div>
+                      </div>
+
+                       <!-- Size -->
+                      <div class="single-sidebar-item">
+                          <div class="single-sidebar-title">
+                              <h4>Size</h4>
+                          </div>
+                          <ul class="list-inline">
+                              @foreach($sizes as $id => $size)
+                                  <li class="list-inline-item">
+                                      <a href="#" class="size-btn">{{ $size }}</a>
+                                  </li>
+                              @endforeach
+                          </ul>
+                      </div>
+
+                          <!-- Price Range desktop -->
+                          <div class="single-sidebar-item">
+                              <div class="single-sidebar-title">
+                                  <h4>Price</h4>
+                              </div>
+                              <div class="price-range-box">
+                                  <div class="price-input">
+                                      <div class="field">
+                                          <label for="minPrice">Min</label>
+                                     <input type="number" id="minPriceDesktop" value="1000">
+                                      </div>
+                                      <div class="field">
+                                          <label for="maxPrice">Max</label>
+                                            <input type="number" id="maxPriceDesktop" value="5000">
+                                      </div>
+                                  </div>
+                                 <div class="slider">
+                                              <div class="progress" id="progressDesktop" style="left: 0%; right: 70%;"></div>
+                                          </div>
+                                  <div class="range-input">
+                                     <input type="range" id="rangeMinDesktop" min="0" max="100000" value="0" step="100">
+                                      <input type="range" id="rangeMaxDesktop" min="0" max="100000" value="30000" step="100">
+
+                                  </div>
+                              </div>
+                          </div>
+
 
                          <div class="single-sidebar-item">
                             <button type="submit" class="btn btn-primary w-100">Apply Filters</button>
                         </div>
                       </div>
                     </div>
-                    
               </div>
-</div>
+           
+            <div class="col-12 col-sm-9">
+                <div class="product-listing-sec">
+                    <div class="row mb-minus-24 room-popup" id="productResults">
+                        @foreach($products as $product)
+                            @php
+                                $images = json_decode($product->thumbnail_image ?? '[]');
+                                $defaultImage = $images[0] ?? '';
+                                $hoverImage = $images[1] ?? $defaultImage;
+                                $fabricName = DB::table('fabric_type')->where('id', $product->fabric_type_id)->value('category_name');
+                                $catSlug = DB::table('sub_product_category')->where('id', $product->product_sab_category_id)->value('slug');
+                            @endphp
 
-            <!-- Products -->
-            <!-- Products -->
-              <!-- <div class="col-12 col-sm-9">
-                  <div class="product-listing-sec">
-                      <div class="row mb-minus-24 room-popup">
-                          @foreach($products as $product)
-                              @php
-                                  $images = json_decode($product->thumbnail_image ?? '[]');
-                                  $defaultImage = $images[0] ?? '';
-                                  $hoverImage = $images[1] ?? $defaultImage;
-                                  $fabricName = DB::table('fabric_type')->where('id', $product->fabric_type_id)->value('category_name');
-                              // Get the category slug for the product
-                      $catSlug = DB::table('sub_product_category')
-                          ->where('id', $product->product_sab_category_id)
-                          ->value('slug');
-                                  @endphp
-                              
-                              <div class="col-lg-4 col-sm-6 col-12 mb-24" data-aos="fade-up" data-aos-duration="1000">
-                                  <div class="product-main-box-sec">
-                                      <div class="product-box-front hover-image-wrap">
-                                          <div class="product-icons">
-                                              <a href="{{ route('wishlist.add', $product->id) }}" class="icon"><i class="fa fa-heart-o"></i></a>
-                                          </div>
-                                          <a href="#">
-                                              <img src="{{ asset('uploads/products/thumbnails/' . $defaultImage) }}" alt="{{ $product->product_name }}" class="img-default">
-                                              <img src="{{ asset('uploads/products/thumbnails/' . $hoverImage) }}" alt="{{ $product->product_name }}" class="img-hover">
-                                          </a>
-                                          
-                                          <div class="product-name-wrap">
-                                              <a href="{{ route('product.categoryproduct', [$catSlug, $product->slug]) }}">
-                                                  <div class="product-inner-contact">
-                                                      <h4>{{ $product->product_name }}</h4>
-                                                      <h5 class="product-price">₹ {{ number_format($product->mrp) }}</h5>
-                                                      <h5 class="product-fabric">{{ $fabricName }}</h5>
-                                                  </div>
-                                              </a>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-                          @endforeach
-                      </div>
-                  </div>
-              </div> -->
-
-
-              <div class="col-12 col-sm-9">
-    <div class="product-listing-sec">
-        <div class="row mb-minus-24 room-popup" id="productResults">
-            @foreach($products as $product)
-                @php
-                    $images = json_decode($product->thumbnail_image ?? '[]');
-                    $defaultImage = $images[0] ?? '';
-                    $hoverImage = $images[1] ?? $defaultImage;
-                    $fabricName = DB::table('fabric_type')->where('id', $product->fabric_type_id)->value('category_name');
-                    $catSlug = DB::table('sub_product_category')->where('id', $product->product_sab_category_id)->value('slug');
-                @endphp
-
-                <div class="col-lg-4 col-sm-6 col-12 mb-24" data-aos="fade-up" data-aos-duration="1000">
-                    <div class="product-main-box-sec">
-                        <div class="product-box-front hover-image-wrap">
-                            <a href="#">
-                                <img src="{{ asset('uploads/products/thumbnails/' . $defaultImage) }}" alt="{{ $product->product_name }}" class="img-default">
-                                <img src="{{ asset('uploads/products/thumbnails/' . $hoverImage) }}" alt="{{ $product->product_name }}" class="img-hover">
-                            </a>
-                            <div class="product-name-wrap">
-                                <a href="{{ route('product.categoryproduct', [$catSlug, $product->slug]) }}">
-                                    <div class="product-inner-contact">
-                                        <h4>{{ $product->product_name }}</h4>
-                                        <h5 class="product-price">₹ {{ number_format($product->mrp) }}</h5>
-                                        <h5 class="product-fabric">{{ $fabricName }}</h5>
+                            <div class="col-lg-4 col-sm-6 col-12 mb-24" data-aos="fade-up" data-aos-duration="1000">
+                                <div class="product-main-box-sec">
+                                    <div class="product-box-front hover-image-wrap">
+                                        <a href="#">
+                                            <img src="{{ asset('uploads/products/thumbnails/' . $defaultImage) }}" alt="{{ $product->product_name }}" class="img-default">
+                                            <img src="{{ asset('uploads/products/thumbnails/' . $hoverImage) }}" alt="{{ $product->product_name }}" class="img-hover">
+                                        </a>
+                                        <div class="product-name-wrap">
+                                            <a href="{{ route('product.categoryproduct', [$catSlug, $product->slug]) }}">
+                                                <div class="product-inner-contact">
+                                                    <h4>{{ $product->product_name }}</h4>
+                                                    <h5 class="product-price">₹ {{ number_format($product->mrp) }}</h5>
+                                                    <h5 class="product-fabric">{{ $fabricName }}</h5>
+                                                </div>
+                                            </a>
+                                        </div>
                                     </div>
-                                </a>
+                                </div>
                             </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
-            @endforeach
-        </div>
-    </div>
-</div>
+            </div>
 
 
 
@@ -669,6 +682,8 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 </script>
+
+
 
 
 

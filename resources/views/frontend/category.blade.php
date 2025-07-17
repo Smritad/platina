@@ -28,10 +28,8 @@
               <div class="col-12">
                 <div class="rx-banner-contact">
                  <h2>
-    {{ $masterCategoryName ?? $masterCategory->category_name }}
-</h2>
-
-
+                    {{ $masterCategoryName ?? $masterCategory->category_name }}
+                </h2>
                 </div>
               </div>
             </div>
@@ -49,10 +47,10 @@
                         <a href="{{route('frontend.index') }}">Home</a>
                       </li>
                       <li>
-    <a href="{{ route('product.category', \Illuminate\Support\Str::slug($masterCategoryName ?? $masterCategory->category_name)) }}">
-        {{ $masterCategoryName ?? $masterCategory->category_name }}
-    </a>
-</li>
+                          <a href="{{ route('product.category', \Illuminate\Support\Str::slug($masterCategoryName ?? $masterCategory->category_name)) }}">
+                              {{ $masterCategoryName ?? $masterCategory->category_name }}
+                          </a>
+                      </li>
 
                       <!-- <li>About Hayagreevas</li> -->
                     </ul>
@@ -86,64 +84,49 @@
             </div>
             <div class="sidebar-content">
               <div class="product-listing-side-bar-sec">
-                <div class="sidebar-wrap">
-
-                        <!-- Category -->
-                         
-                        <!-- <div class="single-sidebar-item">
-                            <div class="single-sidebar-title">
-                                <h4>Category</h4>
-                            </div>
-                            <ul class="products-list">
-                                @foreach($categories as $id => $category)
-                                    <li><a href="#">{{ $category }}</a></li>
-                                @endforeach
-                            </ul>
-                        </div> -->
-
-
-<div class="single-sidebar-item">
+             <div class="sidebar-wrap" id="mobileFilterForm">
+               <div class="single-sidebar-item">
                     <div class="single-sidebar-title">
                       <h4>Category</h4>
                     </div>
-<div class="dropdown product-sub-cate-dropdown-sec">
-  <button class="btn custom-dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Bedding
-  </button>
-  <ul class="dropdown-menu custom-dropdown-menu">
-    <li><a class="dropdown-item" href="#">Bedding 1</a></li>
-    <li><a class="dropdown-item" href="#">Bedding 2</a></li>
-    <li><a class="dropdown-item" href="#">Bedding 3</a></li>
-  </ul>
-</div>
-<div class="dropdown product-sub-cate-dropdown-sec">
-  <button class="btn custom-dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Bedding
-  </button>
-  <ul class="dropdown-menu custom-dropdown-menu">
-    <li><a class="dropdown-item" href="#">Bedding 4</a></li>
-    <li><a class="dropdown-item" href="#">Bedding 5</a></li>
-    <li><a class="dropdown-item" href="#">Bedding 6</a></li>
-  </ul>
-</div>
- <div class="dropdown product-sub-cate-dropdown-sec">
-  <button class="btn custom-dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Bedding
-  </button>
-  <ul class="dropdown-menu custom-dropdown-menu">
-    <li><a class="dropdown-item" href="#">Bedding 7</a></li>
-    <li><a class="dropdown-item" href="#">Bedding 8</a></li>
-    <li><a class="dropdown-item" href="#">Bedding 9</a></li>
-  </ul>
-</div>
-</div>
+                    <div class="dropdown product-sub-cate-dropdown-sec">
+                      <button class="btn custom-dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Bedding
+                      </button>
+                      <ul class="dropdown-menu custom-dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Bedding 1</a></li>
+                        <li><a class="dropdown-item" href="#">Bedding 2</a></li>
+                        <li><a class="dropdown-item" href="#">Bedding 3</a></li>
+                      </ul>
+                    </div>
+                    <div class="dropdown product-sub-cate-dropdown-sec">
+                      <button class="btn custom-dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Bedding
+                      </button>
+                      <ul class="dropdown-menu custom-dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Bedding 4</a></li>
+                        <li><a class="dropdown-item" href="#">Bedding 5</a></li>
+                        <li><a class="dropdown-item" href="#">Bedding 6</a></li>
+                      </ul>
+                    </div>
+                    <div class="dropdown product-sub-cate-dropdown-sec">
+                      <button class="btn custom-dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Bedding
+                      </button>
+                      <ul class="dropdown-menu custom-dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Bedding 7</a></li>
+                        <li><a class="dropdown-item" href="#">Bedding 8</a></li>
+                        <li><a class="dropdown-item" href="#">Bedding 9</a></li>
+                      </ul>
+                    </div>
+                    </div>
 
-                        <!-- TC -->
+                          <!-- TC -->
                         <div class="single-sidebar-item">
                             <div class="single-sidebar-title">
                                 <h4>TC</h4>
                             </div>
-                            <select class="rx-from-control form-select">
+                            <select class="rx-from-control form-select" name="tc_name">
                                 <option selected>Select</option>
                                 @foreach($tcs as $tc)
                                     <option value="{{ $tc }}">{{ $tc }}</option>
@@ -152,11 +135,11 @@
                         </div>
 
                         <!-- Age Group -->
-                        <div class="single-sidebar-item">
+                       <div class="single-sidebar-item">
                             <div class="single-sidebar-title">
                                 <h4>Age Group</h4>
                             </div>
-                            <select class="rx-from-control form-select">
+                            <select class="rx-from-control form-select" name="age_group">
                                 <option selected>Select</option>
                                 @foreach($ageGroups as $id => $ageGroup)
                                     <option value="{{ $ageGroup }}">{{ $ageGroup }}</option>
@@ -169,7 +152,7 @@
                             <div class="single-sidebar-title">
                                 <h4>Collection Name</h4>
                             </div>
-                            <select class="rx-from-control form-select">
+                            <select class="rx-from-control form-select" name="collection_name">
                                 <option selected>Select</option>
                                 @foreach($collections as $collection)
                                     <option value="{{ $collection }}">{{ $collection }}</option>
@@ -192,57 +175,73 @@
                             @endforeach
                         </div>
 
+                        
                         <!-- Color -->
-                        <div class="single-sidebar-item">
-                            <div class="single-sidebar-title">
-                                <h4>Select Color</h4>
-                            </div>
-                            <input type="text" class="product-select-color-search-box" placeholder="Search color...">
-                            <ul class="products-list">
-                                @foreach($uniqueColors as $color)
-                                    <li>{{ $color }}</li>
-                                @endforeach
-                            </ul>
+                      <!-- Color -->
+                      <div class="single-sidebar-item">
+                          <div class="single-sidebar-title">
+                              <h4>Select Color</h4>
+                          </div>
+
+                          <div class="dropdown">
+                              <input type="text" id="colorSearchInputMobile" class="form-control" placeholder="Search color..." data-bs-toggle="dropdown" aria-expanded="false" autocomplete="off">
+                              <ul class="dropdown-menu w-100 color-search-dropdown" id="colorSearchDropdownMobile">
+                                  @foreach($uniqueColors as $color)
+                                      <li><a class="dropdown-item color-option-mobile" href="#" data-color="{{ $color }}">{{ $color }}</a></li>
+                                  @endforeach
+                              </ul>
+                          </div>
+
+                          <div id="selectedColorDisplayMobile" class="mt-2"></div>
+                      </div>
+
+
+                       <!-- Size -->
+                      <div class="single-sidebar-item">
+                          <div class="single-sidebar-title">
+                              <h4>Size</h4>
+                          </div>
+                          <ul class="list-inline">
+                              @foreach($sizes as $id => $size)
+                                  <li class="list-inline-item">
+                                      <a href="#" class="size-btn">{{ $size }}</a>
+                                  </li>
+                              @endforeach
+                          </ul>
+                      </div>
+                     
+
+                          <!-- Price Range mobile-->
+                          <div class="single-sidebar-item">
+                              <div class="single-sidebar-title">
+                                  <h4>Price</h4>
+                              </div>
+                              <div class="price-range-box">
+                                  <div class="price-input">
+                                      <div class="field">
+                                          <label for="minPrice">Min</label>
+                                          <input type="number" id="minPriceMobile" value="0">
+                                      </div>
+                                      <div class="field">
+                                          <label for="maxPrice">Max</label>
+                                         <input type="number" id="maxPriceMobile" value="0">
+                                      </div>
+                                  </div>
+                                 <div class="slider">
+                                          <div class="progress" id="progressMobile" style="left: 0%; right: 70%;"></div>
+                                      </div>
+                                  <div class="range-input">
+                                     <input type="range" id="rangeMinMobile" min="0" max="100000" value="0" step="100">
+                                      <input type="range" id="rangeMaxMobile" min="0" max="100000" value="0" step="100">
+                                  </div>
+                              </div>
+                          </div>
+                          
+                         <div class="single-sidebar-item">
+                            <button type="submit" class="btn btn-primary w-100">Apply Filters</button>
                         </div>
 
-                        <!-- Size -->
-                        <div class="single-sidebar-item">
-                            <div class="single-sidebar-title">
-                                <h4>Size</h4>
-                            </div>
-                            <ul class="list-inline">
-                                @foreach($sizes as $id => $size)
-                                    <li class="list-inline-item"><a href="#" class="size-btn">{{ $size }}</a></li>
-                                @endforeach
-                            </ul>
-                        </div>
-
-                        <!-- Price Range -->
-              <div class="single-sidebar-item">
-                <div class="single-sidebar-title">
-                  <h4>Price</h4>
-                </div>
-                <div class="price-range-box">
-                  <div class="price-input">
-                    <div class="field">
-                      <label for="minPrice">Min</label>
-                      <input type="number" id="minPrice" value="1000">
-                    </div>
-                    <div class="field">
-                      <label for="maxPrice">Max</label>
-                      <input type="number" id="maxPrice" value="5000">
-                    </div>
-                  </div>
-                  <div class="slider">
-                    <div class="progress" style="left: 0%; right: 70%;"></div>
-                  </div>
-                  <div class="range-input">
-                    <input type="range" id="rangeMin" min="0" max="100000" value="0" step="100">
-                    <input type="range" id="rangeMax" min="0" max="100000" value="30000" step="100">
-                  </div>
-                </div>
-              </div>
-
+                        
                     </div>
                 </div>
             </div>
@@ -253,62 +252,22 @@
           <!-- -- Sidebar on desktop: visible only on desktop --> 
 
           <div class="product-listing-side-bar-sec d-none d-lg-block">
-            <div class="sidebar-wrap">
+          <div class="sidebar-wrap" id="desktopFilterForm">
+              <div class="single-sidebar-item">
+                       <div class="single-sidebar-title">
+                            <h4>Category</h4>
+                        </div>
 
-               <!-- Category -->
-                        <!-- <div class="single-sidebar-item">
-                            <div class="single-sidebar-title">
-                                <h4>Category</h4>
-                            </div>
-                            <ul class="products-list">
-                                @foreach($categories as $id => $category)
-                                    <li><a href="#">{{ $category }}</a></li>
-                                @endforeach
-                            </ul>
-                        </div> -->
+                      
 
-<div class="single-sidebar-item">
-                    <div class="single-sidebar-title">
-                      <h4>Category</h4>
-                    </div>
-<div class="dropdown product-sub-cate-dropdown-sec">
-  <button class="btn custom-dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Bedding
-  </button>
-  <ul class="dropdown-menu custom-dropdown-menu">
-    <li><a class="dropdown-item" href="#">Bedding 1</a></li>
-    <li><a class="dropdown-item" href="#">Bedding 2</a></li>
-    <li><a class="dropdown-item" href="#">Bedding 3</a></li>
-  </ul>
-</div>
-<div class="dropdown product-sub-cate-dropdown-sec">
-  <button class="btn custom-dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Bedding
-  </button>
-  <ul class="dropdown-menu custom-dropdown-menu">
-    <li><a class="dropdown-item" href="#">Bedding 4</a></li>
-    <li><a class="dropdown-item" href="#">Bedding 5</a></li>
-    <li><a class="dropdown-item" href="#">Bedding 6</a></li>
-  </ul>
-</div>
- <div class="dropdown product-sub-cate-dropdown-sec">
-  <button class="btn custom-dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Bedding
-  </button>
-  <ul class="dropdown-menu custom-dropdown-menu">
-    <li><a class="dropdown-item" href="#">Bedding 7</a></li>
-    <li><a class="dropdown-item" href="#">Bedding 8</a></li>
-    <li><a class="dropdown-item" href="#">Bedding 9</a></li>
-  </ul>
-</div>
-</div>
+                      </div>
 
                         <!-- TC -->
                         <div class="single-sidebar-item">
                             <div class="single-sidebar-title">
                                 <h4>TC</h4>
                             </div>
-                            <select class="rx-from-control form-select">
+                            <select class="rx-from-control form-select" name="tc_name">
                                 <option selected>Select</option>
                                 @foreach($tcs as $tc)
                                     <option value="{{ $tc }}">{{ $tc }}</option>
@@ -316,17 +275,16 @@
                             </select>
                         </div>
 
-                        <!-- Age Group -->
                         <div class="single-sidebar-item">
                             <div class="single-sidebar-title">
                                 <h4>Age Group</h4>
                             </div>
-                            <select class="rx-from-control form-select">
-                                <option selected>Select</option>
-                                @foreach($ageGroups as $id => $ageGroup)
-                                    <option value="{{ $ageGroup }}">{{ $ageGroup }}</option>
-                                @endforeach
-                            </select>
+                            <select name="age_group">
+                            <option value="Select">Select</option>
+                            @foreach($ageGroups as $id => $ageGroup)
+                                <option value="{{ $id }}">{{ $ageGroup }}</option>
+                            @endforeach
+                        </select>
                         </div>
 
                         <!-- Collection -->
@@ -334,7 +292,7 @@
                             <div class="single-sidebar-title">
                                 <h4>Collection Name</h4>
                             </div>
-                            <select class="rx-from-control form-select">
+                            <select class="rx-from-control form-select" name="collection_name">
                                 <option selected>Select</option>
                                 @foreach($collections as $collection)
                                     <option value="{{ $collection }}">{{ $collection }}</option>
@@ -357,106 +315,116 @@
                             @endforeach
                         </div>
 
+                        
                         <!-- Color -->
-                        <div class="single-sidebar-item">
-                            <div class="single-sidebar-title">
-                                <h4>Select Color</h4>
-                            </div>
-                            <input type="text" class="product-select-color-search-box" placeholder="Search color...">
-                            <ul class="products-list">
-                                @foreach($uniqueColors as $color)
-                                    <li>{{ $color }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
+                      <div class="single-sidebar-item">
+                          <div class="single-sidebar-title">
+                              <h4>Select Color</h4>
+                          </div>
 
-                        <!-- Size -->
-                        <div class="single-sidebar-item">
-                            <div class="single-sidebar-title">
-                                <h4>Size</h4>
-                            </div>
-                            <ul class="list-inline">
-                                @foreach($sizes as $id => $size)
-                                    <li class="list-inline-item"><a href="#" class="size-btn">{{ $size }}</a></li>
-                                @endforeach
-                            </ul>
-                        </div>
+                          
+                          <div class="dropdown">
+                              <input type="text" id="colorSearchInput" class="form-control" placeholder="Search color..." data-bs-toggle="dropdown" aria-expanded="false" autocomplete="off">
+                              <ul class="dropdown-menu w-100 color-search-dropdown" id="colorSearchDropdown">
+                                  @foreach($uniqueColors as $color)
+                                      <li><a class="dropdown-item color-option" href="#" data-color="{{ $color }}">{{ $color }}</a></li>
+                                  @endforeach
+                              </ul>
+                          </div>
 
-                        <!-- Price Range -->
-              <div class="single-sidebar-item">
-                <div class="single-sidebar-title">
-                  <h4>Price</h4>
-                </div>
-                <div class="price-range-box">
-                  <div class="price-input">
-                    <div class="field">
-                      <label for="minPrice">Min</label>
-                      <input type="number" id="minPrice" value="1000">
+                          <!-- Selected colors shown here -->
+                          <div id="selectedColorDisplay" class="mt-2"></div>
+                      </div>
+
+                       <!-- Size -->
+                      <div class="single-sidebar-item">
+                          <div class="single-sidebar-title">
+                              <h4>Size</h4>
+                          </div>
+                          <ul class="list-inline">
+    @foreach($sizes as $id => $size)
+        <li class="list-inline-item">
+            <a href="#" class="size-btn" data-size-id="{{ $id }}">{{ $size }}</a>
+        </li>
+    @endforeach
+</ul>
+                      </div>
+
+                          <!-- Price Range desktop -->
+                          <div class="single-sidebar-item">
+                              <div class="single-sidebar-title">
+                                  <h4>Price</h4>
+                              </div>
+                              <div class="price-range-box">
+                                  <div class="price-input">
+                                      <div class="field">
+                                          <label for="minPrice">Min</label>
+                                     <input type="number" id="minPriceDesktop" value="1000">
+                                      </div>
+                                      <div class="field">
+                                          <label for="maxPrice">Max</label>
+                                            <input type="number" id="maxPriceDesktop" value="5000">
+                                      </div>
+                                  </div>
+                                 <div class="slider">
+                                              <div class="progress" id="progressDesktop" style="left: 0%; right: 70%;"></div>
+                                          </div>
+                                  <div class="range-input">
+                                     <input type="range" id="rangeMinDesktop" min="0" max="100000" value="0" step="100">
+                                      <input type="range" id="rangeMaxDesktop" min="0" max="100000" value="30000" step="100">
+
+                                  </div>
+                              </div>
+                          </div>
+
+
+                         <div class="single-sidebar-item">
+                            <button type="submit" class="btn btn-primary w-100">Apply Filters</button>
+                        </div>
+                      </div>
                     </div>
-                    <div class="field">
-                      <label for="maxPrice">Max</label>
-                      <input type="number" id="maxPrice" value="5000">
-                    </div>
-                  </div>
-                  <div class="slider">
-                    <div class="progress" style="left: 0%; right: 70%;"></div>
-                  </div>
-                  <div class="range-input">
-                    <input type="range" id="rangeMin" min="0" max="100000" value="0" step="100">
-                    <input type="range" id="rangeMax" min="0" max="100000" value="30000" step="100">
-                  </div>
-                </div>
               </div>
-            </div>
-          </div>
-
-</div>  
 
           
-<div class="col-12 col-sm-9">
-    <div class="product-listing-sec">
-        <div class="row mb-minus-24 room-popup">
-            @foreach($products as $product)
-                @php
-                    $images = json_decode($product->thumbnail_image ?? '[]');
-                    $defaultImage = $images[0] ?? '';
-                    $hoverImage = $images[1] ?? $defaultImage;
-                    $fabricName = DB::table('fabric_type')->where('id', $product->fabric_type_id)->value('category_name');
-                // Get the category slug for the product
-        $catSlug = DB::table('sub_product_category')
-            ->where('id', $product->product_sab_category_id)
-            ->value('slug');
-                    @endphp
-                
-                <div class="col-lg-4 col-sm-6 col-12 mb-24" data-aos="fade-up" data-aos-duration="1000">
-                    <div class="product-main-box-sec">
-                        <div class="product-box-front hover-image-wrap">
-                            <div class="product-icons">
-                                <a href="{{ route('wishlist.add', $product->id) }}" class="icon"><i class="fa fa-heart-o"></i></a>
-                            </div>
-                            <a href="#">
-                                <img src="{{ asset('uploads/products/thumbnails/' . $defaultImage) }}" alt="{{ $product->product_name }}" class="img-default">
-                                <img src="{{ asset('uploads/products/thumbnails/' . $hoverImage) }}" alt="{{ $product->product_name }}" class="img-hover">
-                            </a>
-                            <div class="product-name-wrap">
-                                <a href="{{ route('product.categoryproduct', [$catSlug, $product->slug]) }}">
-                                    <div class="product-inner-contact">
-                                        <h4>{{ $product->product_name }}</h4>
-                                        <h5 class="product-price">₹ {{ number_format($product->mrp) }}</h5>
-                                        <h5 class="product-fabric">{{ $fabricName }}</h5>
-                                    </div>
+           <div class="col-12 col-sm-9">
+              <div class="product-listing-sec">
+              <div class="row mb-minus-24 room-popup" id="productResults">
+                @foreach($products as $product)
+                    <?php
+                        $images = json_decode($product->thumbnail_image ?? '[]');
+                        $defaultImage = $images[0] ?? '';
+                        $hoverImage = $images[1] ?? $defaultImage;
+                        $fabricName = DB::table('fabric_type')->where('id', $product->fabric_type_id)->value('category_name');
+                        $catSlug = DB::table('sub_product_category')->where('id', $product->product_sab_category_id)->value('slug');
+                    ?>
+                    <div class="col-lg-4 col-sm-6 col-12 mb-24" data-aos="fade-up" data-aos-duration="1000">
+                        <div class="product-main-box-sec">
+                            <div class="product-box-front hover-image-wrap">
+                                <a href="#">
+                                    <img src="{{ asset('uploads/products/thumbnails/' . $defaultImage) }}" alt="{{ $product->product_name }}" class="img-default">
+                                    <img src="{{ asset('uploads/products/thumbnails/' . $hoverImage) }}" alt="{{ $product->product_name }}" class="img-hover">
                                 </a>
+                                <div class="product-name-wrap">
+                                    <a href="{{ route('product.categoryproduct', [$catSlug, $product->slug]) }}">
+                                        <div class="product-inner-contact">
+                                            <h4>{{ $product->product_name }}</h4>
+                                            <h5 class="product-price">₹ {{ number_format($product->mrp) }}</h5>
+                                            <h5 class="product-fabric">{{ $fabricName }}</h5>
+                                        </div>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
+            </div>
         </div>
     </div>
 </div>
 
 
-        </div>
+
+           </div>
     </div>
 </section>
 
@@ -596,6 +564,127 @@
       });
     });
   </script>
+  <script>
+document.addEventListener("DOMContentLoaded", function () {
+    const searchInput = document.getElementById("colorSearchInput");
+    const dropdown = document.getElementById("colorSearchDropdown");
+    const colorOptions = dropdown.querySelectorAll(".color-option");
+    const selectedColorDisplay = document.getElementById("selectedColorDisplay");
+
+    searchInput.addEventListener("input", function () {
+        const filter = this.value.toLowerCase();
+        let hasMatch = false;
+
+        colorOptions.forEach(option => {
+            const text = option.textContent.toLowerCase();
+            if (text.includes(filter)) {
+                option.style.display = "block";
+                hasMatch = true;
+            } else {
+                option.style.display = "none";
+            }
+        });
+
+        dropdown.classList.toggle("show", hasMatch);
+    });
+
+    colorOptions.forEach(option => {
+        option.addEventListener("click", function (e) {
+            e.preventDefault();
+            const color = this.dataset.color;
+            searchInput.value = color;
+            selectedColorDisplay.innerHTML = `<strong>Selected Color:</strong> ${color}`;
+            dropdown.classList.remove("show");
+
+            // Optional: trigger form submit here if required
+            // document.getElementById("filterForm").submit();
+        });
+    });
+
+    // Hide dropdown when clicking outside
+    document.addEventListener("click", function (e) {
+        if (!searchInput.contains(e.target) && !dropdown.contains(e.target)) {
+            dropdown.classList.remove("show");
+        }
+    });
+});
+</script>
+<script>
+$(document).ready(function() {
+
+    function applyFilters(formSelector) {
+        const form = $(formSelector);
+
+        const tc_name = form.find('select[name="tc_name"]').val();
+        const age_group = form.find('select[name="age_group"]').val();
+        const collection_name = form.find('select[name="collection_name"]').val();
+
+        const fabric_types = form.find('.fabric-type-check:checked').map(function() {
+            return $(this).val();
+        }).get();
+
+        const colors = $('.color-option.active, .color-option-mobile.active').map(function() {
+            return $(this).data('color');
+        }).get();
+
+        const size = form.find('.size-btn.active').data('size-id') || null;
+
+        const min_price = form.find('#minPriceDesktop').val() || form.find('#minPriceMobile').val();
+        const max_price = form.find('#maxPriceDesktop').val() || form.find('#maxPriceMobile').val();
+
+        $.ajax({
+            url: "{{ route('allproducts_inside.filter') }}",
+            method: "GET",
+            data: {
+                tc_name,
+                age_group,
+                collection_name,
+                fabric_types,
+                colors,
+                size,
+                min_price,
+                max_price
+            },
+            beforeSend: function() {
+                $('#productResults').html('<div class="text-center w-100">Loading...</div>');
+            },
+            success: function(response) {
+                $('#productResults').html('<div class="row mb-minus-24 room-popup">' + response + '</div>');
+            },
+            error: function(xhr) {
+                console.error(xhr.responseText);
+                $('#productResults').html('<div class="text-center w-100 text-danger">Error loading products.</div>');
+            }
+        });
+    }
+
+    $('#desktopFilterForm button[type="submit"]').on('click', function(e) {
+        e.preventDefault();
+        applyFilters('#desktopFilterForm');
+    });
+
+    $('#mobileFilterForm button[type="submit"]').on('click', function(e) {
+        e.preventDefault();
+        applyFilters('#mobileFilterForm');
+        $('#mobileSidebar').removeClass('active');
+        $('#sidebarOverlay').fadeOut();
+    });
+
+    $(document).on('click', '.size-btn', function(e) {
+        e.preventDefault();
+        $(this).closest('.list-inline').find('.size-btn').removeClass('active');
+        $(this).addClass('active');
+    });
+
+    $(document).on('click', '.color-option, .color-option-mobile', function(e) {
+        e.preventDefault();
+        $(this).toggleClass('active');
+    });
+});
+</script>
+
+
+
 </body>
 
 </html>
