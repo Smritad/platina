@@ -991,9 +991,6 @@ document.addEventListener('DOMContentLoaded', function () {
 }
 
 
-
-
-
     // 📦 When pincode is filled, fetch location
     document.getElementById('postalcode').addEventListener('blur', function () {
         let pincode = this.value.trim();
