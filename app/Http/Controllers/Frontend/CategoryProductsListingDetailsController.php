@@ -112,11 +112,8 @@ public function filter_inside(Request $request)
     }
 
     if (!empty($request->size) && $request->size !== 'Select') {
-        $productIds = DB::table('product_size_mapping')
-            ->where('size_id', (int) $request->size)
-            ->pluck('product_id');
-        $query->whereIn('id', $productIds);
-    }
+    $query->where('size_id', (int) $request->size);
+   }
 
     if (
         $request->min_price !== null &&
